@@ -1,19 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+// import { createStore, combineReducers } from 'redux';
+// import { Provider } from 'react-redux';
+
+//import appReducer from './store/reducers/file.js';
+
+// const rootReducer = combineReducers({
+//   reducer: appReducer
+// });
+
+// const store = createStore(rootReducer);
+
+import AppNavigator from './navigation/AppNavigator';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    // <Provider store={store}><View></View></Provider>
+    <AppNavigator />
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
