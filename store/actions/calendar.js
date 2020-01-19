@@ -11,9 +11,9 @@ export const getEvents = () => {
         const resData = await res.json();
         console.log(resData);
         const setEvents = [];
-        for(const key in resData) {
-            setEvents.push(new Event(key, resData[key].summary, resData[key].description, resData[key].start, resData[key].end));
-        }
+        // for(const key in resData) {
+        //     setEvents.push(new Event(key, resData[key].summary, resData[key].description, resData[key].start, resData[key].end));
+        // }
         dispatch({type: GET_EVENTS, events: setEvents});
     }
 }
