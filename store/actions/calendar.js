@@ -2,8 +2,8 @@ export const GET_EVENTS = 'GET_EVENTS';
 
 export const getEvents = () => {
     return async dispatch => {
-        const CALENDAR_ID = '10528790%40my.uvu.edu';
-        const API_KEY = 'AIzaSyCTJREaL9fmCPHR0uC4m0q05l9npRVnK_I';
+        const CALENDAR_ID = 'jn.web.developer%40gmail.com';
+        const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ '
         let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`;
         const res = await fetch(url);
         const resData = await res.json();
