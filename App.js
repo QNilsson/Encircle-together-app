@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
 import calendarReducer from './store/reducers/calendar';
 
@@ -9,7 +10,7 @@ const rootReducer = combineReducers({
   calendar: calendarReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 import AppNavigator from './navigation/AppNavigator';
 

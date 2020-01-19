@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
+import * as calendarActions from '../store/actions/calendar';
 
 const CalendarScreen = props => {
   const events = useSelector(state => state.calendar.events);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(calendarActions.getEvents());
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
