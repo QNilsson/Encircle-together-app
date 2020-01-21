@@ -32,7 +32,7 @@
 //           }
 //         }
 //       }
-      
+
 //       const newItems = {};
 //       Object.keys(items).forEach(key => { newItems[key] = items[key]; });
 //       setItems({
@@ -124,16 +124,16 @@ import {
   View,
   StyleSheet
 } from 'react-native';
+
 import { Agenda } from 'react-native-calendars';
 
 export default class AgendaScreen extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       items: {},
-      events: [],
-      dataSource: []
+      events: []
     };
   }
 
@@ -142,17 +142,26 @@ export default class AgendaScreen extends Component {
   }
 
   getEvents = () => {
-    const CALENDAR_ID = '10528790%40my.uvu.edu';
-    const API_KEY = 'AIzaSyCTJREaL9fmCPHR0uC4m0q05l9npRVnK_I';
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`;
-    console.log(url)
-    
+    let url = 'https://zappier-test.firebaseio.com/cal-events.json';
     fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
+      .then((res) => res.json())
+      .then((resData) => {
+        const eventData = [];
+        for(const key in resData) {
+          eventData.push(
+            key, 
+            resData[key].id, 
+            resData[key].creator_email, 
+            resData[key].description, 
+            resData[key].end__dateTime, 
+            resData[key].start__dateTime, 
+            resData[key].summary, 
+            resData[key].location)
+        }
         this.setState({
-          dataSource: [...this.state.dataSource, ...responseJson.items],
+          events: eventData
         });
+        console.log(eventData);
       })
       .catch(error => {
         console.log(error);
@@ -160,9 +169,6 @@ export default class AgendaScreen extends Component {
   };
 
   render() {
-    for(i = 0; i <= this.state.events; i++) {
-      console.log(this.state.dataSource);
-    }
     return (
       <Agenda
         items={this.state.items}
@@ -171,6 +177,8 @@ export default class AgendaScreen extends Component {
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
+        pastScrollRange={1}
+        futureScrollRange={1}
       // markingType={'period'}
       // markedDates={{
       //    '2017-05-08': {textColor: '#666'},
@@ -188,30 +196,26 @@ export default class AgendaScreen extends Component {
     );
   }
 
-  loadItems(day) {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 5);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
-          }
-        }
-      }
-      //console.log(this.state.items);
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => { newItems[key] = this.state.items[key]; });
-      this.setState({
-        items: newItems
-      });
-    }, 1000);
-    // console.log(`Load Items for ${day.year}-${day.month}`);
+  loadItems() {
+    const newItems = {};
+
+    this.state.events.forEach(e => newItems[e.start__dateTime] = []);
+    
+    this.setState({
+      items: newItems
+    })
+
+    //console.log(newItems);
+    // this.setState({
+    //   items: this.state.events.reduce((acc, obj) => {
+    //     let key = obj[prop];
+    //     if(!acc[key]){
+    //       acc[key] = [];
+    //     }
+    //     acc[key].push([]);
+    //     return acc;
+    //   }, {})
+    // });
   }
 
   renderItem(item) {
