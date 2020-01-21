@@ -125,6 +125,7 @@ import {
   StyleSheet
 } from 'react-native';
 
+import Event from '../models/event';
 import { Agenda } from 'react-native-calendars';
 
 export default class AgendaScreen extends Component {
@@ -149,19 +150,20 @@ export default class AgendaScreen extends Component {
         const eventData = [];
         for(const key in resData) {
           eventData.push(
-            key, 
-            resData[key].id, 
-            resData[key].creator_email, 
-            resData[key].description, 
-            resData[key].end__dateTime, 
-            resData[key].start__dateTime, 
-            resData[key].summary, 
-            resData[key].location)
+            new Event(key, 
+              resData[key].id, 
+              resData[key].creator_email, 
+              resData[key].description, 
+              resData[key].end__dateTime, 
+              resData[key].start__dateTime, 
+              resData[key].summary, 
+              resData[key].location)
+          );
         }
         this.setState({
           events: eventData
         });
-        console.log(eventData);
+        //console.log(eventData);
       })
       .catch(error => {
         console.log(error);
@@ -199,13 +201,13 @@ export default class AgendaScreen extends Component {
   loadItems() {
     const newItems = {};
 
-    this.state.events.forEach(e => newItems[e.start__dateTime] = []);
+    this.state.events.forEach(e => newItems[e.start__dateTime.split(' ')[0]] = []);
     
     this.setState({
       items: newItems
     })
 
-    //console.log(newItems);
+    console.log(newItems);
     // this.setState({
     //   items: this.state.events.reduce((acc, obj) => {
     //     let key = obj[prop];
@@ -236,7 +238,7 @@ export default class AgendaScreen extends Component {
 
   timeToString(time) {
     const date = new Date(time);
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split(' ')[0];
   }
 }
 
