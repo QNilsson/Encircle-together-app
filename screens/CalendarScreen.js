@@ -143,21 +143,26 @@ export default class AgendaScreen extends Component {
   }
 
   getEvents = () => {
-    let url = 'https://zappier-test.firebaseio.com/cal-events.json';
+    // let url = 'https://zappier-test.firebaseio.com/cal-events.json';
+    const CALENDAR_ID = 'jn.web.developer%40gmail.com';
+    const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
+    //const date = new Date();
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=1&key=${API_KEY}`;
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
+        console.log(resData.items);
         const eventData = [];
-        for(const key in resData) {
+        for (const key in resData.items) {
           eventData.push(
-            new Event(key, 
-              resData[key].id, 
-              resData[key].creator_email, 
-              resData[key].description, 
-              resData[key].end__dateTime, 
-              resData[key].start__dateTime, 
-              resData[key].summary, 
-              resData[key].location)
+            new Event(key,
+              resData.id,
+              resData.items[key].creator.email,
+              resData.description,
+              resData.items[key].end.dateTime,
+              resData.items[key].start.dateTime,
+              resData.items[key].summary,
+              resData.items[key].location)
           );
         }
         this.setState({
@@ -201,23 +206,14 @@ export default class AgendaScreen extends Component {
   loadItems() {
     const newItems = {};
 
-    this.state.events.forEach(e => newItems[e.start__dateTime.split(' ')[0]] = []);
-    
+    // this.state.events.forEach(e => newItems[e.start__dateTime.split(' ')[0]] = []);
+    this.state.events.forEach(e => newItems[e.start__dateTime.split('T')[0]] = []);
+
     this.setState({
       items: newItems
     })
 
-    console.log(newItems);
-    // this.setState({
-    //   items: this.state.events.reduce((acc, obj) => {
-    //     let key = obj[prop];
-    //     if(!acc[key]){
-    //       acc[key] = [];
-    //     }
-    //     acc[key].push([]);
-    //     return acc;
-    //   }, {})
-    // });
+    //console.log(newItems);
   }
 
   renderItem(item) {
