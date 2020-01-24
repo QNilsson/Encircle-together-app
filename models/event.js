@@ -1,6 +1,5 @@
 class Event {
-    constructor(key, id, creator_email, description, end__dateTime, start__dateTime, summary, location) {
-        this.key = key;
+    constructor(id, creator_email, description, end__dateTime, start__dateTime, summary, location) {
         this.id = id;
         this.creator_email = creator_email;
         this.description = description;
