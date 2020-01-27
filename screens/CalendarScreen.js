@@ -78,6 +78,7 @@ export default class AgendaScreen extends Component {
         selected={Date()}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
+        renderEmptyData={() => { return null }}
         rowHasChanged={this.rowHasChanged.bind(this)}
         pastScrollRange={1}
         futureScrollRange={1}
@@ -112,15 +113,15 @@ export default class AgendaScreen extends Component {
         <Text>{item.loc}</Text>
         <Text>{item.start.split(' ')[1]} - {item.end.split(' ')[1]}</Text>
       </View>
-    )
+    );
   }
 
   renderEmptyDate() {
-    this.state.events.map(e => {
-      return (
-        <View style={[styles.item]}><Text>{e.summary}</Text></View>
-      )
-    });
+    return (
+      <View style={styles.emptyDate}>
+        <Text>This is empty date!</Text>
+      </View>
+    );
   }
 
   rowHasChanged(r1, r2) {
