@@ -119,7 +119,7 @@ export default class AgendaScreen extends Component {
   renderEmptyDate() {
     return (
       <View style={styles.emptyDate}>
-        <Text>This is empty date!</Text>
+        <Text>This is an empty date!</Text>
       </View>
     );
   }
