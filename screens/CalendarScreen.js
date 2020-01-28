@@ -73,7 +73,7 @@ export default class AgendaScreen extends Component {
   render() {
     return (
       <Agenda
-        items={this.state.items}
+        items={this.state.items} //itemsForSelectedDay
         loadItemsForMonth={this.loadItems.bind(this)}
         selected={Date()}
         renderItem={this.renderItem.bind(this)}
