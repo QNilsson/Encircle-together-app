@@ -8,7 +8,7 @@ import {
 import Event from '../models/event';
 import { Agenda } from 'react-native-calendars';
 
-export default class AgendaScreen extends Component {
+export default class CalendarScreen extends Component {
   constructor(props) {
     super(props);
 
