@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
+
 import { WebView } from 'react-native-webview';
+import PDFReader from 'rn-pdf-reader-js';
 
 import Publication from '../models/publication';
 
@@ -10,7 +12,14 @@ export default class ResourcesScreen extends Component {
 
     this.state = {
       items: [],
-      html: `<iframe allowfullscreen allow="fullscreen" style="border:none;width:100%;height:324px;" src="//e.issuu.com/embed.html?d=whataboutgender_spa&u=encircletogether"></iframe>`
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <body>
+            <iframe allowfullscreen allow="fullscreen" style="border:none;width:100%;height:324px;" src="//e.issuu.com/embed.html?d=whataboutgender_spa&u=encircletogether"></iframe>
+          </body>
+        </html>
+        `
     };
   }
 
@@ -47,18 +56,36 @@ export default class ResourcesScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {/* <FlatList
-          data={this.state.items}
-          keyExtractor={item => item.docId}
-          renderItem={({ item }) => <View key={item.docId}><Text>{item.title}</Text></View>}
-        /> */}
+      // <View style={styles.container}>
+      //   <FlatList
+      //     data={this.state.items}
+      //     keyExtractor={item => item.docId}
+      //     renderItem={({ item }) => <View key={item.docId}><Text>{item.title}</Text></View>}
+      //   />
 
-        <WebView
-          source={{ html: this.state.html }}
-          style={styles.resource}
-        />
-      </View>
+      //   <WebView
+      //     source={{ html: this.state.html }}
+      //     style={styles.resource}
+      //   />
+        
+      // </View>
+
+      <WebView
+      androidHardwareAccelerationDisabled
+      source={{uri: 'https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed'}}
+      
+    /> //https://issuu.com/encircletogether/docs/gsatoolkit?fr=sMzkwOTE3MjQ3
+
+      // <WebView
+      //   originWhitelist={["*"]}
+      //     source={{ html: this.state.html }}
+      //     style={styles.resource}
+      //   />
+      // <PDFReader
+      //   source={{
+      //     uri: 'https://issuu.com/encircletogether/docs/whataboutgender_spa',
+      //   }}
+      // />
     );
   }
 };
