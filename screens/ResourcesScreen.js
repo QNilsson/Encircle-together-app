@@ -62,30 +62,16 @@ export default class ResourcesScreen extends Component {
       //     keyExtractor={item => item.docId}
       //     renderItem={({ item }) => <View key={item.docId}><Text>{item.title}</Text></View>}
       //   />
-
-      //   <WebView
-      //     source={{ html: this.state.html }}
-      //     style={styles.resource}
-      //   />
-        
       // </View>
-
       <WebView
-      androidHardwareAccelerationDisabled
-      source={{uri: 'https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed'}}
-      
-    /> //https://issuu.com/encircletogether/docs/gsatoolkit?fr=sMzkwOTE3MjQ3
-
-      // <WebView
-      //   originWhitelist={["*"]}
-      //     source={{ html: this.state.html }}
-      //     style={styles.resource}
-      //   />
-      // <PDFReader
-      //   source={{
-      //     uri: 'https://issuu.com/encircletogether/docs/whataboutgender_spa',
-      //   }}
-      // />
+        androidHardwareAccelerationDisabled
+        source={{ uri: 'https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed' }}
+      />
+      /*
+        https://drive.google.com/file/d/1ae9l_AdR41LDvqCnBw_-KpA521wZpcKY/view?usp=sharing
+        https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed
+        https://issuu.com/encircletogether/docs/gsatoolkit?fr=sMzkwOTE3MjQ3 
+      */
     );
   }
 };
@@ -96,9 +82,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  resource: {
-    width: "100%",
-    flex: 1
   }
 });
