@@ -5,6 +5,7 @@ const EncircleLiveScreen = props => {
   return (
     <View style={styles.container}>
       <Text>Encircle Live Screen</Text>
+      <Text>Test</Text>
     </View>
   );
 };
