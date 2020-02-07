@@ -6,13 +6,15 @@ import DashboardScreen from '../screens/DashboardScreen';
 import EncircleLiveScreen from '../screens/EncircleLiveScreen';
 import MoreScreen from '../screens/MoreScreen';
 import ResourcesScreen from '../screens/ResourcesScreen';
+import ResourceScreen from '../screens/ResourceScreen';
 
 const AppNavigator = createBottomTabNavigator({
   Calendar: CalendarScreen,
   Dashboard: DashboardScreen,
   EncircleLive: EncircleLiveScreen,
   More: MoreScreen,
-  Resources: ResourcesScreen
+  Resources: ResourcesScreen,
+  Resource: ResourceScreen
 });
 
 export default createAppContainer(AppNavigator);

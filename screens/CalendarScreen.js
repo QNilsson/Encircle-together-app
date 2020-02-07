@@ -51,11 +51,8 @@ export default class CalendarScreen extends Component {
         this.setState({
           events: eventData
         });
-
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -76,16 +73,16 @@ export default class CalendarScreen extends Component {
   }
 
   loadItems() {
-    const newItems = {};
-    const marked = {};
+    const items = {};
+    const markedItems = {};
 
-    this.state.events.forEach(e => newItems[e.start__dateTime.split('T')[0]] = [{ summ: e.summary, desc: e.description, loc: e.location, start: e.start__dateTime.split('T')[1].split('-')[0].slice(0,5), end: e.end__dateTime.split('T')[1].split('-')[0].slice(0,5), height: 115 }]);
+    this.state.events.forEach(e => items[e.start__dateTime.split('T')[0]] = [{ summ: e.summary, desc: e.description, loc: e.location, start: e.start__dateTime.split('T')[1].split('-')[0].slice(0,5), end: e.end__dateTime.split('T')[1].split('-')[0].slice(0,5), height: 115 }]);
 
-    this.state.events.forEach(e => marked[e.start__dateTime.split('T')[0]] = { marked: true });
+    this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
 
     this.setState({
-      items: newItems,
-      markedItems: marked
+      items: items,
+      markedItems: markedItems
     });
   }
 
