@@ -6,8 +6,9 @@ import { Agenda } from 'react-native-calendars';
 
 export default class CalendarScreen extends Component {
   static navigationOptions = {
-    title: 'Calendar',
+    title: 'Calendar'
   };
+
   constructor(props) {
     super(props);
 
@@ -26,7 +27,7 @@ export default class CalendarScreen extends Component {
     const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=1&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=3&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())

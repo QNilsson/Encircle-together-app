@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
-import { WebView } from 'react-native-webview';
-
 import Publication from '../models/publication';
 
 export default class ResourcesScreen extends Component {
-  
+  static navigationOptions = {
+    title: 'Resources',
+  };
 
   constructor(props) {
     super(props);
@@ -35,6 +35,7 @@ export default class ResourcesScreen extends Component {
               publications[key].document.documentId,
               publications[key].document.publicationId,
               publications[key].document.title,
+              publications[key].document.name,
               publications[key].document.description,
               publications[key].document.publishDate)
           );
@@ -51,31 +52,21 @@ export default class ResourcesScreen extends Component {
       .catch((err) => console.log(err));
   }
 
-  selectedResource(title) {
+  selectedResource(name) {
     this.props.navigation.navigate('ResourceScreen', {
-      resourceTitle: title
+      resourceName: name
     });
   }
 
   render() {
     return (
-
       <View style={styles.container}>
         <FlatList
           data={this.state.publications}
           keyExtractor={publication => publication.docId}
-          renderItem={({ item }) => <View key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceTitle: item.title })}><Text>{item.title}</Text></TouchableOpacity></View>}
+          renderItem={({ item }) => <View key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Text>{item.title}</Text></TouchableOpacity></View>}
         />
       </View>
-      // <WebView
-      //   androidHardwareAccelerationDisabled
-      //   source={{ uri: 'https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed' }}
-      // />
-      /*
-        https://drive.google.com/file/d/1ae9l_AdR41LDvqCnBw_-KpA521wZpcKY/view?usp=sharing
-        https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed
-        https://issuu.com/encircletogether/docs/gsatoolkit?fr=sMzkwOTE3MjQ3 
-      */
     );
   }
 };
