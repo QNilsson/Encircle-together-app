@@ -5,6 +5,9 @@ import Event from '../models/event';
 import { Agenda } from 'react-native-calendars';
 
 export default class CalendarScreen extends Component {
+  static navigationOptions = {
+    title: 'Calendar',
+  };
   constructor(props) {
     super(props);
 
@@ -108,7 +111,7 @@ export default class CalendarScreen extends Component {
   rowHasChanged(r1, r2) {
     return r1.name !== r2.name;
   }
-}
+};
 
 const styles = StyleSheet.create({
   item: {

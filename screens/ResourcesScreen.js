@@ -6,6 +6,8 @@ import { WebView } from 'react-native-webview';
 import Publication from '../models/publication';
 
 export default class ResourcesScreen extends Component {
+  
+
   constructor(props) {
     super(props);
 
@@ -62,9 +64,7 @@ export default class ResourcesScreen extends Component {
         <FlatList
           data={this.state.publications}
           keyExtractor={publication => publication.docId}
-          renderItem={({ item }) => <View key={item.docId}><TouchableOpacity onPress={() => {
-            this.selectedResource(item.title)
-          }}><Text>{item.title}</Text></TouchableOpacity></View>}
+          renderItem={({ item }) => <View key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceTitle: item.title })}><Text>{item.title}</Text></TouchableOpacity></View>}
         />
       </View>
       // <WebView

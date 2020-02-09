@@ -9,10 +9,6 @@ const DashboardScreen = props => {
   );
 };
 
-DashboardScreen.navigationOptions = {
-  headerTitle: 'Dashboard'
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
