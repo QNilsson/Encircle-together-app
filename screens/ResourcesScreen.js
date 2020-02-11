@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-
-import { WebView } from 'react-native-webview';
-import PDFReader from 'rn-pdf-reader-js';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 import Publication from '../models/publication';
 
 export default class ResourcesScreen extends Component {
+  static navigationOptions = {
+    title: 'Resources',
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
-      items: [],
-      html: `
-        <!DOCTYPE html>
-        <html>
-          <body>
-            <iframe allowfullscreen allow="fullscreen" style="border:none;width:100%;height:324px;" src="//e.issuu.com/embed.html?d=whataboutgender_spa&u=encircletogether"></iframe>
-          </body>
-        </html>
-        `
+      publications: []
     };
   }
 
@@ -33,45 +26,47 @@ export default class ResourcesScreen extends Component {
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
-        const data = [];
-        for (const key in resData.rsp._content.result._content) {
-          data.push(
+        const publications = resData.rsp._content.result._content;
+        const publicationData = [];
+
+        for (const key in publications) {
+          publicationData.push(
             new Publication(
-              resData.rsp._content.result._content[key].document.documentId,
-              resData.rsp._content.result._content[key].document.publicationId,
-              resData.rsp._content.result._content[key].document.title,
-              resData.rsp._content.result._content[key].document.description,
-              resData.rsp._content.result._content[key].document.publishDate)
+              publications[key].document.documentId,
+              publications[key].document.publicationId,
+              publications[key].document.title,
+              publications[key].document.name,
+              publications[key].document.description,
+              publications[key].document.publishDate)
           );
         }
-        // for(const i in data) {
-        //   console.log(data[i])
-        // }
+
+        for (const i in publicationData) {
+          console.log(publicationData[i])
+        }
+
         this.setState({
-          items: data
+          publications: publicationData
         });
       })
       .catch((err) => console.log(err));
   }
 
+  selectedResource(name) {
+    this.props.navigation.navigate('ResourceScreen', {
+      resourceName: name
+    });
+  }
+
   render() {
     return (
-      // <View style={styles.container}>
-      //   <FlatList
-      //     data={this.state.items}
-      //     keyExtractor={item => item.docId}
-      //     renderItem={({ item }) => <View key={item.docId}><Text>{item.title}</Text></View>}
-      //   />
-      // </View>
-      <WebView
-        androidHardwareAccelerationDisabled
-        source={{ uri: 'https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed' }}
-      />
-      /*
-        https://drive.google.com/file/d/1ae9l_AdR41LDvqCnBw_-KpA521wZpcKY/view?usp=sharing
-        https://issuu.com/encircletogether/docs/gsatoolkit?mode=embed
-        https://issuu.com/encircletogether/docs/gsatoolkit?fr=sMzkwOTE3MjQ3 
-      */
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.publications}
+          keyExtractor={publication => publication.docId}
+          renderItem={({ item }) => <View key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Text>{item.title}</Text></TouchableOpacity></View>}
+        />
+      </View>
     );
   }
 };

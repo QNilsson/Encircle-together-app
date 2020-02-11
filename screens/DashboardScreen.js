@@ -9,8 +9,10 @@ const DashboardScreen = props => {
   );
 };
 
-DashboardScreen.navigationOptions = {
-  headerTitle: 'Dashboard'
+DashboardScreen.navigationOptions = () => {
+  return {
+    headerTitle: 'Dashboard Screen'
+  };
 };
 
 const styles = StyleSheet.create({

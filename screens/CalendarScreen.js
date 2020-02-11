@@ -5,6 +5,10 @@ import Event from '../models/event';
 import { Agenda } from 'react-native-calendars';
 
 export default class CalendarScreen extends Component {
+  static navigationOptions = {
+    title: 'Calendar'
+  };
+
   constructor(props) {
     super(props);
 
@@ -23,7 +27,7 @@ export default class CalendarScreen extends Component {
     const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=1&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=3&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
@@ -51,11 +55,8 @@ export default class CalendarScreen extends Component {
         this.setState({
           events: eventData
         });
-
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -76,16 +77,16 @@ export default class CalendarScreen extends Component {
   }
 
   loadItems() {
-    const newItems = {};
-    const marked = {};
+    const items = {};
+    const markedItems = {};
 
-    this.state.events.forEach(e => newItems[e.start__dateTime.split('T')[0]] = [{ summ: e.summary, desc: e.description, loc: e.location, start: e.start__dateTime.split('T')[1].split('-')[0].slice(0,5), end: e.end__dateTime.split('T')[1].split('-')[0].slice(0,5), height: 115 }]);
+    this.state.events.forEach(e => items[e.start__dateTime.split('T')[0]] = [{ summ: e.summary, desc: e.description, loc: e.location, start: e.start__dateTime.split('T')[1].split('-')[0].slice(0,5), end: e.end__dateTime.split('T')[1].split('-')[0].slice(0,5), height: 115 }]);
 
-    this.state.events.forEach(e => marked[e.start__dateTime.split('T')[0]] = { marked: true });
+    this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
 
     this.setState({
-      items: newItems,
-      markedItems: marked
+      items: items,
+      markedItems: markedItems
     });
   }
 
@@ -111,7 +112,7 @@ export default class CalendarScreen extends Component {
   rowHasChanged(r1, r2) {
     return r1.name !== r2.name;
   }
-}
+};
 
 const styles = StyleSheet.create({
   item: {
