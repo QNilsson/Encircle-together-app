@@ -1,21 +1,23 @@
 import React from 'react';
 
-// import { createStore, combineReducers } from 'redux';
-// import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
-//import appReducer from './store/reducers/file.js';
+import calendarReducer from './store/reducers/calendar';
 
-// const rootReducer = combineReducers({
-//   reducer: appReducer
-// });
+const rootReducer = combineReducers({
+  calendar: calendarReducer
+});
 
-// const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App() {
   return (
-    // <Provider store={store}><View></View></Provider>
-    <AppNavigator />
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
   );
 };
