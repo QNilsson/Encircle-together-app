@@ -8,12 +8,12 @@ const ResourceScreen = (props) => {
   // let url = '';
   // switch(name) {
   //   case 'gsatoolkit':
-  //     url = 'https://issuu.com/encircletogether/docs/gsatoolkit/s/10192081';
+  //     url = '';
   //     break;
   //   default:
-  //     url = '';
+  //     url = '';https://issuu.com/encircletogether/docs/${name}
   // }
-  const url = `https://issuu.com/encircletogether/docs/${name}`;
+  const url = `https://issuu.com/encircletogether/docs/gsatoolkit/s/10192081`;
   
   
   return(

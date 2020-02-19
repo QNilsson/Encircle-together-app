@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 import Publication from '../models/publication';
+// import * as FileSystem from 'expo-file-system';
 
 export default class ResourcesScreen extends Component {
   static navigationOptions = {
@@ -59,6 +60,16 @@ export default class ResourcesScreen extends Component {
   }
 
   render() {
+    // FileSystem.downloadAsync(
+    //   'https://issuu.com/call/publisher-suite/encircletogether/files/190327052247-f7b940939b2ef86154210058d2713711',
+    //   FileSystem.documentDirectory + 'GSAToolkit.pdf'
+    // )
+    //   .then(({ uri }) => {
+    //     console.log('Finished downloading to ', uri);
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
     return (
       <View style={styles.container}>
         <FlatList
