@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import axios from 'axios';
 
 
 const MoreScreen = props => {
-// const [productName, setProductName] = useState([]);
+  let titleArr = [];
+  let [test, setTest] = useState([]);
 
   useEffect(() => {
     axios.get('https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json')
@@ -15,26 +16,32 @@ const MoreScreen = props => {
       // console.log(response.data.products[0].images[0].src);
 
       productData = response.data.products;
-      
+      console.log(productData); // this gets all product data
+      setTest('Hello');
+
       productData.forEach(product => {
-        console.log(product.title);
+        // i believe this is where each product needs to get a set state, I could be completely wrong though
+        // I've tried many different things and this is where I'm stuck
+
+        /* console.log(product.title);
         console.log('IMAGE IS: ' + product.images[0].src);
         console.log('PRICE: ' +  '$' + product.variants[0].price);
-        return (
-        <Text>{product.title}</Text>
-        )
+        titleArr.push(product.title);
+        console.log(titleArr); */
+        
       })
-      .catch(err => {
-        console.log(err);
-      });
+      
+  })
+  .catch(err => {
+    console.log(err);
   });
 });
 
-    
 
   return (
       <View style={styles.container}>
-        <Text>Shop Screen</Text>
+      <Text>test: {test}</Text>
+    
       </View>
     );
   }
