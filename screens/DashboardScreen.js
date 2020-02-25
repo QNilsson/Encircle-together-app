@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const DashboardScreen = props => {
-  return (
-    <View style={styles.container}>
-      <Text>dashboard Screen</Text>
-    </View>
-  );
-};
-
-DashboardScreen.navigationOptions = () => {
-  return {
-    headerTitle: 'Dashboard Screen'
+export default class DashboardScreen extends Component {
+  static navigationOptions = {
+    title: 'Dashboard Screen'
   };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>dashboard Screen</Text>
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -23,5 +23,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export default DashboardScreen;
