@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Event from '../models/event';
+import Publication from '../models/publication';
+
 export default class DashboardScreen extends Component {
   static navigationOptions = {
     title: 'Dashboard Screen'
