@@ -60,7 +60,7 @@ export default class CalendarScreen extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     return (

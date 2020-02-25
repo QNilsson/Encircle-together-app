@@ -16,6 +16,11 @@ export default class DashboardScreen extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getEvents();
+    this.getPublications();
+  }
+
   getEvents = () => {
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
@@ -53,7 +58,39 @@ export default class DashboardScreen extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
+  }
+
+  getPublications() {
+    const url = `http://api.issuu.com/1_0?action=issuu.documents.list&apiKey=bmcyheq8ih6qlsr0ktxgzsfppzkjruw2&format=json&signature=f85ca64d5f1ac9b0c18e12eb1c23cf7e`
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((resData) => {
+        const publications = resData.rsp._content.result._content;
+        const publicationData = [];
+
+        for (const key in publications) {
+          publicationData.push(
+            new Publication(
+              publications[key].document.documentId,
+              publications[key].document.publicationId,
+              publications[key].document.title,
+              publications[key].document.name,
+              publications[key].document.description,
+              publications[key].document.publishDate)
+          );
+        }
+
+        for (const i in publicationData) {
+          console.log(publicationData[i])
+        }
+
+        this.setState({
+          publications: publicationData
+        });
+      })
+      .catch((err) => console.log(err));
+  }
 
   render() {
     return (
