@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Event from '../models/event';
@@ -15,7 +15,8 @@ export default class DashboardScreen extends Component {
     this.state = {
       items: {},
       markedItems: {},
-      events: []
+      events: [],
+      publications: []
     };
   }
 
@@ -52,9 +53,9 @@ export default class DashboardScreen extends Component {
           );
         }
 
-        for(const event in eventData) {
-          console.log(eventData[event]);
-        }
+        // for(const event in eventData) {
+        //   console.log(eventData[event]);
+        // }
 
         this.setState({
           events: eventData
@@ -84,9 +85,9 @@ export default class DashboardScreen extends Component {
           );
         }
 
-        for (const i in publicationData) {
-          console.log(publicationData[i])
-        }
+        // for (const i in publicationData) {
+        //   console.log(publicationData[i])
+        // }
 
         this.setState({
           publications: publicationData
