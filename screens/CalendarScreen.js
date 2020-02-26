@@ -24,10 +24,13 @@ export default class CalendarScreen extends Component {
   }
 
   getEvents = () => {
-    const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
+    // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
+    // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
+    // const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
+    const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=1&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
@@ -48,16 +51,16 @@ export default class CalendarScreen extends Component {
           );
         }
 
-        // for(const event in eventData) {
-        //   console.log(eventData[event]);
-        // }
+        for(const event in eventData) {
+          console.log(eventData[event]);
+        }
 
         this.setState({
           events: eventData
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     return (
@@ -124,7 +127,7 @@ const styles = StyleSheet.create({
     marginTop: 17
   },
   emptyDate: {
-    height: 15,
+    height: 100,
     flex: 1,
     paddingTop: 30
   }
