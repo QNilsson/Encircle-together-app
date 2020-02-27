@@ -26,11 +26,10 @@ export default class CalendarScreen extends Component {
   getEvents = () => {
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
-    // const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=5&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=15&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
@@ -81,51 +80,37 @@ export default class CalendarScreen extends Component {
 
   loadItems() {
     const items = {};
-    const numOfItems = [];
-    const newItems = {};
     const markedItems = {};
 
-    // this.state.events.forEach(e => items[e.start__dateTime.split('T')[0]] = [{ 
-    //   summ: e.summary, 
-    //   desc: e.description, 
-    //   loc: e.location, 
-    //   start: e.start__dateTime.split('T')[1].split('-')[0].slice(0,5), 
-    //   end: e.end__dateTime.split('T')[1].split('-')[0].slice(0,5), 
-    //   height: 115 
-    // }]);
-
     this.state.events.forEach(e => {
-      numOfItems.push(e.start__dateTime.split('T')[0]);
       let strTime = e.start__dateTime.split('T')[0];
 
       if (!items[strTime]) {
         items[strTime] = [];
-        const numItems = 15;
-
-        for (let i = 0; i < numItems; i++) {
-          items[strTime].push({
-            summ: e.summary,
-            desc: e.description,
-            loc: e.location,
-            start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
-            end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
-            height: 200
-          });
-        }
+        items[strTime].push({
+          summ: e.summary,
+          desc: e.description,
+          loc: e.location,
+          start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          height: 200
+        });
+      } else {
+        items[strTime].push({
+          summ: e.summary,
+          desc: e.description,
+          loc: e.location,
+          start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          height: 200
+        });
       }
-    })
+    });
 
-    Object.keys(items).forEach(key => { newItems[key] = items[key] });
-
-    // for(const i in numOfItems) {
-    //   console.log(numOfItems[i])
-    // }
-
-    // this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
+    this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
 
     this.setState({
-      //items: items,
-      items: newItems,
+      items: items,
       markedItems: markedItems
     });
   }
