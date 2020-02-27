@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import Event from '../models/event';
 import Publication from '../models/publication';
@@ -13,7 +13,6 @@ export default class DashboardScreen extends Component {
     super(props);
 
     this.state = {
-      items: {},
       markedItems: {},
       events: [],
       publications: []
@@ -31,14 +30,14 @@ export default class DashboardScreen extends Component {
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=3&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
         const events = resData.items;
         const eventData = [];
-        
+
         for (const key in events) {
           eventData.push(
             new Event(
@@ -64,7 +63,7 @@ export default class DashboardScreen extends Component {
   }
 
   getPublications() {
-    const url = `http://api.issuu.com/1_0?action=issuu.documents.list&apiKey=bmcyheq8ih6qlsr0ktxgzsfppzkjruw2&format=json&signature=f85ca64d5f1ac9b0c18e12eb1c23cf7e`
+    const url = `http://api.issuu.com/1_0?action=issuu.documents.list&apiKey=bmcyheq8ih6qlsr0ktxgzsfppzkjruw2&format=json&pageSize=3&signature=e77d6d7be1cc2ababc1494319f9a0743`
 
     fetch(url)
       .then((res) => res.json())
@@ -95,10 +94,29 @@ export default class DashboardScreen extends Component {
       .catch((err) => console.log(err));
   }
 
+  selectedResource(name) {
+    this.props.navigation.navigate('ResourceScreen', {
+      resourceName: name
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>dashboard Screen</Text>
+        <View>
+          <FlatList
+            data={this.state.events}
+            keyExtractor={event => event.id}
+            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summary}</Text></View>}
+          />
+        </View>
+        <View>
+          <FlatList
+            data={this.state.publications}
+            keyExtractor={publication => publication.docId}
+            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>}
+          />
+        </View>
       </View>
     );
   }
