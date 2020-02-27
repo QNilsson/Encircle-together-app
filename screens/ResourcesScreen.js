@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import Publication from '../models/publication';
 // import * as FileSystem from 'expo-file-system';
@@ -22,7 +22,7 @@ export default class ResourcesScreen extends Component {
   }
 
   getPublications() {
-    const url = `http://api.issuu.com/1_0?action=issuu.documents.list&apiKey=bmcyheq8ih6qlsr0ktxgzsfppzkjruw2&format=json&signature=f85ca64d5f1ac9b0c18e12eb1c23cf7e`
+    const url = `http://api.issuu.com/1_0?action=issuu.documents.list&apiKey=bmcyheq8ih6qlsr0ktxgzsfppzkjruw2&format=json&pageSize=30&signature=ce7ab9c425b8c58767948e25cd5d5a92`
 
     fetch(url)
       .then((res) => res.json())
@@ -75,7 +75,7 @@ export default class ResourcesScreen extends Component {
         <FlatList
           data={this.state.publications}
           keyExtractor={publication => publication.docId}
-          renderItem={({ item }) => <View key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Text>{item.title}</Text></TouchableOpacity></View>}
+          renderItem={({ item }) => <View style={{flex: 1,}} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>}
         />
       </View>
     );
