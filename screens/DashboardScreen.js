@@ -6,7 +6,7 @@ import Publication from '../models/publication';
 
 export default class DashboardScreen extends Component {
   static navigationOptions = {
-    title: 'Dashboard Screen'
+    title: 'Dashboard'
   };
 
   constructor(props) {
@@ -28,7 +28,6 @@ export default class DashboardScreen extends Component {
   getEvents = () => {
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
-    // const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();

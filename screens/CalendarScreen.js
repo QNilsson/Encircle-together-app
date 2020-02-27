@@ -82,11 +82,15 @@ export default class CalendarScreen extends Component {
     const items = {};
     const markedItems = {};
 
+    this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
+    this.setState({ markedItems: markedItems });
+
     this.state.events.forEach(e => {
       let strTime = e.start__dateTime.split('T')[0];
 
       if (!items[strTime]) {
         items[strTime] = [];
+
         items[strTime].push({
           summ: e.summary,
           desc: e.description,
@@ -106,13 +110,7 @@ export default class CalendarScreen extends Component {
         });
       }
     });
-
-    this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
-
-    this.setState({
-      items: items,
-      markedItems: markedItems
-    });
+    this.setState({ items: items });
   }
 
   renderItem(item) {
