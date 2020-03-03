@@ -24,17 +24,19 @@ export default class CalendarScreen extends Component {
   }
 
   getEvents = () => {
-    const CALENDAR_ID = 'jn.web.developer%40gmail.com'; 
+    // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
+    // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
+    const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=1&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=15&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
         const events = resData.items;
         const eventData = [];
-        
+
         for (const key in events) {
           eventData.push(
             new Event(
@@ -57,7 +59,7 @@ export default class CalendarScreen extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     return (
@@ -80,14 +82,35 @@ export default class CalendarScreen extends Component {
     const items = {};
     const markedItems = {};
 
-    this.state.events.forEach(e => items[e.start__dateTime.split('T')[0]] = [{ summ: e.summary, desc: e.description, loc: e.location, start: e.start__dateTime.split('T')[1].split('-')[0].slice(0,5), end: e.end__dateTime.split('T')[1].split('-')[0].slice(0,5), height: 115 }]);
-
     this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
+    this.setState({ markedItems: markedItems });
 
-    this.setState({
-      items: items,
-      markedItems: markedItems
+    this.state.events.forEach(e => {
+      let strTime = e.start__dateTime.split('T')[0];
+
+      if (!items[strTime]) {
+        items[strTime] = [];
+
+        items[strTime].push({
+          summ: e.summary,
+          desc: e.description,
+          loc: e.location,
+          start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          height: 200
+        });
+      } else {
+        items[strTime].push({
+          summ: e.summary,
+          desc: e.description,
+          loc: e.location,
+          start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          height: 200
+        });
+      }
     });
+    this.setState({ items: items });
   }
 
   renderItem(item) {
@@ -124,7 +147,7 @@ const styles = StyleSheet.create({
     marginTop: 17
   },
   emptyDate: {
-    height: 15,
+    height: 100,
     flex: 1,
     paddingTop: 30
   }
