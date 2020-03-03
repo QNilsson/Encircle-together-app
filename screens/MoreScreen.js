@@ -1,50 +1,96 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios';
 
+import Product from '../models/product';
 
-const MoreScreen = props => {
-  let titleArr = [];
-  let [test, setTest] = useState([]);
+export default class MoreScreen extends Component {
+  static navigationOptions = {
+    title: 'More',
+  };
 
-  useEffect(() => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: []
+    };
+  }
+
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts() {
     axios.get('https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json')
     .then(response => {
-      // console.log(response.data.products); //console log first product object
-      // console.log(response.data.products[0].title); //console log single product name
-      // console.log('$' + response.data.products[0].variants[0].price); //console log single product price
-      // console.log(response.data.products[0].images[0].src);
+      const products = response.data.products;
+      const productData = [];
+      // console.log(products);
+      console.log(products[0].image.src);
 
-      productData = response.data.products;
-      console.log(productData); // this gets all product data
-      setTest('Hello');
+        /* this is conditionally see if the products have an image. If they don't have an image, then they are used interally for Encirlce */
+        for (const key in products) {
+          console.log(`key is: ${key}` + products[key].title)
+          if (products[key].image) {
+            console.log(`This product has an image src of: ${products[key].image.src}`)
+            productData.push(
+              new Product(
+                products[key].image.src,
+                products[key].title,
+                products[key].variants[0].price,
+                )
+            );
+          } else {
+            console.log(`This product has no image src property`)
+          }
+          
+        }
 
-      productData.forEach(product => {
-        // i believe this is where each product needs to get a set state, I could be completely wrong though
-        // I've tried many different things and this is where I'm stuck
+        for (const i in productData) {
+          console.log(productData[i])
+        }
 
-        /* console.log(product.title);
-        console.log('IMAGE IS: ' + product.images[0].src);
-        console.log('PRICE: ' +  '$' + product.variants[0].price);
-        titleArr.push(product.title);
-        console.log(titleArr); */
-        
+        this.setState({
+          products: productData
+        });
       })
-      
-  })
-  .catch(err => {
-    console.log(err);
-  });
-});
+      .catch((err) => console.log(err));
+  }
 
-
-  return (
+  render() {
+    return (
       <View style={styles.container}>
-      <Text>test: {test}</Text>
-    
+        
+        {<FlatList
+          style={styles.containerTest}
+          data={this.state.products}
+          keyExtractor={product => product.title}
+          renderItem={({ item }) => 
+            <View 
+              >
+              {<Image
+                style={{width: 100, height: 100}}
+                source={{uri: item.image }}
+              />}
+
+              <TouchableOpacity
+                style={styles.textBlock}
+              >
+                <Text style={styles.titleText}>{item.title}</Text>
+                <Text style={styles.priceText}>${item.price}</Text>
+              </TouchableOpacity>
+
+              
+            </View>
+        }
+        />}
+
+       
       </View>
     );
   }
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -52,7 +98,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 70,
+    flexDirection: "column"
+    
+  }, 
+  containerTest: {
+    flex: 1,
+    // flexDirection: "column"
   },
-});
+  textBlock: {
+    marginTop: 10,
+    marginBottom: 30
+  },
+  titleText: {
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  priceText: {
+    color: '#A9A9A9',
+    fontStyle: 'italic',
+  }
 
-export default MoreScreen;
+});

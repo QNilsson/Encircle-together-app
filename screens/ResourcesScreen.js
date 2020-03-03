@@ -43,7 +43,7 @@ export default class ResourcesScreen extends Component {
         }
 
         for (const i in publicationData) {
-          console.log(publicationData[i])
+          // console.log(publicationData[i])
         }
 
         this.setState({
