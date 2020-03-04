@@ -60,17 +60,19 @@ export default class MoreScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        
+      <View style={styles.mainContainer}>
+        <Text style={styles.shop}>Shop</Text>
+        <Text style={styles.paragraph}>Show the world what "No sides, only love" means to you</Text>
         {<FlatList
-          style={styles.containerTest}
+          numColumns={2}
+          style={styles.container}
           data={this.state.products}
           keyExtractor={product => product.title}
           renderItem={({ item }) => 
-            <View 
+            <View style={styles.item}
               >
               {<Image
-                style={{width: 100, height: 100}}
+                style={{width: 175, height: 250}}
                 source={{uri: item.image }}
               />}
 
@@ -93,30 +95,60 @@ export default class MoreScreen extends Component {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 70,
-    flexDirection: "column"
-    
+  mainContainer: {
+    margin: 20,
+    marginTop: 100,
+    marginBottom: 50
+    // textAlign: "center"
   }, 
+  shop: {
+    fontSize: 40,
+    textAlign: 'center',
+    color: '#2B2B2B'
+  },
+  paragraph: {
+    fontSize: 20,
+    color: '#686868',
+    textAlign: 'center',
+    margin: 8,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  container: {
+    /* flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+    columnWrapperStyle: '' 
+    alignItems: 'center'
+    */
+    marginBottom: 50,
+  }, 
+  item: {
+    // width: '20%',
+    flex: 1,
+    textAlign: 'center',
+    alignSelf: 'center'
+  },
   containerTest: {
     flex: 1,
     // flexDirection: "column"
   },
   textBlock: {
     marginTop: 10,
-    marginBottom: 30
+    marginBottom: 15
   },
   titleText: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: '500',
+    color: '#2B2B2B',
+    textAlign: 'center',
   },
   priceText: {
-    color: '#A9A9A9',
+    color: '#686868',
     fontStyle: 'italic',
+    textAlign: 'center',
+    padding: 10,
   }
 
 });
