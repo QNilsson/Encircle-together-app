@@ -3,14 +3,21 @@ import { StyleSheet, Text, View, Switch } from 'react-native';
 
 export default class LocationScreen extends Component {
   render() {
-    const [value, setValue] = useState(false);
+    const [provo, setProvo] = useState(false);
+    const [slc, setSlc] = useState(false)
     return (
       <View>
         <Text>Location Screen</Text>
         <Switch
-          value={value}
+          value={provo}
           onValueChange={v => {
-            setValue(v);
+            setProvo(v);
+          }}
+        />
+        <Switch
+          value={slc}
+          onValueChange={v => {
+            setSlc(v);
           }}
         />
       </View>
