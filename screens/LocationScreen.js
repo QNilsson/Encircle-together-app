@@ -1,36 +1,45 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Switch } from 'react-native';
+import { useDispatch } from 'react-redux';
 
-export default class LocationScreen extends Component {
-  constructor(props) {
-    super(props);
+import { setLocation } from '../store/actions/Location';
 
-    this.state = {
-      provo: false,
-      slc: false
-    };
+const LocationScreen = () => {
+  const [provo, setProvo] = useState(false);
+  const [slc, setSlc] = useState(false);
+
+  const dispatch = useDispatch();
+  const selectedLocation = (location) => {
+    dispatch(setLocation(location));
   }
-
-  render() {
-    return (
-      <View style={styles.container}>
+  
+  return (
+    <View style={styles.container}>
+      <View style={styles.filterContainer}>
         <Text>Provo</Text>
-        <View style={styles.filterContainer}>
-          <Switch
-            value={this.state.provo}
-            onValueChange={v => this.setState({ provo: v, slc: false })}
-          />
-        </View>
-        <View style={styles.filterContainer}>
-          <Text>Salt Lake City</Text>
-          <Switch
-            value={this.state.slc}
-            onValueChange={v => this.setState({ slc: v, provo: false })}
-          />
-        </View>
+        <Switch
+          value={provo}
+          onValueChange={v => {
+            setProvo(v);
+            setSlc(false);
+            selectedLocation('provo');
+          }}
+        />
       </View>
-    );
-  }
+
+      <View style={styles.filterContainer}>
+        <Text>Salt Lake City</Text>
+        <Switch
+          value={slc}
+          onValueChange={v => {
+            setSlc(v);
+            setProvo(false);
+            selectedLocation('slc');
+          }}
+        />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -38,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    
+
   },
   filterContainer: {
     flexDirection: 'row',
@@ -46,3 +55,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+export default LocationScreen;
