@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
 import Event from '../models/event';
-import { Agenda } from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 
-export default class CalendarScreen extends Component {
-  static navigationOptions = {
-    title: 'Calendar'
-  };
-
+class CalendarScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      items: {},
       markedItems: {},
-      events: []
+      events: [],
+      eventList: [],
+      selectedDay: undefined,
+      isLoading: true,
+      location: ''
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.getEvents();
+    //this.setState({ location: this.props.location });
   }
 
   getEvents = () => {
+    console.log(this.state.location)
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
@@ -50,48 +52,64 @@ export default class CalendarScreen extends Component {
           );
         }
 
-        // for(const event in eventData) {
+        // for (const event in eventData) {
         //   console.log(eventData[event]);
         // }
 
-        this.setState({
-          events: eventData
-        });
+        this.setState({ events: eventData });
+
+        this.markItems();
       })
       .catch(err => console.log(err));
   }
 
+  markItems = () => {
+    const items = {};
+    this.state.events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
+    this.setState({
+      markedItems: items,
+      isLoading: false
+    });
+  }
+
   render() {
     return (
-      <Agenda
-        items={this.state.items}
-        loadItemsForMonth={this.loadItems.bind(this)}
-        selected={Date()}
-        renderItem={this.renderItem.bind(this)}
-        renderEmptyDate={this.renderEmptyDate.bind(this)}
-        renderEmptyData={() => { return null }}
-        rowHasChanged={this.rowHasChanged.bind(this)}
-        pastScrollRange={0}
-        futureScrollRange={2}
-        markedDates={this.state.markedItems}
-      />
+      <View>
+        <View>
+          <Calendar
+            style={styles.calendar}
+            displayLoadingIndicator={this.state.isLoading}
+            hideExtraDays
+            onDayPress={this.onDayPress}
+            markedDates={this.state.markedItems}
+          />
+        </View>
+        <View>
+          <FlatList
+            data={this.state.eventList[this.state.selectedDay]}
+            keyExtractor={event => event.id}
+            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summ}</Text></View>}
+          />
+        </View>
+      </View>
     );
   }
 
-  loadItems() {
-    const items = {};
-    const markedItems = {};
+  onDayPress = (day) => {
+    const selected = day.dateString;
+    this.setState({ selectedDay: selected });
 
-    this.state.events.forEach(e => markedItems[e.start__dateTime.split('T')[0]] = { marked: true });
-    this.setState({ markedItems: markedItems });
+    console.log(selected)
 
+    const list = {};
     this.state.events.forEach(e => {
       let strTime = e.start__dateTime.split('T')[0];
 
-      if (!items[strTime]) {
-        items[strTime] = [];
+      if (!list[strTime]) {
+        list[strTime] = [];
 
-        items[strTime].push({
+        list[strTime].push({
+          id: e.id,
           summ: e.summary,
           desc: e.description,
           loc: e.location,
@@ -100,7 +118,8 @@ export default class CalendarScreen extends Component {
           height: 200
         });
       } else {
-        items[strTime].push({
+        list[strTime].push({
+          id: e.id,
           summ: e.summary,
           desc: e.description,
           loc: e.location,
@@ -110,32 +129,34 @@ export default class CalendarScreen extends Component {
         });
       }
     });
-    this.setState({ items: items });
+    this.setState({ eventList: list });
   }
 
-  renderItem(item) {
-    return (
-      <View style={[styles.item, { height: item.height }]}>
-        <Text>Title: {item.summ}</Text>
-        <Text>Description: {item.desc}</Text>
-        <Text>Location: {item.loc}</Text>
-        <Text>Time: {item.start} - {item.end}</Text>
-      </View>
-    );
-  }
+  // renderItem(item) {
+  //   return (
+  //     <View style={[styles.item, { height: item.height }]}>
+  //       <Text>Title: {item.summ}</Text>
+  //       <Text>Description: {item.desc}</Text>
+  //       <Text>Location: {item.loc}</Text>
+  //       <Text>Time: {item.start} - {item.end}</Text>
+  //     </View>
+  //   );
+  // }
 
-  renderEmptyDate() {
-    return (
-      <View style={styles.emptyDate}>
-        <Text>This is an empty date!</Text>
-      </View>
-    );
-  }
+  // renderEmptyDate() {
+  //   return (
+  //     <View style={styles.emptyDate}>
+  //       <Text>This is an empty date!</Text>
+  //     </View>
+  //   );
+  // }
+}
 
-  rowHasChanged(r1, r2) {
-    return r1.name !== r2.name;
+const mapStateToProps = state => {
+  return {
+    location: state.location
   }
-};
+}
 
 const styles = StyleSheet.create({
   item: {
@@ -150,5 +171,10 @@ const styles = StyleSheet.create({
     height: 100,
     flex: 1,
     paddingTop: 30
+  },
+  calendar: {
+    marginBottom: 10
   }
 });
+
+export default connect(mapStateToProps)(CalendarScreen);
