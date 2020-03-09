@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
 import Event from '../models/event';
 import { Calendar } from 'react-native-calendars';
 
-export default class CalendarScreen extends Component {
+class CalendarScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -13,15 +14,18 @@ export default class CalendarScreen extends Component {
       events: [],
       eventList: [],
       selectedDay: undefined,
-      isLoading: true
+      isLoading: true,
+      location: ''
     };
   }
 
   componentDidMount = () => {
     this.getEvents();
+    //this.setState({ location: this.props.location });
   }
 
   getEvents = () => {
+    console.log(this.state.location)
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
@@ -148,6 +152,12 @@ export default class CalendarScreen extends Component {
   // }
 }
 
+const mapStateToProps = state => {
+  return {
+    location: state.location
+  }
+}
+
 const styles = StyleSheet.create({
   item: {
     backgroundColor: 'white',
@@ -166,3 +176,5 @@ const styles = StyleSheet.create({
     marginBottom: 10
   }
 });
+
+export default connect(mapStateToProps)(CalendarScreen);
