@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, Button, View, FlatList } from 'react-native';
 import axios from 'axios';
 
 
@@ -41,7 +41,9 @@ const MoreScreen = props => {
   return (
       <View style={styles.container}>
       <Text>test: {test}</Text>
-    
+        <View>
+          <Button title="Locations" onPress={() => props.navigation.navigate('Location')}/>
+        </View>
       </View>
     );
   }
