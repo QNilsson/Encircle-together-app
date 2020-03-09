@@ -60,33 +60,92 @@ export default class ResourcesScreen extends Component {
   }
 
   render() {
-    // FileSystem.downloadAsync(
-    //   'https://issuu.com/call/publisher-suite/encircletogether/files/190327052247-f7b940939b2ef86154210058d2713711',
-    //   FileSystem.documentDirectory + 'GSAToolkit.pdf'
-    // )
-    //   .then(({ uri }) => {
-    //     console.log('Finished downloading to ', uri);
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
     return (
-      <View style={styles.container}>
-        <FlatList
+      <View style={styles.mainContainer}>
+        <Text style={styles.resources}>Resources</Text>
+        <Text style={styles.paragraph}>Publications and resources produced by Encircle.</Text>
+        {<FlatList
+          numColumns={2}
+          style={styles.container}
           data={this.state.publications}
           keyExtractor={publication => publication.docId}
-          renderItem={({ item }) => <View style={{flex: 1,}} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>}
-        />
-      </View>
-    );
-  }
-};
+          renderItem={({ item }) => 
+            <View style={styles.item} key={item.docId}>
+              {<Image
+                style={{width: 175, height: 250}}
+                source={{uri: item.image }}
+              />}
+
+              <TouchableOpacity
+                // onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}
+                style={styles.textBlock}
+              >
+                <Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} />
+                <Text style={styles.titleText}>{item.title}</Text>
+              </TouchableOpacity>
+
+              
+            </View>
+          }
+          />}
+  
+         
+        </View>
+      /* <View style={styles.container}>
+        <Text style={styles.resources}>Resources</Text>
+        <Text style={styles.paragraph}>Publications and resources produced by Encircle.</Text>
+        {<FlatList
+          // numColumns={2}
+          contentContainerStyle={{margin: 10}}
+    //horizontal={false}
+    numColumns={2}
+          data={this.state.publications}
+          keyExtractor={publication => publication.docId}
+          renderItem={({ item }) => 
+          <View style={styles.item} key={item.docId}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}>
+              {<Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} />}
+
+              <Text style={styles.titleText}>{item.title}</Text>
+            </TouchableOpacity>
+          </View>
+          }
+        />}
+      </View> *//* }
+    ); */
+  )};
+}; 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  resources: {
+    fontSize: 40,
+    marginTop: 30,
+    textAlign: 'center',
+    color: '#2B2B2B'
+  },
+  paragraph: {
+    fontSize: 20,
+    color: '#686868',
+    textAlign: 'center',
+    margin: 8,
+    marginBottom: 20,
     alignItems: 'center',
-    justifyContent: 'center',
-  }
+  },
+  item: {
+    flex: 1,
+    textAlign: 'center',
+    alignSelf: 'center'
+  },
+  titleText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#2B2B2B',
+    textAlign: 'center',
+  },
 });
