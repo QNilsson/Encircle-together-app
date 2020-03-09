@@ -4,10 +4,10 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
-import calendarReducer from './store/reducers/calendar';
+import locationReducer from './store/reducers/Location';
 
 const rootReducer = combineReducers({
-  calendar: calendarReducer
+  location: locationReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
