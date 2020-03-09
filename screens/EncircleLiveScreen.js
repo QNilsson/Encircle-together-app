@@ -1,22 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import WebView from "react-native-webview";
 
 const EncircleLiveScreen = props => {
   return (
-    <View style={styles.container}>
-      <Text>Encircle Live Screen</Text>
-      <Text>Test</Text>
-    </View>
+    <WebView
+      source={{ uri: "https://www.encirclelive.org" }}
+      style={{ marginTop: 20 }}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
 
 export default EncircleLiveScreen;
