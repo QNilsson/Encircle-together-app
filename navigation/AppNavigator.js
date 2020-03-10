@@ -28,7 +28,7 @@ const AppNavigator = createBottomTabNavigator({
   Resources: ResourceNavigator,
   EncircleLive: EncircleLiveScreen,
   More: MoreNavigator,
-  Donate: DonateScreen
+  Donate: DonateScreen,
   Shop: ShopScreen
 });
 
