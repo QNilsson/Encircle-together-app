@@ -4,7 +4,6 @@ import { StyleSheet, Text, Button, View } from 'react-native';
 const MoreScreen = props => {
   return (
       <View style={styles.container}>
-      <Text>test: {test}</Text>
         <View>
           <Button title="Locations" onPress={() => props.navigation.navigate('Location')}/>
         </View>
