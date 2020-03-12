@@ -3,7 +3,8 @@ import { Platform } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Ionicons} from '@expo/vector-icons';
 
 import CalendarScreen from '../screens/CalendarScreen';
 import DashboardScreen from '../screens/DashboardScreen';
@@ -59,7 +60,7 @@ const AppNavigator = createBottomTabNavigator({
         iconName = focused ? 'cart' : 'cart';
       }
 
-      return <IconComponent name={Platform.OS === 'ios' ? 'ios-' : 'md-' + iconName} size={25} color={tintColor} />;
+      return <IconComponent name={Platform.OS === 'ios' ? 'ios-' + iconName : 'md-' + iconName} size={25} color={tintColor} />;
     },
   }),
   tabBarOptions: {
