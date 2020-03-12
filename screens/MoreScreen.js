@@ -4,8 +4,14 @@ import { StyleSheet, Text, Button, View } from 'react-native';
 const MoreScreen = props => {
   return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.buttonContainer}>
           <Button title="Locations" onPress={() => props.navigation.navigate('Location')}/>
+        </View>
+        <View style={styles.buttonContainer}>
+        <Button title="Encircle Live" onPress={() => props.navigation.navigate('EncircleLive')}/>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Shop" onPress={() => props.navigation.navigate('Shop')}/>
         </View>
       </View>
     );
@@ -18,6 +24,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonContainer: {
+    flex: 1
+  }
 });
 
 export default MoreScreen;
