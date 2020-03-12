@@ -8,9 +8,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "@expo/vector-icons": "^10.0.6",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/native": "^5.0.0",
+    "axios": "^0.19.2",
     "expo": "^35.0.0",
     "expo-constants": "~7.0.0",
     "expo-file-system": "~7.0.0",
