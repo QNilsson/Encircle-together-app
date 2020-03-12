@@ -21,7 +21,7 @@ class CalendarScreen extends Component {
 
   componentDidMount = () => {
     this.getEvents();
-    //this.setState({ location: this.props.location });
+    this.setState({ location: this.props.location });
   }
 
   getEvents = () => {
@@ -73,6 +73,12 @@ class CalendarScreen extends Component {
   }
 
   render() {
+    let dateTitle = '';
+    if(this.state.selectedDay === undefined) {
+      dateTitle = (<Text style={styles.selectedDayTxt}>Select a date to see events!</Text>)
+    } else {
+      dateTitle = (<Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text>)
+    }
     return (
       <View>
         <View>
@@ -84,11 +90,15 @@ class CalendarScreen extends Component {
             markedDates={this.state.markedItems}
           />
         </View>
-        <View>
+        <View style={styles.eventListContainer}>
+          <View>
+            {dateTitle}
+          </View>
+
           <FlatList
             data={this.state.eventList[this.state.selectedDay]}
             keyExtractor={event => event.id}
-            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summ}</Text></View>}
+            renderItem={({ item }) => <View style={styles.item} key={item.id}><Text>{item.summ}</Text></View>}
           />
         </View>
       </View>
@@ -160,11 +170,10 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: 'white',
+    backgroundColor: '#f1f1f1',
     flex: 1,
     borderRadius: 5,
     padding: 10,
-    marginRight: 10,
     marginTop: 17
   },
   emptyDate: {
@@ -174,6 +183,16 @@ const styles = StyleSheet.create({
   },
   calendar: {
     marginBottom: 10
+  },
+  selectedDayTxt: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#2B2B2B',
+    textAlign: 'center',
+  },
+  eventListContainer: {
+    backgroundColor: '#ddd',
+    padding: 25
   }
 });
 

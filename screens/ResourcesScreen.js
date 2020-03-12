@@ -5,10 +5,6 @@ import Publication from '../models/publication';
 // import * as FileSystem from 'expo-file-system';
 
 export default class ResourcesScreen extends Component {
-  static navigationOptions = {
-    title: 'Resources',
-  };
-
   constructor(props) {
     super(props);
 
@@ -69,7 +65,7 @@ export default class ResourcesScreen extends Component {
           style={styles.container}
           data={this.state.publications}
           keyExtractor={publication => publication.docId}
-          renderItem={({ item }) => 
+          renderItem={({ item }) =>
             <View style={styles.item} key={item.docId}>
               {<Image
                 style={{width: 175, height: 250}}
@@ -84,12 +80,12 @@ export default class ResourcesScreen extends Component {
                 <Text style={styles.titleText}>{item.title}</Text>
               </TouchableOpacity>
 
-              
+
             </View>
           }
           />}
-  
-         
+
+
         </View>
       /* <View style={styles.container}>
         <Text style={styles.resources}>Resources</Text>
@@ -101,7 +97,7 @@ export default class ResourcesScreen extends Component {
     numColumns={2}
           data={this.state.publications}
           keyExtractor={publication => publication.docId}
-          renderItem={({ item }) => 
+          renderItem={({ item }) =>
           <View style={styles.item} key={item.docId}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}>
               {<Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} />}
@@ -114,7 +110,7 @@ export default class ResourcesScreen extends Component {
       </View> *//* }
     ); */
   )};
-}; 
+};
 
 const styles = StyleSheet.create({
   container: {
