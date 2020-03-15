@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 
+import GlobalStyles from '../constants/GlobalStyles';
 import Publication from '../models/publication';
 // import * as FileSystem from 'expo-file-system';
 
@@ -58,8 +59,8 @@ export default class ResourcesScreen extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.resources}>Resources</Text>
-        <Text style={styles.paragraph}>Publications and resources produced by Encircle.</Text>
+        <Text style={GlobalStyles.h1}>Resources</Text>
+        <Text style={GlobalStyles.p}>Publications and resources produced by Encircle.</Text>
         {<FlatList
           numColumns={2}
           style={styles.container}
