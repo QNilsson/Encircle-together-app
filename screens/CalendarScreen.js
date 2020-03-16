@@ -31,7 +31,14 @@ class CalendarScreen extends Component {
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=15&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    console.log(DATE);
+    const splitDATE = DATE.split('-', 2);
+    const yearMonth = `${splitDATE[0]}-${splitDATE[1]}`;
+
+    // show events for todays date
+    this.setState({selectedDay: DATE.dateString});
+
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=150&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
@@ -75,9 +82,9 @@ class CalendarScreen extends Component {
   render() {
     let dateTitle = '';
     if(this.state.selectedDay === undefined) {
-      dateTitle = (<Text style={styles.selectedDayTxt}>Select a date to see events!</Text>)
+      dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Select a date to see events!</Text></View>);
     } else {
-      dateTitle = (<Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text>)
+      dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text></View>);
     }
     return (
       <View>
@@ -90,11 +97,12 @@ class CalendarScreen extends Component {
             markedDates={this.state.markedItems}
           />
         </View>
-        <View style={styles.eventListContainer}>
-          <View>
-            {dateTitle}
-          </View>
 
+        <View style={styles.container}>
+          {dateTitle}
+        </View>
+
+        <View style={styles.eventListContainer}>
           <FlatList
             data={this.state.eventList[this.state.selectedDay]}
             keyExtractor={event => event.id}
@@ -169,6 +177,10 @@ const mapStateToProps = state => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   item: {
     backgroundColor: '#f1f1f1',
     flex: 1,
@@ -191,8 +203,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   eventListContainer: {
+    borderWidth: 1,
+    borderColor: '#eee',
+    borderRadius: 16,
     backgroundColor: '#ddd',
-    padding: 25
+    paddingLeft: 12,
+    paddingRight: 12,
+    height: '100%'
+  },
+  eventListHeading: {
+    borderWidth: 1,
+    borderColor: '#000000',
+    borderRadius: 16,
+    width: '50%',
+    textAlign: 'center',
+    paddingTop: 8,
+    paddingBottom: 8
   }
 });
 
