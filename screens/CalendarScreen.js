@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Event from '../models/event';
 import { Calendar } from 'react-native-calendars';
+import GlobalStyles from '../constants/GlobalStyles';
 
 class CalendarScreen extends Component {
   constructor(props) {
@@ -95,6 +96,31 @@ class CalendarScreen extends Component {
             hideExtraDays
             onDayPress={this.onDayPress}
             markedDates={this.state.markedItems}
+            /*theme={{
+              backgroundColor: '#ffffff',
+              calendarBackground: '#ffffff',
+              textSectionTitleColor: '#b6c1cd',
+              selectedDayBackgroundColor: '#00adf5',
+              selectedDayTextColor: '#ffffff',
+              todayTextColor: '#00adf5',
+              dayTextColor: '#2d4150',
+              textDisabledColor: '#d9e1e8',
+              dotColor: '#00adf5',
+              selectedDotColor: '#ffffff',
+              arrowColor: 'orange',
+              disabledArrowColor: '#d9e1e8',
+              monthTextColor: 'blue',
+              indicatorColor: 'blue',
+              textDayFontFamily: 'monospace',
+              textMonthFontFamily: GlobalStyles.h1,
+              textDayHeaderFontFamily: 'monospace',
+              textDayFontWeight: '300',
+              textMonthFontWeight: 'bold',
+              textDayHeaderFontWeight: '300',
+              textDayFontSize: 16,
+              textMonthFontSize: 16,
+              textDayHeaderFontSize: 16
+            }}*/
           />
         </View>
 
