@@ -8,7 +8,7 @@ const MoreScreen = props => {
           <Button title="Locations" onPress={() => props.navigation.navigate('Location')}/>
         </View>
         <View style={styles.buttonContainer}>
-        <Button title="Encircle Live" onPress={() => props.navigation.navigate('EncircleLive')}/>
+        <Button title="Donate" onPress={() => props.navigation.navigate('Donate')}/>
         </View>
         <View style={styles.buttonContainer}>
           <Button title="Shop" onPress={() => props.navigation.navigate('Shop')}/>
