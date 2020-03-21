@@ -14,7 +14,7 @@ class CalendarScreen extends Component {
       markedItems: {},
       events: [],
       eventList: [],
-      selectedDay: undefined,
+      selectedDay: '',
       isLoading: true,
       location: ''
     };
@@ -23,6 +23,7 @@ class CalendarScreen extends Component {
   componentDidMount = () => {
     this.getEvents();
     this.setState({ location: this.props.location });
+
   }
 
   getEvents = () => {
@@ -32,12 +33,21 @@ class CalendarScreen extends Component {
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    console.log(DATE);
+
+    // set timeMin url parameter to beginning of month
     const splitDATE = DATE.split('-', 2);
     const yearMonth = `${splitDATE[0]}-${splitDATE[1]}`;
 
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
     // show events for todays date
-    this.setState({selectedDay: DATE.dateString});
+    this.setState({selectedDay: today});
+    this.onDayPress(today)
 
     let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=150&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
@@ -82,7 +92,7 @@ class CalendarScreen extends Component {
 
   render() {
     let dateTitle = '';
-    if(this.state.selectedDay === undefined) {
+    if(!this.state.selectedDay) {
       dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Select a date to see events!</Text></View>);
     } else {
       dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text></View>);
@@ -142,8 +152,6 @@ class CalendarScreen extends Component {
   onDayPress = (day) => {
     const selected = day.dateString;
     this.setState({ selectedDay: selected });
-
-    console.log(selected)
 
     const list = {};
     this.state.events.forEach(e => {
@@ -210,8 +218,9 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#f1f1f1',
     flex: 1,
-    borderRadius: 5,
-    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#777777',
+    padding: 20,
     marginTop: 17
   },
   emptyDate: {
@@ -232,15 +241,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#eee',
     borderRadius: 16,
-    backgroundColor: '#ddd',
+    backgroundColor: '#f3f3f3',
     paddingLeft: 12,
     paddingRight: 12,
     height: '100%'
   },
   eventListHeading: {
-    borderWidth: 1,
-    borderColor: '#000000',
-    borderRadius: 16,
+    // borderWidth: 1,
+    // borderColor: '#777777',
+    // borderRadius: 16,
     width: '50%',
     textAlign: 'center',
     paddingTop: 8,
