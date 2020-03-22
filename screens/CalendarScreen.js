@@ -92,11 +92,14 @@ class CalendarScreen extends Component {
 
   render() {
     let dateTitle = '';
-    if(!this.state.selectedDay) {
+    if(this.state.selectedDay === '') {
       dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Select a date to see events!</Text></View>);
+    } else if(!this.state.eventList[this.state.selectedDay]) {
+      dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>No events on this date!</Text></View>)
     } else {
       dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text></View>);
     }
+    
     return (
       <View>
         <View>
