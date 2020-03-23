@@ -104,24 +104,27 @@ export default class DashboardScreen extends Component {
     return (
       <View style={styles.container}>
         <View>
-          <FlatList
-            data={this.state.events}
-            keyExtractor={event => event.id}
-            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summary}</Text></View>}
-          />
+          <View style={{ flex: 1, }} key={item.id}><Text>{item.summary}</Text></View>
         </View>
         <View>
-          <FlatList
-            data={this.state.publications}
-            keyExtractor={publication => publication.docId}
-            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>}
-          />
+          <View style={{ flex: 1, }} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>
         </View>
       </View>
     );
   }
 };
-
+/*
+<FlatList
+  data={this.state.events}
+  keyExtractor={event => event.id}
+  renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summary}</Text></View>}
+/>
+<FlatList
+  data={this.state.publications}
+  keyExtractor={publication => publication.docId}
+  renderItem={({ item }) => <View style={{ flex: 1, }} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>}
+/>
+*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
