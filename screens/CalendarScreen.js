@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Event from '../models/event';
 import { Calendar } from 'react-native-calendars';
+import GlobalStyles from '../constants/GlobalStyles';
 
 class CalendarScreen extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class CalendarScreen extends Component {
 
   componentDidMount = () => {
     this.getEvents();
-    //this.setState({ location: this.props.location });
+    this.setState({ location: this.props.location });
   }
 
   getEvents = () => {
@@ -31,7 +32,14 @@ class CalendarScreen extends Component {
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
     const DATE = new Date().toISOString();
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=15&orderBy=startTime&singleEvents=true&timeMin=${DATE}&key=${API_KEY}`;
+    console.log(DATE);
+    const splitDATE = DATE.split('-', 2);
+    const yearMonth = `${splitDATE[0]}-${splitDATE[1]}`;
+
+    // show events for todays date
+    this.setState({selectedDay: DATE.dateString});
+
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=150&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     fetch(url)
       .then((res) => res.json())
@@ -73,6 +81,12 @@ class CalendarScreen extends Component {
   }
 
   render() {
+    let dateTitle = '';
+    if(this.state.selectedDay === undefined) {
+      dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Select a date to see events!</Text></View>);
+    } else {
+      dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text></View>);
+    }
     return (
       <View>
         <View>
@@ -82,13 +96,43 @@ class CalendarScreen extends Component {
             hideExtraDays
             onDayPress={this.onDayPress}
             markedDates={this.state.markedItems}
+            /*theme={{
+              backgroundColor: '#ffffff',
+              calendarBackground: '#ffffff',
+              textSectionTitleColor: '#b6c1cd',
+              selectedDayBackgroundColor: '#00adf5',
+              selectedDayTextColor: '#ffffff',
+              todayTextColor: '#00adf5',
+              dayTextColor: '#2d4150',
+              textDisabledColor: '#d9e1e8',
+              dotColor: '#00adf5',
+              selectedDotColor: '#ffffff',
+              arrowColor: 'orange',
+              disabledArrowColor: '#d9e1e8',
+              monthTextColor: 'blue',
+              indicatorColor: 'blue',
+              textDayFontFamily: 'monospace',
+              textMonthFontFamily: GlobalStyles.h1,
+              textDayHeaderFontFamily: 'monospace',
+              textDayFontWeight: '300',
+              textMonthFontWeight: 'bold',
+              textDayHeaderFontWeight: '300',
+              textDayFontSize: 16,
+              textMonthFontSize: 16,
+              textDayHeaderFontSize: 16
+            }}*/
           />
         </View>
-        <View>
+
+        <View style={styles.container}>
+          {dateTitle}
+        </View>
+
+        <View style={styles.eventListContainer}>
           <FlatList
             data={this.state.eventList[this.state.selectedDay]}
             keyExtractor={event => event.id}
-            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summ}</Text></View>}
+            renderItem={({ item }) => <View style={styles.item} key={item.id}><Text>{item.summ}</Text></View>}
           />
         </View>
       </View>
@@ -159,12 +203,15 @@ const mapStateToProps = state => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   item: {
-    backgroundColor: 'white',
+    backgroundColor: '#f1f1f1',
     flex: 1,
     borderRadius: 5,
     padding: 10,
-    marginRight: 10,
     marginTop: 17
   },
   emptyDate: {
@@ -174,6 +221,30 @@ const styles = StyleSheet.create({
   },
   calendar: {
     marginBottom: 10
+  },
+  selectedDayTxt: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#2B2B2B',
+    textAlign: 'center',
+  },
+  eventListContainer: {
+    borderWidth: 1,
+    borderColor: '#eee',
+    borderRadius: 16,
+    backgroundColor: '#ddd',
+    paddingLeft: 12,
+    paddingRight: 12,
+    height: '100%'
+  },
+  eventListHeading: {
+    borderWidth: 1,
+    borderColor: '#000000',
+    borderRadius: 16,
+    width: '50%',
+    textAlign: 'center',
+    paddingTop: 8,
+    paddingBottom: 8
   }
 });
 

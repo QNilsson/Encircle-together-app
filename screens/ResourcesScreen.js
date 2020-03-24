@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from "react-native";
 
-import Publication from "../models/publication";
+import GlobalStyles from '../constants/GlobalStyles';
+import Publication from '../models/publication';
+// import * as FileSystem from 'expo-file-system';
 
 export default class ResourcesScreen extends Component {
-  static navigationOptions = {
-    title: "Resources"
-  };
-
   constructor(props) {
     super(props);
 

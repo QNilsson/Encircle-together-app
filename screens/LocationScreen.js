@@ -12,7 +12,7 @@ const LocationScreen = () => {
   const selectedLocation = (location) => {
     dispatch(setLocation(location));
   }
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.filterContainer}>
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   filterContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '75%'
   }
 });
 
