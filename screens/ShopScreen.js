@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
-import axios from 'axios';
 
 import Product from '../models/product';
 
@@ -17,46 +16,50 @@ export default class ShopScreen extends Component {
     };
   }
 
+  imageHeight = 250;
+  imageWidth = '100%';
+
   componentDidMount() {
     this.getProducts();
   }
 
   getProducts() {
-    axios.get('https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json')
-    .then(response => {
-      const products = response.data.products;
-      const productData = [];
+    const url = `https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json`;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(result => {
+      const products = result.products;
       // console.log(products);
-      console.log(products[0].image.src);
-
-        /* this is conditionally see if the products have an image. If they don't have an image, then they are used interally for Encirlce */
-        for (const key in products) {
-          console.log(`key is: ${key}` + products[key].title)
-          if (products[key].image) {
-            console.log(`This product has an image src of: ${products[key].image.src}`)
-            productData.push(
-              new Product(
-                products[key].image.src,
-                products[key].title,
-                products[key].variants[0].price,
-                )
-            );
-          } else {
-            console.log(`This product has no image src property`)
-          }
-          
+      const productData = [];
+    
+      for (const key in products) {
+        if (products[key].image) {
+          /* this is conditionally see if the products have an image. If they don't have an image, then they are used interally for Encirlce */
+          console.log(`This product has an image src of: ${products[key].image.src}`)
+          productData.push(
+            new Product(
+              products[key].image.src,
+              products[key].title,
+              products[key].variants[0].price,
+              )
+          );
+        } else {
+          console.log(`This product has no image src property`)
         }
+      }
 
-        for (const i in productData) {
-          console.log(productData[i])
-        }
+      for (const i in productData) {
+        console.log(productData[i])
+      }
 
-        this.setState({
-          products: productData
-        });
-      })
-      .catch((err) => console.log(err));
+      this.setState({
+        products: productData
+      });
+    })
+    .catch(err => console.log(err));
   }
+
 
   render() {
     return (
@@ -71,7 +74,7 @@ export default class ShopScreen extends Component {
           renderItem={({ item }) => 
             <View style={styles.item}>
               {<Image
-                style={{width: 175, height: 250}}
+                style={{width: this.imageWidth, height: this.imageHeight}}
                 source={{uri: item.image }}
               />}
 
