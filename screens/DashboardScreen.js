@@ -5,10 +5,6 @@ import Event from '../models/event';
 import Publication from '../models/publication';
 
 export default class DashboardScreen extends Component {
-  static navigationOptions = {
-    title: 'Dashboard'
-  };
-
   constructor(props) {
     super(props);
 
@@ -51,9 +47,9 @@ export default class DashboardScreen extends Component {
           );
         }
 
-        // for(const event in eventData) {
-        //   console.log(eventData[event]);
-        // }
+         for(const event in eventData) {
+           console.log(eventData[event]);
+         }
 
         this.setState({
           events: eventData
@@ -104,18 +100,10 @@ export default class DashboardScreen extends Component {
     return (
       <View style={styles.container}>
         <View>
-          <FlatList
-            data={this.state.events}
-            keyExtractor={event => event.id}
-            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.id}><Text>{item.summary}</Text></View>}
-          />
+          {this.state.events.map(event => <View style={styles.eventContainter} key={event.id}><Text>{ event.summary }</Text></View>)}
         </View>
         <View>
-          <FlatList
-            data={this.state.publications}
-            keyExtractor={publication => publication.docId}
-            renderItem={({ item }) => <View style={{ flex: 1, }} key={item.docId}><TouchableOpacity onPress={() => this.props.navigation.navigate('Resource', { resourceName: item.name })}><Image style={{ width: 50, height: 100 }} source={{ uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg` }} /><Text>{item.title}</Text></TouchableOpacity></View>}
-          />
+          {this.state.publications.map(publication => <View style={styles.publicationContainter} key={publication.docId}><Text>{publication.name}</Text></View>)}
         </View>
       </View>
     );
@@ -125,8 +113,15 @@ export default class DashboardScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexWrap: 'wrap',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  eventContainter: {
+
+  },
+  publicationContainter: {
+
+  }
 });
