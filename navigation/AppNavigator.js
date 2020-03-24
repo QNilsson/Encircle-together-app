@@ -28,8 +28,8 @@ const AppNavigator = createBottomTabNavigator({
   Resources: ResourceNavigator,
   EncircleLive: EncircleLiveScreen,
   More: MoreNavigator,
-  Donate: DonateScreen
-  Shop: ShopScreen
+  Donate: DonateScreen,
+  Shop: ShopScreen,
 });
 
 export default createAppContainer(AppNavigator);
