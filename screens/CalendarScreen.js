@@ -27,7 +27,7 @@ class CalendarScreen extends Component {
   }
 
   getEvents = () => {
-    console.log(this.state.location)
+    console.log(this.props.location);
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
@@ -99,7 +99,7 @@ class CalendarScreen extends Component {
     } else {
       dateTitle = (<View style={styles.eventListHeading}><Text style={styles.selectedDayTxt}>Events on {this.state.selectedDay}</Text></View>);
     }
-    
+
     return (
       <View>
         <View>

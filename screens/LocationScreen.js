@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setLocation } from '../store/actions/Location';
 
 const LocationScreen = () => {
-  const [provo, setProvo] = useState(false);
+  const [provo, setProvo] = useState(true);
   const [slc, setSlc] = useState(false);
 
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const LocationScreen = () => {
           onValueChange={v => {
             setProvo(v);
             setSlc(false);
-            selectedLocation('provo');
+            selectedLocation('Provo');
           }}
         />
       </View>
@@ -34,7 +34,7 @@ const LocationScreen = () => {
           onValueChange={v => {
             setSlc(v);
             setProvo(false);
-            selectedLocation('slc');
+            selectedLocation('Salt Lake City');
           }}
         />
       </View>
