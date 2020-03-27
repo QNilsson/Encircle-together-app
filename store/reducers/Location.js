@@ -1,3 +1,4 @@
+// REDUCERS
 import { SET_LOCATION } from '../actions/Location';
 /*
 let initState = {

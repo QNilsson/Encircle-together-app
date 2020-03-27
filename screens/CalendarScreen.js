@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
 
+import { connect } from 'react-redux';
+import { fetchProvoEvents } from '../store/actions/Event';
 import Event from '../models/event';
 import { Calendar } from 'react-native-calendars';
 import GlobalStyles from '../constants/GlobalStyles';
@@ -22,11 +23,30 @@ class CalendarScreen extends Component {
 
   componentDidMount = () => {
     this.getEvents();
-    this.setState({ location: this.props.location });
-
   }
 
   getEvents = () => {
+    // const location = this.props.location;
+    // const events = this.props.fetchProvoEvents();
+    // console.log(events)
+    //
+    // let today = new Date();
+    // const dd = String(today.getDate()).padStart(2, '0');
+    // const mm = String(today.getMonth() + 1).padStart(2, '0');
+    // const yyyy = today.getFullYear();
+    //
+    // today = yyyy + '-' + mm + '-' + dd;
+    //
+    // this.setState({
+    //   location: location,
+    //   events: events,
+    //   selectedDay: today
+    // });
+    //
+    // console.log(events);
+    //
+    // this.onDayPress(today)
+    // this.markItems();
     console.log(this.props.location);
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
@@ -213,6 +233,12 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = () => {
+  return {
+    fetchProvoEvents
+  }
+};
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -260,4 +286,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps)(CalendarScreen);
+export default connect(mapStateToProps, mapDispatchToProps())(CalendarScreen);

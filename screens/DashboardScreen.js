@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react
 import { connect } from 'react-redux';
 import Event from '../models/event';
 import Publication from '../models/publication';
+import Card from '../components/Card';
 
 class DashboardScreen extends Component {
   constructor(props) {
@@ -51,9 +52,9 @@ class DashboardScreen extends Component {
           );
         }
 
-         for(const event in eventData) {
-           console.log(eventData[event]);
-         }
+         //for(const event in eventData) {
+           //console.log(eventData[event]);
+         //}
 
         this.setState({
           events: eventData
@@ -109,16 +110,18 @@ class DashboardScreen extends Component {
         </View>
         <View style={styles.eventContainter}>
           <Text>Later today in {this.state.location}</Text>
-          {this.state.events.map(event => <View style={styles.event} key={event.id}><Text>{ event.summary }</Text></View>)}
+          {this.state.events.map(event => <Card key={event.id} time={event.start__dateTime} summary={event.summary} />)}
         </View>
         <View style={styles.publicationContainter}>
-          {this.state.publications.map(publication => <View style={styles.publication} key={publication.docId}><Text>{publication.name}</Text></View>)}
+
         </View>
       </View>
     );
   }
 };
-
+ /*
+{this.state.publications.map(publication => <View style={styles.publication} key={publication.docId}><Text>{publication.name}</Text></View>)}
+ */
 const mapStateToProps = state => {
   return {
     location: state.location
@@ -128,8 +131,6 @@ const mapStateToProps = state => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '100%',
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 20,
