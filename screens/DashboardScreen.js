@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 
+import { connect } from 'react-redux';
 import Event from '../models/event';
 import Publication from '../models/publication';
+import Card from '../components/Card';
 
-export default class DashboardScreen extends Component {
+class DashboardScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       markedItems: {},
       events: [],
-      publications: []
+      publications: [],
+      location: ''
     };
   }
 
   componentDidMount() {
     this.getEvents();
     this.getPublications();
+    this.setState({ location: this.props.location });
   }
 
   getEvents = () => {
+    console.log(this.state.location)
     // Provo cal id = encircletogether.org_3739393730353231353232@resource.calendar.google.com
     // SLC cal id = encircletogether.org_3231333930393634323835@resource.calendar.google.com
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
@@ -47,9 +52,9 @@ export default class DashboardScreen extends Component {
           );
         }
 
-         for(const event in eventData) {
-           console.log(eventData[event]);
-         }
+         //for(const event in eventData) {
+           //console.log(eventData[event]);
+         //}
 
         this.setState({
           events: eventData
@@ -100,28 +105,65 @@ export default class DashboardScreen extends Component {
     return (
       <View style={styles.container}>
         <View>
-          {this.state.events.map(event => <View style={styles.eventContainter} key={event.id}><Text>{ event.summary }</Text></View>)}
+          <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.subTitle}>Make today a great day.</Text>
         </View>
-        <View>
-          {this.state.publications.map(publication => <View style={styles.publicationContainter} key={publication.docId}><Text>{publication.name}</Text></View>)}
+        <View style={styles.eventContainter}>
+          <Text>Later today in {this.state.location}</Text>
+          {this.state.events.map(event => <Card key={event.id} time={event.start__dateTime} summary={event.summary} />)}
+        </View>
+        <View style={styles.publicationContainter}>
+
         </View>
       </View>
     );
+  }
+};
+ /*
+{this.state.publications.map(publication => <View style={styles.publication} key={publication.docId}><Text>{publication.name}</Text></View>)}
+ */
+const mapStateToProps = state => {
+  return {
+    location: state.location
   }
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexWrap: 'wrap',
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 20,
+    marginTop: 100,
+    marginBottom: 50
+  },
+  title: {
+    fontSize: 40,
+    textAlign: 'center',
+    color: '#2B2B2B'
+  },
+  subTitle: {
+    fontSize: 18,
+    color: '#686868',
+    textAlign: 'center',
+    margin: 8,
+    marginBottom: 20,
+    alignItems: 'center'
   },
   eventContainter: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  event: {
 
   },
   publicationContainter: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  publication: {
 
   }
 });
+
+export default connect(mapStateToProps)(DashboardScreen);
