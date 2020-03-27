@@ -99,14 +99,15 @@ export default class ShopScreen extends Component {
 const styles = StyleSheet.create({
   mainContainer: {
     margin: 20,
-    marginTop: 100,
+    // marginTop: '10%',
     marginBottom: 50
     // textAlign: "center"
   }, 
   shop: {
     fontSize: 40,
     textAlign: 'center',
-    color: '#2B2B2B'
+    color: '#2B2B2B',
+    fontFamily: 'ModernoFB',
   },
   paragraph: {
     fontSize: 20,
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
     margin: 8,
     marginBottom: 20,
     alignItems: 'center',
+    fontFamily: 'Futura-Book'
   },
   container: {
     /* flex: 1,
@@ -145,12 +147,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#2B2B2B',
     textAlign: 'center',
+    fontFamily: 'Futura-Book'
   },
   priceText: {
     color: '#686868',
     fontStyle: 'italic',
     textAlign: 'center',
     padding: 10,
+    fontFamily: 'ModernoFB',
   }
 
 });
