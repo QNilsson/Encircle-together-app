@@ -1,7 +1,5 @@
-// ACTIONS
-export const FETCH_PROVO_EVENTS = 'FETCH_PROVO_EVENTS';
-
 import Event from '../../models/event';
+export const FETCH_PROVO_EVENTS = 'FETCH_PROVO_EVENTS';
 
 export const fetchProvoEvents = () => {
   return async dispatch => {
@@ -15,7 +13,7 @@ export const fetchProvoEvents = () => {
     let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=15&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
-    const resData = response.json();
+    const resData = await response.json();
     const items = resData.items;
     const eventData = [];
 

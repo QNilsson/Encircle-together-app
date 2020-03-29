@@ -15,6 +15,7 @@ import ResourceScreen from '../screens/ResourceScreen';
 import DonateScreen from '../screens/DonateScreen';
 import LocationScreen from '../screens/LocationScreen';
 import ShopScreen from '../screens/ShopScreen';
+import Calendar from '../screens/Calendar';
 
 const MoreNavigator = createStackNavigator({
   More: MoreScreen,
@@ -32,7 +33,8 @@ const ResourceNavigator = createStackNavigator({
 
 const AppNavigator = createBottomTabNavigator({
   Dashboard: DashboardScreen,
-  Calendar: CalendarScreen,
+  //Calendar: CalendarScreen,
+  Calendar: Calendar,
   Resources: ResourceNavigator,
   EncircleLive: EncircleLiveScreen,
   More: MoreNavigator
