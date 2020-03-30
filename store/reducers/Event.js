@@ -14,7 +14,7 @@ const eventReducer = (state = initState, action) => {
     case MARK_ITEMS:
       const items = {};
       action.data.events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
-      return { ...state, markedItems: items }
+      return { ...state, markedItems: items };
     default:
       return state;
   }
