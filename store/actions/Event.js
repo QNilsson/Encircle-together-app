@@ -77,3 +77,7 @@ export const fetchSlcEvents = () => {
     dispatch({ type: FETCH_SLC_EVENTS, events: eventData})
   };
 };
+
+export const markItems = (events) => {
+  return { type: MARK_ITEMS, data: { events: events }};
+};
