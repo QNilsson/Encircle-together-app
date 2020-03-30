@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,18 +8,35 @@ import * as eventActions from '../store/actions/Event';
 
 const CalendarScreen = (props) => {
   const location = useSelector(state => state.location.location);
-  console.log(location);
+  const events = useSelector(state => state.events.events);
+  const [markedItems, setMarkedItems] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(eventActions.fetchProvoEvents());
-  })
+    location === 'Provo' ?
+    dispatch(eventActions.fetchProvoEvents()) :
+    dispatch(eventActions.fetchSlcEvents());
+
+    markItems(events);
+  }, [dispatch, markItems]);
+
+  const markItems = (eventsArray) => {
+    const items = {};
+    eventsArray.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
+    setMarkedItems(items);
+    for(const i in items) {
+      console.log(items[i]);
+    }
+  }
 
   return (
     <Calendar
+    markedDates={markedItems}
     />
   );
 };
+
+
 
 const styles = StyleSheet.create({
 

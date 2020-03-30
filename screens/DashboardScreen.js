@@ -109,7 +109,7 @@ class DashboardScreen extends Component {
           <Text style={styles.subTitle}>Make today a great day.</Text>
         </View>
         <View style={styles.eventContainter}>
-          <Text>Later today in {this.state.location}</Text>
+          <Text>Later today in </Text>
           {this.state.events.map(event => <Card key={event.id} time={event.start__dateTime} summary={event.summary} />)}
         </View>
         <View style={styles.publicationContainter}>

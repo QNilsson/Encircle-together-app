@@ -10,7 +10,7 @@ import eventReducer from './store/reducers/Event';
 
 const rootReducer = combineReducers({
   location: locationReducer,
-  event: eventReducer
+  events: eventReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

@@ -1,10 +1,13 @@
 import { SET_LOCATION } from '../actions/Location';
 
-const locationReducer = (state = 'Provo', action) => {
+const initState = {
+  location: 'Provo'
+}
+
+const locationReducer = (state = initState, action) => {
   switch(action.type) {
     case SET_LOCATION:
-      let location = action.location;
-      return { ...state, location: location };
+      return { location: action.location };
     default:
       return state;
   }
