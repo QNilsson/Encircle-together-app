@@ -5,11 +5,8 @@ import { WebView } from "react-native-webview";
 const EncircleLiveScreen = props => {
   return (
     <WebView
-      source={{
-        html:
-          '<iframe width="100%" height="100%" src="https://www.encirclelive.org" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
-      }}
-      style={{ marginTop: 30 }}
+      source={{ uri: "https://www.encirclelive.org" }}
+      style={{ marginTop: 20 }}
     />
   );
 };
