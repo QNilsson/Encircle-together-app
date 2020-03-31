@@ -1,6 +1,7 @@
 import Event from '../../models/event';
 export const FETCH_PROVO_EVENTS = 'FETCH_PROVO_EVENTS';
 export const FETCH_SLC_EVENTS = 'FETCH_SLC_EVENTS';
+export const MARK_ITEMS = 'MARK_ITEMS';
 
 export const fetchProvoEvents = () => {
   return async dispatch => {
@@ -11,7 +12,7 @@ export const fetchProvoEvents = () => {
     // set timeMin url parameter to beginning of month
     const splitDATE = DATE.split('-', 2);
     const yearMonth = `${splitDATE[0]}-${splitDATE[1]}`;
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=5&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
     const resData = await response.json();
@@ -32,9 +33,9 @@ export const fetchProvoEvents = () => {
       );
     }
 
-    for(const event in eventData) {
-      console.log(eventData[event]);
-    }
+    // for(const event in eventData) {
+    //   console.log(eventData[event]);
+    // }
 
     dispatch({ type: FETCH_PROVO_EVENTS, events: eventData})
   };
@@ -49,7 +50,7 @@ export const fetchSlcEvents = () => {
     // set timeMin url parameter to beginning of month
     const splitDATE = DATE.split('-', 2);
     const yearMonth = `${splitDATE[0]}-${splitDATE[1]}`;
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=15&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
     const resData = await response.json();
@@ -70,14 +71,14 @@ export const fetchSlcEvents = () => {
       );
     }
 
-    for(const event in eventData) {
-      console.log(eventData[event]);
-    }
+    // for(const event in eventData) {
+    //   console.log(eventData[event]);
+    // }
 
     dispatch({ type: FETCH_SLC_EVENTS, events: eventData})
   };
 };
 
-export const markItems = (events) => {
-  return { type: MARK_ITEMS, data: { events: events }};
-};
+// export const markItems = () => {
+//   return { type: MARK_ITEMS, items: {}};
+// };
