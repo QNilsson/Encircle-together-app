@@ -10,16 +10,7 @@ const eventReducer = (state = initState, action) => {
     case FETCH_PROVO_EVENTS:
       return { events: action.events };
     case FETCH_SLC_EVENTS:
-    return { events: action.events };
-    // case MARK_ITEMS:
-    //   const events = [...state.events];
-    //   const items = {};
-    //   events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
-    //   // for(const i in action.events) {
-    //   //   console.log(action.events[i])
-    //   // }
-    //   // action.events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
-    //   return { ...state, markedItems: items };
+      return { events: action.events };
     default:
       return state;
   }
