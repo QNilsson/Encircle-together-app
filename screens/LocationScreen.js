@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Switch } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import { setLocation } from '../store/actions/Location';
+// import { setLocation } from '../store/actions/Location';
+import * as eventActions from '../store/actions/Event';
 
 const LocationScreen = () => {
   const [provo, setProvo] = useState(true);
@@ -10,7 +11,13 @@ const LocationScreen = () => {
 
   const dispatch = useDispatch();
   const selectedLocation = (location) => {
-    dispatch(setLocation(location));
+    if(location === 'Provo') {
+      dispatch(eventActions.fetchProvoEvents(location));
+    } else if(location === 'Salt Lake City') {
+      dispatch(eventActions.fetchSlcEvents(location));
+    } else {
+      dispatch(eventActions.fetchProvoEvents(location));
+    }
   }
 
   return (

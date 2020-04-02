@@ -3,7 +3,7 @@ export const FETCH_PROVO_EVENTS = 'FETCH_PROVO_EVENTS';
 export const FETCH_SLC_EVENTS = 'FETCH_SLC_EVENTS';
 export const MARK_ITEMS = 'MARK_ITEMS';
 
-export const fetchProvoEvents = () => {
+export const fetchProvoEvents = (location) => {
   return async dispatch => {
     const CALENDAR_ID = 'encircletogether.org_3739393730353231353232@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
@@ -42,11 +42,11 @@ export const fetchProvoEvents = () => {
     //   console.log(eventData[event]);
     // }
 
-    dispatch({ type: FETCH_PROVO_EVENTS, events: eventData})
+    dispatch({ type: FETCH_PROVO_EVENTS, data: {location: location, events: eventData}})
   };
 };
 
-export const fetchSlcEvents = () => {
+export const fetchSlcEvents = (location) => {
   return async dispatch => {
     const CALENDAR_ID = 'encircletogether.org_3231333930393634323835@resource.calendar.google.com';
     const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
@@ -85,6 +85,6 @@ export const fetchSlcEvents = () => {
     //   console.log(eventData[event]);
     // }
 
-    dispatch({ type: FETCH_SLC_EVENTS, events: eventData})
+    dispatch({ type: FETCH_SLC_EVENTS, data: {location: location, events: eventData}})
   };
 };

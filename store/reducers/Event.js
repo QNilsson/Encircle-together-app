@@ -2,15 +2,16 @@ import { FETCH_PROVO_EVENTS, FETCH_SLC_EVENTS, MARK_ITEMS } from '../actions/Eve
 
 const initState = {
   events: [],
-  markedItems: {}
+  markedItems: {},
+  location: 'Provo'
 }
 
 const eventReducer = (state = initState, action) => {
   switch(action.type) {
     case FETCH_PROVO_EVENTS:
-      return { events: action.events };
+      return { location: action.data.location, events: action.data.events };
     case FETCH_SLC_EVENTS:
-      return { events: action.events };
+      return { location: action.data.location, events: action.data.events };
     default:
       return state;
   }
