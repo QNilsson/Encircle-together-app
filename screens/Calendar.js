@@ -8,24 +8,17 @@ import * as eventActions from '../store/actions/Event';
 const CalendarScreen = () => {
   const dispatch = useDispatch();
 
-  let location = useSelector(state => state.location.location);
+  let location = useSelector(state => state.events.location);
   let events = useSelector(state => state.events.events);
   let eventList = [];
-
-  let today = new Date();
-  const dd = String(today.getDate()).padStart(2, '0');
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const yyyy = today.getFullYear();
-
-  today = yyyy + '-' + mm + '-' + dd;
   let selectedDay = '';
   
 
   useEffect(() => {
     if(location === 'Provo') {
-      dispatch(eventActions.fetchProvoEvents());
+      dispatch(eventActions.fetchProvoEvents('Provo'));
     } else if(location === 'Salt Lake City') {
-      dispatch(eventActions.fetchSlcEvents());
+      dispatch(eventActions.fetchSlcEvents('Salt Lake City'));
     }
   }, [dispatch]);
 
@@ -36,13 +29,13 @@ const CalendarScreen = () => {
   }
 
   const onDayPress = (day) => {
+    console.log(day);
     let selected = day.dateString;
     selectedDay = selected;
 
     let list = {};
     events.forEach(e => {
       let strTime = e.start__dateTime.split('T')[0];
-      console.log(strTime);
 
       if (!list[strTime]) {
         list[strTime] = [];
@@ -86,7 +79,7 @@ const CalendarScreen = () => {
       <View style={styles.eventListContainer}>
         <FlatList
         style={{flex: 1}}
-        data={eventList}
+        data={eventList[selectedDay]}
         keyExtractor={event => event.id}
         renderItem={({ item }) => (
           <View style={styles.item}>

@@ -1,4 +1,4 @@
-import { FETCH_PROVO_EVENTS, FETCH_SLC_EVENTS, MARK_ITEMS } from '../actions/Event';
+import { FETCH_PROVO_EVENTS, FETCH_SLC_EVENTS } from '../actions/Event';
 
 const initState = {
   events: [],
