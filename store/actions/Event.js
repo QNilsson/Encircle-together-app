@@ -1,7 +1,6 @@
 import Event from '../../models/event';
 export const FETCH_PROVO_EVENTS = 'FETCH_PROVO_EVENTS';
 export const FETCH_SLC_EVENTS = 'FETCH_SLC_EVENTS';
-export const MARK_ITEMS = 'MARK_ITEMS';
 
 export const fetchProvoEvents = (location) => {
   return async dispatch => {
@@ -42,7 +41,7 @@ export const fetchProvoEvents = (location) => {
     //   console.log(eventData[event]);
     // }
 
-    dispatch({ type: FETCH_PROVO_EVENTS, data: {location: location, events: eventData}})
+    dispatch({ type: FETCH_PROVO_EVENTS, data: {location: location, events: eventData} })
   };
 };
 
@@ -85,6 +84,6 @@ export const fetchSlcEvents = (location) => {
     //   console.log(eventData[event]);
     // }
 
-    dispatch({ type: FETCH_SLC_EVENTS, data: {location: location, events: eventData}})
+    dispatch({ type: FETCH_SLC_EVENTS, data: {location: location, events: eventData} })
   };
 };

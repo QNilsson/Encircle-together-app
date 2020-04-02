@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,15 +10,23 @@ const CalendarScreen = () => {
 
   let location = useSelector(state => state.events.location);
   let events = useSelector(state => state.events.events);
-  let eventList = [];
-  let selectedDay = '';
+
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
   
+  let [selectedDay, setSelectedDay] = useState(today);
+  let [eventList, setEventList] = useState([]);
 
   useEffect(() => {
     if(location === 'Provo') {
       dispatch(eventActions.fetchProvoEvents('Provo'));
     } else if(location === 'Salt Lake City') {
       dispatch(eventActions.fetchSlcEvents('Salt Lake City'));
+    } else {
+      dispatch(eventActions.fetchProvoEvents('Provo'));
     }
   }, [dispatch]);
 
@@ -26,12 +34,18 @@ const CalendarScreen = () => {
     let items = {};
     events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
     return items;
-  }
+  };
 
   const onDayPress = (day) => {
-    console.log(day);
-    let selected = day.dateString;
-    selectedDay = selected;
+    let selected = '';
+
+    if(day.dateString) {
+      selected = day.dateString;
+    } else {
+      selected = day;
+    }
+    
+    setSelectedDay(selected);
 
     let list = {};
     events.forEach(e => {
@@ -61,10 +75,9 @@ const CalendarScreen = () => {
         });
       }
     });
-    eventList = list;
-  }
-  
-  
+
+    setEventList(list);
+  };
 
   return (
     <View>
@@ -72,6 +85,7 @@ const CalendarScreen = () => {
         <Calendar
         markedDates={markItems()}
         onDayPress={onDayPress.bind(this)}
+        hideExtraDays
         style={styles.calendar}
         />
       </View>
