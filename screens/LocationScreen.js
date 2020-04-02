@@ -15,8 +15,10 @@ const LocationScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Change Location</Text>
+      <Text style={styles.subTitle}>Choose your primary Encircle location. This will change which calendar events you see.</Text>
       <View style={styles.filterContainer}>
-        <Text>Provo</Text>
+        <Text style={styles.filterContainerText}>Provo</Text>
         <Switch
           value={provo}
           onValueChange={v => {
@@ -28,7 +30,7 @@ const LocationScreen = () => {
       </View>
 
       <View style={styles.filterContainer}>
-        <Text>Salt Lake City</Text>
+        <Text style={styles.filterContainerText}>Salt Lake City</Text>
         <Switch
           value={slc}
           onValueChange={v => {
@@ -49,11 +51,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
+  title: {
+    fontSize: 40,
+    textAlign: 'center',
+    color: '#2B2B2B',
+    fontFamily: 'ModernoFB',
+    marginTop: '8%'
+  },
+  subTitle: {
+    fontSize: 20,
+    color: '#686868',
+    textAlign: 'center',
+    margin: 8,
+    marginBottom: 20,
+    alignItems: 'center',
+    fontFamily: 'Futura-Book',
+    width: '90%'
+  },
   filterContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '75%'
+    width: '85%',
+    backgroundColor: '#F5F5F5',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  filterContainerText: {
+    fontFamily: 'Futura-Book',
+    color: '#2b2b2b',
+    fontWeight: '400',
+    fontSize: 18
   }
 });
 

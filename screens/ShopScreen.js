@@ -29,8 +29,9 @@ export default class ShopScreen extends Component {
     fetch(url)
     .then(response => response.json())
     .then(result => {
+      console.log(result);
       const products = result.products;
-      // console.log(products);
+      console.log(products);
       const productData = [];
     
       for (const key in products) {
@@ -66,35 +67,38 @@ export default class ShopScreen extends Component {
       <View style={styles.mainContainer}>
         <Text style={styles.shop}>Shop</Text>
         <Text style={styles.paragraph}>Show the world what "No sides, only love" means to you</Text>
-        {<FlatList
-          numColumns={2}
-          style={styles.container}
+        <FlatList
+          // numColumns={2}
+          // style={styles.container}
           data={this.state.products}
           keyExtractor={product => product.title}
-          renderItem={({ item }) => 
-            <View style={styles.item}>
-              {<Image
-                style={{width: this.imageWidth, height: this.imageHeight}}
+          renderItem={({ item }) => //style={styles.item}
+            <View >
+             {/*  {<Image
+                style={{width: '99%', height: 300}}
                 source={{uri: item.image }}
-              />}
+              />} */}
 
-              <TouchableOpacity
-                style={styles.textBlock}
+                <Text>${item.price}</Text>
+                <Text>foo</Text>
+              {/* <TouchableOpacity
+                // style={styles.textBlock}
               >
-                <Text style={styles.titleText}>{item.title}</Text>
-                <Text style={styles.priceText}>${item.price}</Text>
+                
               </TouchableOpacity>
-
+ */}
               
             </View>
         }
-        />}
+        />
 
        
       </View>
     );
   }
 };
+////style={styles.titleText}
+//style={styles.priceText}
 
 const styles = StyleSheet.create({
   mainContainer: {
