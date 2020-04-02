@@ -1,28 +1,26 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
 // @ts-ignore
 import Modal from "react-native-modal";
 import ModalBaseScene from "../assets/utils/ModalBaseScene";
 import DefaultModalContent from "../assets/utils/DefaultModalContent";
+import { Ionicons } from "@expo/vector-icons";
 
-class MoreScreen extends ModalBaseScene {
-  renderModal() {
+class MoreScreen extends Component {
+  render() {
     return (
-      <Modal
-        testID={"modal"}
-        isVisible={this.isVisible()}
-        onSwipeComplete={this.close}
-        swipeDirection={["up", "left", "right", "down"]}
-        style={styles.view}
-      >
+      <View style={styles.view}>
         <DefaultModalContent onPress={this.close} />
-      </Modal>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   view: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "flex-end",
     margin: 0
   }

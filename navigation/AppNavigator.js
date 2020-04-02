@@ -15,6 +15,7 @@ import ResourceScreen from "../screens/ResourceScreen";
 import DonateScreen from "../screens/DonateScreen";
 import LocationScreen from "../screens/LocationScreen";
 import ShopScreen from "../screens/ShopScreen";
+import DefaultModalContent from "../assets/utils/DefaultModalContent";
 
 const MoreNavigator = createStackNavigator({
   More: MoreScreen,
@@ -44,19 +45,19 @@ const AppNavigator = createBottomTabNavigator(
         let iconName;
 
         if (routeName === "Dashboard") {
-          iconName = focused ? "home" : "home";
+          iconName = "home";
         } else if (routeName === "Calendar") {
-          iconName = focused ? "calendar" : "calendar";
+          iconName = "calendar";
         } else if (routeName === "Resources") {
-          iconName = focused ? "book" : "book";
+          iconName = "book";
         } else if (routeName === "EncircleLive") {
-          iconName = focused ? "analytics" : "analytics";
+          iconName = "analytics";
         } else if (routeName === "More") {
-          iconName = focused ? "more" : "more";
+          iconName = "more";
         } else if (routeName === "Donate") {
-          iconName = focused ? "gift" : "gift";
+          iconName = "gift";
         } else if (routeName === "Shop") {
-          iconName = focused ? "cart" : "cart";
+          iconName = "cart";
         }
 
         return (
