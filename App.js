@@ -9,7 +9,6 @@ import locationReducer from './store/reducers/Location';
 import eventReducer from './store/reducers/Event';
 
 const rootReducer = combineReducers({
-  location: locationReducer,
   events: eventReducer
 });
 
