@@ -71,6 +71,7 @@ export default class ResourcesScreen extends Component {
           <FlatList
             contentContainerStyle={{ margin: 10 }}
             numColumns={2}
+            style={styles.flatlist}
             data={this.state.publications}
             keyExtractor={publication => publication.docId}
             renderItem={({ item }) => (
@@ -85,9 +86,10 @@ export default class ResourcesScreen extends Component {
                   {
                     <Image
                       style={{
-                        height: this.imageHeight,
-                        width: this.imageWidth,
-                        marginBottom: 20
+                        height: 300,
+                        width: '99%',
+                        alignItems: "center"
+                    
                       }}
                       source={{
                         uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg`
@@ -109,34 +111,44 @@ export default class ResourcesScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   resources: {
     fontSize: 40,
     marginTop: 30,
     textAlign: "center",
-    color: "#2B2B2B"
+    color: "#2B2B2B",
+    fontFamily: 'ModernoFB',
   },
   paragraph: {
     fontSize: 20,
     color: "#686868",
     textAlign: "center",
     margin: 8,
-    marginBottom: 20,
-    alignItems: "center"
+    marginBottom: 10,
+    alignItems: "center",
+    fontFamily: 'Futura-Book'
   },
   item: {
     flex: 1,
-    width: "100%",
-    height: "70%",
+    // width: "100%",
+    // height: "100%",
     textAlign: "center",
     alignSelf: "center",
-    alignContent: "center"
+    alignContent: "center",
+    marginBottom: 30,
+    marginTop: 30
+
   },
   titleText: {
-    fontSize: 14,
+    fontSize: 16,
+    width: '98%',
     fontWeight: "500",
     color: "#2B2B2B",
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'Futura-Book',
+    marginBottom: 0,
+    margin: 0,
+    paddingTop: 20
   }
 });

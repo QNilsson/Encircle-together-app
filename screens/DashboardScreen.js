@@ -103,17 +103,20 @@ class DashboardScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.title}>Welcome Back</Text>
-          <Text style={styles.subTitle}>Make today a great day.</Text>
-        </View>
-        <View style={styles.eventContainter}>
-          <Text>Later today in </Text>
-          {this.state.events.map(event => <Card key={event.id} time={event.start__dateTime} summary={event.summary} />)}
-        </View>
-        <View style={styles.publicationContainter}>
+      <View style={styles.mainContainer}>
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Welcome Back</Text>
+            <Text style={styles.subTitle}>Make today a great day.</Text>
+          </View>
+          <View style={styles.eventContainter}>
+            <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{this.state.location.toUpperCase()}</Text></Text>
+            {this.state.events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary} />)}
+          </View>
 
+          <View style={styles.publicationContainter}>
+
+          </View>
         </View>
       </View>
     );
@@ -129,18 +132,31 @@ const mapStateToProps = state => {
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: '#F5F5F5',
+    flex: 1,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     margin: 20,
     marginTop: 100,
-    marginBottom: 50
+    marginBottom: 50,
+    backgroundColor: '#F5F5F5'
+  },
+  titleContainer: {
+    backgroundColor: 'white',
+    width:'100%',
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 20,
   },
   title: {
     fontSize: 40,
     textAlign: 'center',
-    color: '#2B2B2B'
+    color: '#2B2B2B',
+    // fontFamily: 'ModernoFB',
   },
   subTitle: {
     fontSize: 18,
@@ -148,14 +164,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 8,
     marginBottom: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    // fontFamily: 'Futura-Book'
   },
   eventContainter: {
     flex: 1,
     alignItems: 'center'
   },
-  event: {
+  location: {
+    color: 'black',
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 15
+  },
+  locationText: {
+    color: '#686868',
+  },
 
+  event: {
+    backgroundColor: 'red'
   },
   publicationContainter: {
     flex: 1,
