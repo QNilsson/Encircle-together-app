@@ -33,7 +33,7 @@ const ResourceNavigator = createStackNavigator({
 
 const AppNavigator = createBottomTabNavigator({
   Dashboard: DashboardScreen,
-  //Calendar: CalendarScreen,
+  // Calendar: CalendarScreen,
   Calendar: Calendar,
   Resources: ResourceNavigator,
   EncircleLive: EncircleLiveScreen,
