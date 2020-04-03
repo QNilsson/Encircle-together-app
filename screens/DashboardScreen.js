@@ -127,7 +127,7 @@ class DashboardScreen extends Component {
  */
 const mapStateToProps = state => {
   return {
-    location: state.location
+    location: state.events.location
   }
 };
 

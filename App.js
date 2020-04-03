@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
 import * as Font from 'expo-font';
-import locationReducer from './store/reducers/Location';
+import eventReducer from './store/reducers/Event';
 
 const rootReducer = combineReducers({
-  location: locationReducer
+  events: eventReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
