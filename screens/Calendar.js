@@ -77,6 +77,19 @@ const CalendarScreen = () => {
     });
 
     setEventList(list);
+
+    const selectedEvent = (id, summ, start, end, loc, desc) => {
+        this.props.navigation.navigate("EventScreen", {
+          event: {
+            id: id,
+            summ: summ,
+            start: start,
+            end: end,
+            loc: loc,
+            desc: desc
+          }
+        });
+    };
   };
 
   return (
