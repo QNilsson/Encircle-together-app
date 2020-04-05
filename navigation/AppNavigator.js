@@ -3,10 +3,8 @@ import { Platform } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Ionicons} from '@expo/vector-icons';
 
-import CalendarScreen from '../screens/CalendarScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import EncircleLiveScreen from '../screens/EncircleLiveScreen';
 import MoreScreen from '../screens/MoreScreen';
@@ -46,7 +44,6 @@ const CalendarNavigator = createStackNavigator({
 
 const AppNavigator = createBottomTabNavigator({
   Dashboard: DashboardScreen,
-  // Calendar: CalendarScreen,
   Calendar: CalendarNavigator,
   Resources: ResourceNavigator,
   EncircleLive: EncircleLiveScreen,
