@@ -1,49 +1,60 @@
-import React from "react";
-import { Platform } from "react-native";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { Platform } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import {Ionicons} from '@expo/vector-icons';
 
-import CalendarScreen from "../screens/CalendarScreen";
-import DashboardScreen from "../screens/DashboardScreen";
-import EncircleLiveScreen from "../screens/EncircleLiveScreen";
-import MoreScreen from "../screens/MoreScreen";
-import ResourcesScreen from "../screens/ResourcesScreen";
-import ResourceScreen from "../screens/ResourceScreen";
-import DonateScreen from "../screens/DonateScreen";
-import LocationScreen from "../screens/LocationScreen";
-import ShopScreen from "../screens/ShopScreen";
-import Calendar from "../screens/Calendar";
+import DashboardScreen from '../screens/DashboardScreen';
+import EncircleLiveScreen from '../screens/EncircleLiveScreen';
+import MoreScreen from '../screens/MoreScreen';
+import ResourcesScreen from '../screens/ResourcesScreen';
+import ResourceScreen from '../screens/ResourceScreen';
+import DonateScreen from '../screens/DonateScreen';
+import LocationScreen from '../screens/LocationScreen';
+import ShopScreen from '../screens/ShopScreen';
+import Calendar from '../screens/Calendar';
+import EventScreen from '../screens/EventScreen';
 
 const MoreNavigator = createStackNavigator({
   More: MoreScreen,
   Location: LocationScreen,
   Donate: DonateScreen,
   Shop: ShopScreen
+}, {
+  header: null,
+  headerMode: 'none'
 });
 
 const ResourceNavigator = createStackNavigator({
   Resources: ResourcesScreen,
   Resource: ResourceScreen
+}, {
+  header: null,
+  headerMode: 'none'
 });
 
-const AppNavigator = createBottomTabNavigator(
-  {
-    Dashboard: DashboardScreen,
-    //Calendar: CalendarScreen,
-    Calendar: Calendar,
-    Resources: ResourceNavigator,
-    EncircleLive: EncircleLiveScreen,
-    More: MoreNavigator
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state;
-        let IconComponent = Ionicons;
-        let iconName;
+const CalendarNavigator = createStackNavigator({
+  Calendar: Calendar,
+  Event: EventScreen
+}, {
+  header: null,
+  headerMode: 'none'
+});
+
+const AppNavigator = createBottomTabNavigator({
+  Dashboard: DashboardScreen,
+  Calendar: CalendarNavigator,
+  Resources: ResourceNavigator,
+  EncircleLive: EncircleLiveScreen,
+  More: MoreNavigator
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      const { routeName } = navigation.state;
+      let IconComponent = Ionicons;
+      let iconName;
 
         if (routeName === "Dashboard") {
           iconName = focused ? "home" : "home";
@@ -80,6 +91,6 @@ const AppNavigator = createBottomTabNavigator(
       }
     }
   }
-);
+});
 
 export default createAppContainer(AppNavigator);
