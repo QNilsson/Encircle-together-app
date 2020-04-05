@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const EventScreen = (props) => {
-    const id = props.navigation.getParam(event.id);
-    const summ = props.navigation.getParam(event.summ);
-    const start = props.navigation.getParam(event.start);
-    const end = props.navigation.getParam(event.end);
-    const loc = props.navigation.getParam(event.loc);
-    const desc = props.navigation.getParam(event.desc);
+    const id = props.navigation.getParam('id');
+    const summ = props.navigation.getParam('summ');
+    const start = props.navigation.getParam('start');
+    const end = props.navigation.getParam('end');
+    const loc = props.navigation.getParam('loc');
+    const desc = props.navigation.getParam('desc');
 
     return (
         <View style={styles.container}>
@@ -23,7 +23,7 @@ const EventScreen = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }

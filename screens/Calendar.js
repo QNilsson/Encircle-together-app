@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity,StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
 import * as eventActions from '../store/actions/Event';
 
-const CalendarScreen = () => {
+const CalendarScreen = (props) => {
   const dispatch = useDispatch();
 
   let location = useSelector(state => state.events.location);
@@ -110,7 +110,14 @@ const CalendarScreen = () => {
         keyExtractor={event => event.id}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text>{item.summ}</Text>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Event", {
+              id: item.id,
+              summ: item.summ,
+              start: item.start,
+              end: item.end,
+              loc: item.loc,
+              desc: item.desc
+            })}><Text>{item.summ}</Text></TouchableOpacity>
           </View>
         )}
         />
