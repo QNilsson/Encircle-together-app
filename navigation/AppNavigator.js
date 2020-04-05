@@ -23,18 +23,25 @@ const MoreNavigator = createStackNavigator({
   Location: LocationScreen,
   Donate: DonateScreen,
   Shop: ShopScreen
-}
-);
+}, {
+  header: null,
+  headerMode: 'none'
+});
 
 const ResourceNavigator = createStackNavigator({
   Resources: ResourcesScreen,
   Resource: ResourceScreen
-}
-);
+}, {
+  header: null,
+  headerMode: 'none'
+});
 
 const CalendarNavigator = createStackNavigator({
   Calendar: Calendar,
   Event: EventScreen
+}, {
+  header: null,
+  headerMode: 'none'
 });
 
 const AppNavigator = createBottomTabNavigator({
@@ -80,7 +87,6 @@ const AppNavigator = createBottomTabNavigator({
       marginTop: 10
     }
   }
-}
-);
+});
 
 export default createAppContainer(AppNavigator);
