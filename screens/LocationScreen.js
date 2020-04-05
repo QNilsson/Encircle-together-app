@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Switch } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-// import { setLocation } from '../store/actions/Location';
 import * as eventActions from '../store/actions/Event';
 
 const LocationScreen = () => {

@@ -79,6 +79,28 @@ const CalendarScreen = (props) => {
     setEventList(list);
   };
 
+  let date;
+  if(selectedDay === '') {
+    date = (
+      <View>
+        <Text>Select a date to see events</Text>
+      </View>
+    );
+  }
+  else if(!eventList[selectedDay]) {
+    date = (
+      <View>
+        <Text>No events on { selectedDay }</Text>
+      </View>
+    );
+  } else {
+    date = (
+      <View>
+        <Text>Events on { selectedDay }</Text>
+      </View>
+    );
+  }
+
   return (
     <View>
       <View>
@@ -91,6 +113,8 @@ const CalendarScreen = (props) => {
       </View>
       
       <View style={styles.eventListContainer}>
+        { date }
+
         <FlatList
         style={{flex: 1}}
         data={eventList[selectedDay]}
