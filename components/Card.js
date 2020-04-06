@@ -6,12 +6,15 @@ const Card = props => {
   const dd = String(today.getDate()).padStart(2, '0');
   today = dd;
 
+  let month = 'Mar';
+
   let time = props.time.split('T')[1];
   const hour = time.split('-')[0];
   return (
     <View style={styles.card}>
       <View style={styles.dateBox}>
         <Text style={styles.date}>{ today }</Text>
+        <Text style={styles.month}>{ month }</Text>
       </View>
       <View style={styles.textBox}>
         <Text style={styles.time}>{ hour }</Text>
@@ -24,28 +27,54 @@ const Card = props => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    height: 250,
-    width: 325,
-    borderWidth: 1,
-    borderColor: 'black'
+    flexDirection: 'row',
+    height: 84,
+    width: 375,
+    borderWidth: 2,
+    borderColor: 'black',
+    marginBottom: 10,
+    overflow: 'hidden',
+    minHeight: 84
   },
   dateBox: {
     backgroundColor: 'black',
-    width: 35,
+    width: 60,
+    height: 84,
+    maxWidth: 60,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   date: {
     color: 'white',
-    fontSize: 25
+    fontFamily: 'ModernoFB',
+    fontSize: 36,
+    textAlign: 'center',
+    marginBottom: -10
   },
   textBox: {
-
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingLeft: 12
   },
   time: {
-    color: '#ccc',
-    fontSize: 16
+    color: '#8C8C8C',
+    fontSize: 15,
+    fontFamily:'Futura-Book',
   },
   summary: {
-    fontSize: 15
+    fontSize: 22,
+    fontFamily:'Futura-Book',
+    textTransform: 'capitalize'
+  },
+  month: {
+    fontSize: 15,
+    fontFamily:'Futura-Book',
+    textTransform: 'uppercase',
+    color: '#828282',
+    textAlign: 'center',
+    margin: 0
   }
 })
 
