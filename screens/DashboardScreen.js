@@ -111,7 +111,7 @@ class DashboardScreen extends Component {
           </View>
           <View style={styles.eventContainter}>
             <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{this.state.location.toUpperCase()}</Text></Text>
-            {this.state.events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary} />)}
+            {this.state.events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card>)}
           </View>
 
           <View style={styles.publicationContainter}>
@@ -178,11 +178,11 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   locationText: {
-    color: '#686868',
+    color: '#686868'
   },
 
   event: {
-    backgroundColor: 'red'
+    marginBottom: 10
   },
   publicationContainter: {
     flex: 1,
