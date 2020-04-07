@@ -6,9 +6,11 @@ import ReduxThunk from 'redux-thunk';
 
 import * as Font from 'expo-font';
 import eventReducer from './store/reducers/Event';
+import resourceReducer from './store/reducers/Resource';
 
 const rootReducer = combineReducers({
-  events: eventReducer
+  events: eventReducer,
+  resources: resourceReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

@@ -41,7 +41,7 @@ export const fetchProvoEvents = (location) => {
     //   console.log(eventData[event]);
     // }
 
-    dispatch({ type: FETCH_PROVO_EVENTS, data: {location: location, events: eventData} })
+    dispatch({ type: FETCH_PROVO_EVENTS, data: {location: location, events: eventData} });
   };
 };
 
@@ -84,6 +84,6 @@ export const fetchSlcEvents = (location) => {
     //   console.log(eventData[event]);
     // }
 
-    dispatch({ type: FETCH_SLC_EVENTS, data: {location: location, events: eventData} })
+    dispatch({ type: FETCH_SLC_EVENTS, data: {location: location, events: eventData} });
   };
 };
