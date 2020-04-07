@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Event from '../models/event';
 import Publication from '../models/publication';
 import Card from '../components/Card';
+import DashboardWelcome from '../components/DashboardWelcome';
 
 class DashboardScreen extends Component {
   constructor(props) {
@@ -105,10 +106,11 @@ class DashboardScreen extends Component {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.container}>
-          <View style={styles.titleContainer}>
+          {/* <View style={styles.titleContainer}>
             <Text style={styles.title}>Welcome Back</Text>
             <Text style={styles.subTitle}>Make today a great day.</Text>
-          </View>
+          </View> */}
+          <DashboardWelcome />
           <View style={styles.eventContainter}>
             <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{this.state.location.toUpperCase()}</Text></Text>
             {this.state.events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card>)}
@@ -140,22 +142,32 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 20,
-    marginTop: 100,
-    marginBottom: 50,
+    // margin: 20,
+    // marginTop: 100,
+    // marginBottom: 50,
     backgroundColor: '#F5F5F5'
   },
   titleContainer: {
     backgroundColor: 'white',
     width:'100%',
     padding: 20,
-    borderRadius: 15,
+    borderBottomEndRadius: 30,
+    borderBottomStartRadius: 30,
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#2B2B2B',
+
+    paddingLeft: 12,
+    paddingRight: 12,
+    top: 0,
+    // height: '100%',
+   
   },
   title: {
     fontSize: 40,
     textAlign: 'center',
     color: '#2B2B2B',
+    marginTop: '20%'
     // fontFamily: 'ModernoFB',
   },
   subTitle: {

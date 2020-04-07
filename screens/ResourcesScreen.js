@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   resources: {
     fontSize: 40,
-    marginTop: 30,
+    marginTop: '20%',
     textAlign: "center",
     color: "#2B2B2B",
     fontFamily: 'ModernoFB',

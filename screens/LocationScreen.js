@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#2B2B2B',
     fontFamily: 'ModernoFB',
-    marginTop: '8%'
+    marginTop: '20%'
   },
   subTitle: {
     fontSize: 20,
