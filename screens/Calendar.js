@@ -4,6 +4,7 @@ import { View, Text, FlatList, TouchableOpacity,StyleSheet } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
 import * as eventActions from '../store/actions/Event';
+import { Ionicons } from '@expo/vector-icons';
 
 const CalendarScreen = (props) => {
   const dispatch = useDispatch();
@@ -82,21 +83,21 @@ const CalendarScreen = (props) => {
   let date;
   if(selectedDay === '') {
     date = (
-      <View>
-        <Text>Select a date to see events</Text>
+      <View style={styles.eventsOnContainer}>
+        <Text style={styles.eventsOnText}>Select a date to see events</Text>
       </View>
     );
   }
   else if(!eventList[selectedDay]) {
     date = (
-      <View>
-        <Text>No events on { selectedDay }</Text>
+      <View style={styles.eventsOnContainer}>
+        <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{ selectedDay }</Text></Text>
       </View>
     );
   } else {
     date = (
-      <View>
-        <Text>Events on { selectedDay }</Text>
+      <View style={styles.eventsOnContainer}>
+        <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{ selectedDay }</Text></Text>
       </View>
     );
   }
@@ -111,27 +112,30 @@ const CalendarScreen = (props) => {
         style={styles.calendar}
         />
       </View>
-      
+      <View>{ date }</View>
       <View style={styles.eventListContainer}>
-        { date }
-
+      {/* { date }
+ */}
         <FlatList
         style={{flex: 1}}
         data={eventList[selectedDay]}
         keyExtractor={event => event.id}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <TouchableOpacity onPress={() => props.navigation.navigate("Event", {
+            <TouchableOpacity style={styles.textIconContainer} onPress={() => props.navigation.navigate("Event", {
               id: item.id,
               summ: item.summ,
               start: item.start,
               end: item.end,
               loc: item.loc,
               desc: item.desc
-            })}><Text>{item.summ}</Text></TouchableOpacity>
+            })}><Text style={styles.eventSummaryText}>{item.summ}</Text>
+                <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon}/>
+            </TouchableOpacity>
           </View>
         )}
         />
+        
       </View>
     </View>
   );
@@ -151,14 +155,48 @@ const styles = StyleSheet.create({
     marginTop: 17,
     color: 'black'
   },
+  eventsOnContainer: {
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#2B2B2B',
+    backgroundColor: 'white',
+    borderRadius: 30,
+    padding: 15,
+    marginRight: '10%',
+    marginLeft: '10%', 
+    marginTop: 5 
+  },
+  eventsOnText: {
+    color: '#2B2B2B',
+    fontFamily: 'Futura-Book',
+    fontWeight: '700',
+    padding: 0
+  },
+  selectedDayText: {
+    color: '#686868',
+    fontWeight: '700'
+  },
+  textIconContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  eventSummaryText: {
+    fontFamily: 'Futura-Book',
+    color: '#2B2B2B',
+    fontWeight: '700'
+  },
+  arrowIcon: {
+    marginLeft: 'auto'
+  },
   eventListContainer: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 16,
-    backgroundColor: '#ddd',
+    borderColor: '#2B2B2B',
+    borderRadius: 30,
+    backgroundColor: 'white',
     paddingLeft: 12,
     paddingRight: 12,
-    height: '100%'
+    height: '100%',
+    marginTop: 12,    
   },
  
 });
