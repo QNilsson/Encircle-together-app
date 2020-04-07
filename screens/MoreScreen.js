@@ -19,6 +19,7 @@ const MoreScreen = props => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: '35%',
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
