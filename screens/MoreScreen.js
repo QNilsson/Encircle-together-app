@@ -1,100 +1,102 @@
-import React, { Component } from "react";
-import { Button, Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import React, {Component} from "react";
+import {Button, Text, StyleSheet, View, TouchableOpacity} from "react-native";
 // @ts-ignore
 import Modal from "react-native-modal";
-import { Ionicons } from "@expo/vector-icons";
+// import ModalBaseScene from "../assets/utils/ModalBaseScene";
+// import DefaultModalContent from "../assets/utils/DefaultModalContent";
+import {Ionicons} from "@expo/vector-icons";
 
 class MoreScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isModalVisible: false,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			isModalVisible: false,
+		};
+	}
 
-  componentDidMount() {
-    this.toggleModal();
-  }
+	componentDidMount() {
+		this.toggleModal();
+	}
 
-  toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-  };
+	toggleModal = () => {
+		this.setState({isModalVisible: !this.state.isModalVisible});
+	};
 
-  render() {
-    return (
-      <View style={styles.view}>
-        {/* <DefaultModalContent onPress={this.close} /> */}
-        <Button title="Menu" onPress={this.toggleModal} />
-        <Modal isVisible={this.state.isModalVisible}>
-          <View style={styles.innerModal}>
-            <TouchableOpacity
-              onPress={() => {
-                this.toggleModal();
-                this.props.navigation.navigate("Location");
-              }}
-            >
-              <View style={styles.viewModal}>
-                <Text style={styles.textModal}>Location</Text>
-              </View>
-            </TouchableOpacity>
+	render() {
+		return (
+			<View style={styles.view}>
+				{/* <DefaultModalContent onPress={this.close} /> */}
+				<Button title="Menu" onPress={this.toggleModal} />
+				<Modal isVisible={this.state.isModalVisible}>
+					<View style={styles.innerModal}>
+						<TouchableOpacity
+							onPress={() => {
+								this.toggleModal();
+								this.props.navigation.navigate("Location");
+							}}
+						>
+							<View style={styles.viewModal}>
+								<Text style={styles.textModal}>Location</Text>
+							</View>
+						</TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => {
-                this.toggleModal();
-                this.props.navigation.navigate("Shop");
-              }}
-            >
-              <View style={styles.viewModal}>
-                <Text style={styles.textModal}>Shop</Text>
-              </View>
-            </TouchableOpacity>
+						<TouchableOpacity
+							onPress={() => {
+								this.toggleModal();
+								this.props.navigation.navigate("Shop");
+							}}
+						>
+							<View style={styles.viewModal}>
+								<Text style={styles.textModal}>Shop</Text>
+							</View>
+						</TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => {
-                this.toggleModal();
-                this.props.navigation.navigate("Donate");
-              }}
-            >
-              <View style={styles.viewModal}>
-                <Text style={styles.textModal}>Donate</Text>
-              </View>
-            </TouchableOpacity>
-            <Button title="Close" onPress={this.toggleModal} />
-          </View>
-        </Modal>
-      </View>
-    );
-  }
+						<TouchableOpacity
+							onPress={() => {
+								this.toggleModal();
+								this.props.navigation.navigate("Donate");
+							}}
+						>
+							<View style={styles.viewModal}>
+								<Text style={styles.textModal}>Donate</Text>
+							</View>
+						</TouchableOpacity>
+						<Button title="Close" onPress={this.toggleModal} />
+					</View>
+				</Modal>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  view: {
-    // height: "25%",
-    // display: "flex",
-    // flexDirection: "column",
-    // justifyContent: "flex-end",
-    // margin: 0,
-    // borderTopLeftRadius: 50,
-    // borderTopRightRadius: 50,
-  },
-  innerModal: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textModal: {
-    fontSize: 45,
-    fontWeight: "bold",
-    color: "white",
-  },
-  viewModal: {
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    borderStyle: "solid",
-    borderBottomColor: "#eee",
-    borderBottomWidth: 5,
-    width: "100%",
-    marginVertical: 20,
-  },
+	view: {
+		height: "25%",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "flex-end",
+		margin: 0,
+		borderTopLeftRadius: 50,
+		borderTopRightRadius: 50,
+	},
+	innerModal: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	textModal: {
+		fontSize: 45,
+		fontWeight: "bold",
+		color: "white",
+	},
+	viewModal: {
+		borderColor: "rgba(255, 255, 255, 0.1)",
+		borderStyle: "solid",
+		borderBottomColor: "#eee",
+		borderBottomWidth: 5,
+		width: "100%",
+		marginVertical: 20,
+	},
 });
 
 export default MoreScreen;
