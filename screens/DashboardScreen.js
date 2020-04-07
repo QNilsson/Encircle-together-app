@@ -6,6 +6,7 @@ import Event from '../models/event';
 import Publication from '../models/publication';
 import Card from '../components/Card';
 import DashboardWelcome from '../components/DashboardWelcome';
+import { Ionicons } from '@expo/vector-icons';
 
 class DashboardScreen extends Component {
   constructor(props) {
@@ -114,7 +115,18 @@ class DashboardScreen extends Component {
           <View style={styles.eventContainter}>
             <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{this.state.location.toUpperCase()}</Text></Text>
             {this.state.events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card>)}
+
+            <TouchableOpacity
+              style={styles.calendarButton}
+              onPress={() => this.props.navigation.navigate('Calendar')}
+            >
+              <Text style={styles.buttonText}>FULL CALENDAR</Text>
+              <Ionicons name="ios-arrow-round-forward" size={45} style={styles.arrowIcon}/>
+            </TouchableOpacity>
+            
           </View>
+
+         
 
           <View style={styles.publicationContainter}>
 
@@ -196,6 +208,32 @@ const styles = StyleSheet.create({
   event: {
     marginBottom: 10
   },
+
+
+
+  calendarButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 8,
+    paddingRight: 30,
+    paddingLeft: 30,
+    backgroundColor: 'black',
+    minWidth: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60,
+    textAlign: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16
+  },
+  arrowIcon: {
+    color: 'white',
+    marginLeft: 'auto',
+    fontWeight: '700'
+  },
+
   publicationContainter: {
     flex: 1,
     alignItems: 'center'

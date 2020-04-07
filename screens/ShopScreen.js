@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, Linking, } from 'react-native';
 
 import Product from '../models/product';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class ShopScreen extends Component {
   static navigationOptions = {
@@ -65,8 +66,18 @@ export default class ShopScreen extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.shop}>Shop</Text>
-        <Text style={styles.paragraph}>Show the world what "No sides, only love" means to you</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.shop}>Shop</Text>
+          <Text style={styles.paragraph}>Show the world what "No sides, only love" means to you</Text>
+          <TouchableOpacity
+                style={styles.calendarButton}
+                onPress={() => Linking.openURL('https://encirclestore.org/')}
+              >
+                <Text style={styles.buttonText}>VIST FULL SHOP</Text>
+                <Ionicons name="ios-arrow-round-forward" size={35} style={styles.arrowIcon}/>
+              </TouchableOpacity>
+        </View>
+            
         <FlatList
           // numColumns={2}
           // style={styles.container}
@@ -107,14 +118,20 @@ const styles = StyleSheet.create({
     marginBottom: 50
     // textAlign: "center"
   }, 
+  textContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
   shop: {
     fontSize: 40,
     textAlign: 'center',
     color: '#2B2B2B',
     fontFamily: 'ModernoFB',
+    marginTop: '20%'
   },
   paragraph: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#686868',
     textAlign: 'center',
     margin: 8,
@@ -122,6 +139,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontFamily: 'Futura-Book'
   },
+  calendarButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 8,
+    paddingRight: 30,
+    paddingLeft: 30,
+    backgroundColor: 'black',
+    // maxWidth:  150,
+    minWidth: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    textAlign: 'center',
+    // borderRadius: 35
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18
+  },
+  arrowIcon: {
+    color: 'white',
+    marginLeft: 'auto',
+    fontWeight: '700'
+  },
+
+
   container: {
     /* flex: 1,
     flexDirection: 'row',
