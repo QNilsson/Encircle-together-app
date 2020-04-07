@@ -15,18 +15,17 @@ import ResourceScreen from "../screens/ResourceScreen";
 import DonateScreen from "../screens/DonateScreen";
 import LocationScreen from "../screens/LocationScreen";
 import ShopScreen from "../screens/ShopScreen";
-import DefaultModalContent from "../assets/utils/DefaultModalContent";
 
 const MoreNavigator = createStackNavigator({
   More: MoreScreen,
   Location: LocationScreen,
   Donate: DonateScreen,
-  Shop: ShopScreen
+  Shop: ShopScreen,
 });
 
 const ResourceNavigator = createStackNavigator({
   Resources: ResourcesScreen,
-  Resource: ResourceScreen
+  Resource: ResourceScreen,
 });
 
 const AppNavigator = createBottomTabNavigator(
@@ -35,7 +34,7 @@ const AppNavigator = createBottomTabNavigator(
     Calendar: CalendarScreen,
     Resources: ResourceNavigator,
     EncircleLive: EncircleLiveScreen,
-    More: MoreNavigator
+    More: MoreNavigator,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -67,7 +66,7 @@ const AppNavigator = createBottomTabNavigator(
             color={tintColor}
           />
         );
-      }
+      },
     }),
     tabBarOptions: {
       activeTintColor: "tomato",
@@ -75,9 +74,9 @@ const AppNavigator = createBottomTabNavigator(
       showLabel: false,
       style: {
         marginBottom: 30,
-        marginTop: 10
-      }
-    }
+        marginTop: 10,
+      },
+    },
   }
 );
 
