@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Resource = (props) => {
   const id = props.id;
@@ -7,11 +7,9 @@ const Resource = (props) => {
   const title = props.title;
   return (
     <View style={styles.container}>
-      <Text>{props.id}</Text>
-      <Text>{props.name}</Text>
       <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate("Resource", {
+          props.navigation.navigate("Resource", {
             resourceName: name
           })
         }

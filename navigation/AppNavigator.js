@@ -5,7 +5,8 @@ import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
 import {Ionicons} from "@expo/vector-icons";
 
-import DashboardScreen from "../screens/DashboardScreen";
+import Dashboard from '../screens/Dashboard';
+// import DashboardScreen from "../screens/DashboardScreen";
 import EncircleLiveScreen from "../screens/EncircleLiveScreen";
 import MoreScreen from "../screens/MoreScreen";
 import ResourcesScreen from "../screens/ResourcesScreen";
@@ -53,7 +54,8 @@ const CalendarNavigator = createStackNavigator(
 
 const AppNavigator = createBottomTabNavigator(
 	{
-		Dashboard: DashboardScreen,
+    // Dashboard: DashboardScreen,
+    Dashboard: Dashboard,
 		Calendar: CalendarNavigator,
 		Resources: ResourceNavigator,
 		EncircleLive: EncircleLiveScreen,
