@@ -57,10 +57,11 @@ export const fetchSlcEvents = (location) => {
     const yyyy = today.getFullYear();
 
     today = yyyy + '-' + mm + '-' + dd;
+    console.log(today)
 
     // set timeMin url parameter to beginning of month
     const yearMonth = `${yyyy}-${mm}`;
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T23:59:00.000Z&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
     const resData = await response.json();
@@ -107,12 +108,11 @@ export const fetchTodaysEvents = (location) => {
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
-
+    
+    // set timeMin url parameter to beginning of today
     today = yyyy + '-' + mm + '-' + dd;
 
-    // set timeMin url parameter to beginning of month
-    const yearMonth = `${yyyy}-${mm}`;
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&timeMax=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=3&orderBy=startTime&singleEvents=true&timeMin=${today}T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
     const resData = await response.json();

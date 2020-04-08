@@ -17,13 +17,7 @@ const Dashboard = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (location === 'Provo') {
-      dispatch(eventActions.fetchProvoEvents('Provo'));
-    } else if (location === 'Salt Lake City') {
-      dispatch(eventActions.fetchSlcEvents('Salt Lake City'));
-    } else {
-      dispatch(eventActions.fetchProvoEvents('Provo'));
-    }
+    dispatch(eventActions.fetchTodaysEvents(location));
     dispatch(resourceActions.fetchResources());
   }, [dispatch]);
 
