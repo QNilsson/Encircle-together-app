@@ -96,8 +96,7 @@ const AppNavigator = createBottomTabNavigator(
 			inactiveTintColor: "gray",
 			showLabel: false,
 			style: {
-				marginBottom: 30,
-				marginTop: 10,
+				marginBottom: 40
 			},
 		},
 	}

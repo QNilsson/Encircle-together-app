@@ -116,8 +116,8 @@ const CalendarScreen = (props) => {
       <View style={styles.eventListContainer}>
       {/* { date }
  */}
-        <FlatList
-        style={{flex: 1}}
+        {/* <FlatList
+        style={{flex:1}}
         data={eventList[selectedDay]}
         keyExtractor={event => event.id}
         renderItem={({ item }) => (
@@ -134,8 +134,15 @@ const CalendarScreen = (props) => {
             </TouchableOpacity>
           </View>
         )}
-        />
+        /> */}
         
+        <FlatList 
+          data={eventList[selectedDay]}
+          keyExtractor={event => event.id}
+          renderItem={({item}) => (
+            <Text>{item.summ}</Text>
+          )}
+        />
       </View>
     </View>
   );

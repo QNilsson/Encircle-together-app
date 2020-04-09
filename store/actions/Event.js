@@ -17,7 +17,7 @@ export const fetchProvoEvents = (location) => {
 
     // set timeMin url parameter to beginning of month
     const yearMonth = `${yyyy}-${mm}`;
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=100&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
     const resData = await response.json();
@@ -61,7 +61,7 @@ export const fetchSlcEvents = (location) => {
 
     // set timeMin url parameter to beginning of month
     const yearMonth = `${yyyy}-${mm}`;
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=100&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
 
     const response = await fetch(url);
     const resData = await response.json();
