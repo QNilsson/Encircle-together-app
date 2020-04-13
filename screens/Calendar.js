@@ -16,6 +16,7 @@ const CalendarScreen = (props) => {
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
+  // today = yyyy + '-' + mm + '-' + dd;
   today = yyyy + '-' + mm + '-' + dd;
   
   let [selectedDay, setSelectedDay] = useState(today);
@@ -128,7 +129,8 @@ const CalendarScreen = (props) => {
               start: item.start,
               end: item.end,
               loc: item.loc,
-              desc: item.desc
+              desc: item.desc,
+              day: selectedDay
             })}><Text style={styles.eventSummaryText}>{item.summ}</Text>
                 <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon}/>
             </TouchableOpacity>
