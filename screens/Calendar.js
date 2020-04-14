@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
@@ -18,21 +18,21 @@ const CalendarScreen = (props) => {
   let yyyy = today.getFullYear();
   // today = yyyy + '-' + mm + '-' + dd;
   today = yyyy + '-' + mm + '-' + dd;
-  
+
   let [selectedDay, setSelectedDay] = useState(today);
   let [eventList, setEventList] = useState([]);
 
   useEffect(() => {
-    if(location === 'Provo') {
+    if (location === 'Provo') {
       dispatch(eventActions.fetchProvoEvents('Provo'));
-    } else if(location === 'Salt Lake City') {
+    } else if (location === 'Salt Lake City') {
       dispatch(eventActions.fetchSlcEvents('Salt Lake City'));
     } else {
       dispatch(eventActions.fetchProvoEvents('Provo'));
     }
   }, [dispatch]);
 
-  const markItems = () => {  
+  const markItems = () => {
     let items = {};
     events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
     return items;
@@ -41,12 +41,12 @@ const CalendarScreen = (props) => {
   const onDayPress = (day) => {
     let selected = '';
 
-    if(day.dateString) {
+    if (day.dateString) {
       selected = day.dateString;
     } else {
       selected = day;
     }
-    
+
     setSelectedDay(selected);
 
     let list = {};
@@ -82,62 +82,86 @@ const CalendarScreen = (props) => {
   };
 
   let date;
-  if(selectedDay === '') {
+  if (selectedDay === '') {
     date = (
       <View style={styles.eventsOnContainer}>
         <Text style={styles.eventsOnText}>Select a date to see events</Text>
       </View>
     );
   }
-  else if(!eventList[selectedDay]) {
+  else if (!eventList[selectedDay]) {
     date = (
       <View style={styles.eventsOnContainer}>
-        <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{ selectedDay }</Text></Text>
+        <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>
       </View>
     );
   } else {
     date = (
       <View style={styles.eventsOnContainer}>
-        <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{ selectedDay }</Text></Text>
+        <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>
       </View>
     );
   }
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View>
         <Calendar
-        markedDates={markItems()}
-        onDayPress={onDayPress.bind(this)}
-        hideExtraDays
-        style={styles.calendar}
+          markedDates={markItems()}
+          onDayPress={onDayPress.bind(this)}
+          hideExtraDays
+          style={styles.calendar}
         />
       </View>
-      <View>{ date }</View>
-      <View style={styles.eventListContainer}>
-      {/* { date }
- */}
-        <FlatList
-        style={{flex: 1}}
-        data={eventList[selectedDay]}
-        keyExtractor={event => event.id}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <TouchableOpacity style={styles.textIconContainer} onPress={() => props.navigation.navigate("Event", {
-              id: item.id,
-              summ: item.summ,
-              start: item.start,
-              end: item.end,
-              loc: item.loc,
-              desc: item.desc,
-              day: selectedDay
-            })}><Text style={styles.eventSummaryText}>{item.summ}</Text>
-                <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon}/>
-            </TouchableOpacity>
-          </View>
-        )}
-        />
-        
+      <View>{date}</View>
+      {/* <View style={styles.eventListContainer}>
+        <ScrollView>
+          <FlatList
+          
+          data={eventList[selectedDay]}
+          keyExtractor={event => event.id}
+          renderItem={({ item }) => (
+            <View style={styles.item}>
+              <TouchableOpacity style={styles.textIconContainer} onPress={() => props.navigation.navigate("Event", {
+                id: item.id,
+                summ: item.summ,
+                start: item.start,
+                end: item.end,
+                loc: item.loc,
+                desc: item.desc
+              })}><Text style={styles.eventSummaryText}>{item.summ}</Text>
+                  <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon}/>
+              </TouchableOpacity>
+            </View>
+          )}
+          />
+        </ScrollView>
+      </View> */}
+      <View style={{ flex: 1 }}>
+        <ScrollView >
+          <FlatList
+            data={eventList[selectedDay]}
+            keyExtractor={event => event.id}
+            renderItem={({ item }) => (
+              <View style={styles.item}>
+                <TouchableOpacity style={styles.textIconContainer}
+                  onPress={() => props.navigation.navigate("Event",
+                    {
+                      id: item.id,
+                      summ: item.summ,
+                      start: item.start,
+                      end: item.end,
+                      loc: item.loc,
+                      desc: item.desc
+                    }
+                  )}>
+                  <Text style={styles.eventSummaryText}>{item.summ}</Text>
+                  <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon} />
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        </ScrollView>
       </View>
     </View>
   );
@@ -165,8 +189,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 15,
     marginRight: '10%',
-    marginLeft: '10%', 
-    marginTop: 5 
+    marginLeft: '10%',
+    marginTop: 5
   },
   eventsOnText: {
     color: '#2B2B2B',
@@ -198,9 +222,8 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 12,
     height: '100%',
-    marginTop: 12,   
-  },
- 
+    marginTop: 12,
+  }
 });
 
 export default CalendarScreen;
