@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity,StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 12,
     height: '100%',
-    marginTop: 12,    
+    marginTop: 12,   
   },
  
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -19,27 +19,30 @@ const EventScreen = (props) => {
                 style={styles.calendarButton}
                 onPress={() => props.navigation.navigate('Calendar')}
                 >
-                <Ionicons name="ios-arrow-back" size={45} style={styles.arrowIcon}/>
+                <Ionicons name="ios-arrow-back" size={20} style={styles.arrowIcon}/>
                 <Text style={styles.buttonText}>BACK TO EVENTS</Text>
                 </TouchableOpacity>
             </View> 
-            <View style={styles.container}>
-                {/* <Text>{id}</Text> */}
-                <Text style={styles.title}>{summ}</Text>
+            <ScrollView style={{ marginBottom: 70, paddingBottom: 70 }}>
+                <View style={styles.container}>
+                    {/* <Text>{id}</Text> */}
+                    <Text style={styles.title}>{summ}</Text>
 
-                <View style={styles.iconContainer}>
-                    <Ionicons name="md-paper-plane" size={35} style={styles.arrowIcon}/>
-                    <Text style={styles.location}>{loc}</Text>
-                </View>
+                    <View style={styles.iconContainer}>
+                        <Ionicons name="md-paper-plane" size={25} style={styles.arrowIcon}/>
+                        <Text style={styles.location}>{loc}</Text>
+                    </View>
 
-                <View style={styles.iconContainer}>
-                    <Ionicons name="md-clock" size={35} style={styles.arrowIcon}/>
-                    <Text style={styles.location}>{day} | {start} - {end}</Text>
+                    <View style={styles.iconContainer}>
+                        <Ionicons name="md-clock" size={25} style={styles.arrowIcon}/>
+                        <Text style={styles.time}>{day} | {start} - {end}</Text>
+                    </View>
+                    
+                    <Text style={styles.description}>{desc}</Text>
                 </View>
-                
-                <Text style={styles.description}>{desc}</Text>
-            </View>
+            </ScrollView>
         </View>
+        
 
     );
 };
@@ -47,7 +50,8 @@ const EventScreen = (props) => {
 const styles = StyleSheet.create({
     buttonContainer: {
         marginTop: '15%',
-        marginLeft: '5%'
+        marginLeft: '5%',
+        marginBottom: 20
     },
     calendarButton: {
         display: 'flex',
@@ -75,24 +79,25 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         marginLeft: 'auto',
         fontWeight: '700',
-        fontSize: 20,
       }, 
 
     container: {
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'flex-start',
         backgroundColor: '#ffffff',
         borderRadius: 30,
-        marginTop: 50,
+        marginTop: 30,
         // marginRight: '5%',
         // marginLeft: '5%',
         padding: 25,
+        minHeight: 700
     },
     title: {
         fontSize: 30,
         textAlign: 'left',
         color: '#2B2B2B',
         fontFamily: 'Futura-Book',
+        marginTop: 15
     },
     iconContainer: {
         display: 'flex',
@@ -102,16 +107,24 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     location: {
-        fontSize: 17,
+        fontSize: 15,
         textAlign: 'left',
         color: '#2B2B2B',
         fontFamily: 'Futura-Book',
-        marginLeft: 15
+        marginLeft: '5%'
+    },
+    time: {
+        fontSize: 15,
+        textAlign: 'left',
+        color: '#2B2B2B',
+        fontFamily: 'Futura-Book',
+        marginLeft: '5%'
     },
     description: {
         color: '#2B2B2B',
         fontFamily: 'Futura-Book',
-        fontSize: 17 
+        fontSize: 20,
+        marginBottom: 70
     }
 
 

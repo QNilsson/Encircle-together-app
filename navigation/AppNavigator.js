@@ -97,7 +97,14 @@ const AppNavigator = createBottomTabNavigator(
 			showLabel: false,
 			style: {
 				marginBottom: 30,
-				marginTop: 10,
+				borderTopStartRadius: 30,
+				borderTopEndRadius: 30,
+				borderTopWidth: 1,
+				borderRightWidth: 1,
+				borderLeftWidth: 1,
+				borderColor: '#BABDC1',
+				paddingTop: 15,
+				height: 60
 			},
 		},
 	}
