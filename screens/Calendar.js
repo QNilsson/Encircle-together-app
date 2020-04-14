@@ -104,7 +104,7 @@ const CalendarScreen = (props) => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       <View>
         <Calendar
           markedDates={markItems()}
@@ -138,7 +138,7 @@ const CalendarScreen = (props) => {
         </ScrollView>
       </View> */}
       <View style={{ flex: 1 }}>
-        <ScrollView >
+        <ScrollView style={styles.eventListContainer}>
           <FlatList
             data={eventList[selectedDay]}
             keyExtractor={event => event.id}
@@ -173,7 +173,6 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   item: {
-    backgroundColor: '#fff',
     flex: 1,
     borderBottomWidth: 1,
     borderBottomColor: '#777777',
@@ -215,9 +214,12 @@ const styles = StyleSheet.create({
     marginLeft: 'auto'
   },
   eventListContainer: {
-    borderWidth: 1,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
     borderColor: '#2B2B2B',
-    borderRadius: 30,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
     backgroundColor: 'white',
     paddingLeft: 12,
     paddingRight: 12,
