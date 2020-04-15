@@ -12,10 +12,13 @@ const LocationScreen = () => {
   const selectedLocation = (location) => {
     if(location === 'Provo') {
       dispatch(eventActions.fetchProvoEvents(location));
+      dispatch(eventActions.fetchTodaysEvents(location));
     } else if(location === 'Salt Lake City') {
       dispatch(eventActions.fetchSlcEvents(location));
+      dispatch(eventActions.fetchTodaysEvents(location));
     } else {
       dispatch(eventActions.fetchProvoEvents(location));
+      dispatch(eventActions.fetchTodaysEvents(location));
     }
   }
 

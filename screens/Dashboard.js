@@ -11,7 +11,7 @@ import * as resourceActions from '../store/actions/Resource';
 
 const Dashboard = (props) => {
   let location = useSelector(state => state.events.location);
-  let events = useSelector(state => state.events.events);
+  let events = useSelector(state => state.events.todaysEvents);
   let resources = useSelector(state => state.resources.resources);
 
   const dispatch = useDispatch();

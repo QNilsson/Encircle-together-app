@@ -16,7 +16,6 @@ const CalendarScreen = (props) => {
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
-  // today = yyyy + '-' + mm + '-' + dd;
   today = yyyy + '-' + mm + '-' + dd;
 
   let [selectedDay, setSelectedDay] = useState(today);
@@ -114,29 +113,6 @@ const CalendarScreen = (props) => {
         />
       </View>
       <View>{date}</View>
-      {/* <View style={styles.eventListContainer}>
-        <ScrollView>
-          <FlatList
-          
-          data={eventList[selectedDay]}
-          keyExtractor={event => event.id}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              <TouchableOpacity style={styles.textIconContainer} onPress={() => props.navigation.navigate("Event", {
-                id: item.id,
-                summ: item.summ,
-                start: item.start,
-                end: item.end,
-                loc: item.loc,
-                desc: item.desc
-              })}><Text style={styles.eventSummaryText}>{item.summ}</Text>
-                  <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon}/>
-              </TouchableOpacity>
-            </View>
-          )}
-          />
-        </ScrollView>
-      </View> */}
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.eventListContainer}>
           <FlatList
