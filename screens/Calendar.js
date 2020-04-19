@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
@@ -103,15 +103,16 @@ const CalendarScreen = (props) => {
   }
 
   return (
+    
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <View>
+      <SafeAreaView>
         <Calendar
           markedDates={markItems()}
           onDayPress={onDayPress.bind(this)}
           hideExtraDays
           style={styles.calendar}
         />
-      </View>
+      </SafeAreaView>
       <View>{date}</View>
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.eventListContainer}>
@@ -140,12 +141,13 @@ const CalendarScreen = (props) => {
         </ScrollView>
       </View>
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
   calendar: {
-    marginTop: 50,
+    
     marginBottom: 10
   },
   item: {
