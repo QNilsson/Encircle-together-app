@@ -6,7 +6,7 @@ const Card = props => {
   const dd = String(today.getDate()).padStart(2, '0');
   today = dd;
 
-  let month = 'Mar';
+  let month = new Date().toLocaleString('default', { month: 'short' });
 
   let time = props.time.split('T')[1];
   const hour = time.split('-')[0];
