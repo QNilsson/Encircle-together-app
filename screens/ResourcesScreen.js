@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from "react-native";
-
-import GlobalStyles from '../constants/GlobalStyles';
 import Publication from '../models/publication';
-// import * as FileSystem from 'expo-file-system';
 
 export default class ResourcesScreen extends Component {
   constructor(props) {
@@ -81,15 +78,14 @@ export default class ResourcesScreen extends Component {
                     this.props.navigation.navigate("Resource", {
                       resourceName: item.name
                     })
-                  }
+                  } 
                 >
                   {
                     <Image
                       style={{
                         height: 300,
                         width: '99%',
-                        alignItems: "center"
-                    
+                        alignItems: "center",
                       }}
                       source={{
                         uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg`
@@ -131,10 +127,7 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    // width: "100%",
-    // height: "100%",
     textAlign: "center",
-    alignSelf: "center",
     alignContent: "center",
     marginBottom: 30,
     marginTop: 30

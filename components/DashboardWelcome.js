@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-class DashboardWelcome extends Component {
+const DashboardWelcome = props => {
     // trying to get fonts to load
 
     /* state={
@@ -21,14 +21,12 @@ class DashboardWelcome extends Component {
           return <Expo.AppLoading />;
         }
     } */
-        render() {
           return (
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Welcome Back</Text>
                 <Text style={styles.subTitle}>Make today a great day.</Text>
             </View>
-          )
-    }       
+          );  
 }
 
 const styles = StyleSheet.create({
