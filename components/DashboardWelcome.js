@@ -26,7 +26,7 @@ class DashboardWelcome extends Component {
     }
     return (
         <View style={styles.titleContainer}>
-        <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.title}>Welcome Back</Text>
           <Text style={styles.subTitle}>Make today a great day.</Text>
         </View>
     );

@@ -22,7 +22,7 @@ const Dashboard = (props) => {
   }, [dispatch]);
 
   return (
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }}>
         <View style={styles.mainContainer}>
         <SafeAreaView>
           <DashboardWelcome />
@@ -50,6 +50,7 @@ const Dashboard = (props) => {
             </View>
           </View>
         </View>
+        <View style={{height: 150}}></View>
       </ScrollView>
   );
 };
