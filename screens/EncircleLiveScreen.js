@@ -1,14 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import WebView from "react-native-webview";
-// import React, { Component } from "react";
 
 const EncircleLiveScreen = props => {
   return (
-    <WebView
-      source={{ uri: "https://www.encirclelive.org" }}
-      style={{ marginTop: 20 }}
-    />
+    <SafeAreaView style={{flex: 1}}>
+      <WebView
+        source={{ uri: "https://www.encirclelive.org" }}
+        androidHardwareAccelerationDisabled
+        style={{ flex: 1 }}
+      />
+    </SafeAreaView>
   );
 };
 

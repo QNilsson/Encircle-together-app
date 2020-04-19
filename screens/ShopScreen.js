@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  Linking
+  Linking,
+  SafeAreaView
 } from "react-native";
 
 import Product from "../models/product";
@@ -74,46 +75,48 @@ export default class ShopScreen extends Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.shop}>Shop</Text>
-          <Text style={styles.paragraph}>
-            Show the world what "No sides, only love" means to you
-          </Text>
-          <TouchableOpacity
-            style={styles.calendarButton}
-            onPress={() => Linking.openURL("https://encirclestore.org/")}
-          >
-            <Text style={styles.buttonText}>VIST FULL SHOP</Text>
-            <Ionicons
-              name="ios-arrow-round-forward"
-              size={35}
-              style={styles.arrowIcon}
-            />
-          </TouchableOpacity>
-        </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.mainContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.shop}>Shop</Text>
+            <Text style={styles.paragraph}>
+              Show the world what "No sides, only love" means to you
+            </Text>
+            <TouchableOpacity
+              style={styles.calendarButton}
+              onPress={() => Linking.openURL("https://encirclestore.org/")}
+            >
+              <Text style={styles.buttonText}>VIST FULL SHOP</Text>
+              <Ionicons
+                name="ios-arrow-round-forward"
+                size={35}
+                style={styles.arrowIcon}
+              />
+            </TouchableOpacity>
+          </View>
 
-        <FlatList
-          numColumns={2}
-          style={styles.container}
-          data={this.state.products}
-          keyExtractor={product => product.title}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              {
-                <Image
-                  style={{ width: "99%", height: 300 }}
-                  source={{ uri: item.image }}
-                />
-              }
-              <TouchableOpacity style={styles.textBlock}>
-                <Text style={styles.titleText}>{item.title}</Text>
-                <Text style={styles.priceText}>{item.price}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </View>
+          <FlatList
+            numColumns={2}
+            style={styles.container}
+            data={this.state.products}
+            keyExtractor={product => product.title}
+            renderItem={({ item }) => (
+              <View style={styles.item}>
+                {
+                  <Image
+                    style={{ width: "99%", height: 300 }}
+                    source={{ uri: item.image }}
+                  />
+                }
+                <TouchableOpacity style={styles.textBlock}>
+                  <Text style={styles.titleText}>{item.title}</Text>
+                  <Text style={styles.priceText}>{item.price}</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }
