@@ -139,7 +139,10 @@ const styles = StyleSheet.create({
   publicationContainter: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 40
+    marginTop: 40,
+    paddingBottom: 30,
+    backgroundColor: 'white',
+    paddingTop: 30,
   },
   publication: {
 
