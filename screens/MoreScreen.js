@@ -1,10 +1,10 @@
-import React, {Component} from "react";
-import {Button, Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import React, { Component } from "react";
+import { Button, Text, StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 // @ts-ignore
 import Modal from "react-native-modal";
 // import ModalBaseScene from "../assets/utils/ModalBaseScene";
 // import DefaultModalContent from "../assets/utils/DefaultModalContent";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 class MoreScreen extends Component {
 	constructor(props) {
@@ -19,52 +19,54 @@ class MoreScreen extends Component {
 	}
 
 	toggleModal = () => {
-		this.setState({isModalVisible: !this.state.isModalVisible});
+		this.setState({ isModalVisible: !this.state.isModalVisible });
 	};
 
 	render() {
 		return (
-			<View style={styles.view}>
-				{/* <DefaultModalContent onPress={this.close} /> */}
-				<Button title="Menu" onPress={this.toggleModal} />
-				<Modal isVisible={this.state.isModalVisible}>
-					<View style={styles.innerModal}>
-						<TouchableOpacity
-							onPress={() => {
-								this.toggleModal();
-								this.props.navigation.navigate("Location");
-							}}
-						>
-							<View style={styles.viewModal}>
-								<Text style={styles.textModal}>Location</Text>
-							</View>
-						</TouchableOpacity>
+			<SafeAreaView style={{ flex: 1 }}>
+				<View style={styles.view}>
+					{/* <DefaultModalContent onPress={this.close} /> */}
+					<Button title="Menu" onPress={this.toggleModal} />
+					<Modal isVisible={this.state.isModalVisible}>
+						<View style={styles.innerModal}>
+							<TouchableOpacity
+								onPress={() => {
+									this.toggleModal();
+									this.props.navigation.navigate("Location");
+								}}
+							>
+								<View style={styles.viewModal}>
+									<Text style={styles.textModal}>Location</Text>
+								</View>
+							</TouchableOpacity>
 
-						<TouchableOpacity
-							onPress={() => {
-								this.toggleModal();
-								this.props.navigation.navigate("Shop");
-							}}
-						>
-							<View style={styles.viewModal}>
-								<Text style={styles.textModal}>Shop</Text>
-							</View>
-						</TouchableOpacity>
+							<TouchableOpacity
+								onPress={() => {
+									this.toggleModal();
+									this.props.navigation.navigate("Shop");
+								}}
+							>
+								<View style={styles.viewModal}>
+									<Text style={styles.textModal}>Shop</Text>
+								</View>
+							</TouchableOpacity>
 
-						<TouchableOpacity
-							onPress={() => {
-								this.toggleModal();
-								this.props.navigation.navigate("Donate");
-							}}
-						>
-							<View style={styles.viewModal}>
-								<Text style={styles.textModal}>Donate</Text>
-							</View>
-						</TouchableOpacity>
-						<Button title="Close" onPress={this.toggleModal} />
-					</View>
-				</Modal>
-			</View>
+							<TouchableOpacity
+								onPress={() => {
+									this.toggleModal();
+									this.props.navigation.navigate("Donate");
+								}}
+							>
+								<View style={styles.viewModal}>
+									<Text style={styles.textModal}>Donate</Text>
+								</View>
+							</TouchableOpacity>
+							<Button title="Close" onPress={this.toggleModal} />
+						</View>
+					</Modal>
+				</View>
+			</SafeAreaView>
 		);
 	}
 }

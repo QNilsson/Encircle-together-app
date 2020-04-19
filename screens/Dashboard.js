@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '../components/Card';
@@ -11,7 +11,7 @@ import * as resourceActions from '../store/actions/Resource';
 
 const Dashboard = (props) => {
   let location = useSelector(state => state.events.location);
-  let events = useSelector(state => state.events.events);
+  let events = useSelector(state => state.events.todaysEvents);
   let resources = useSelector(state => state.resources.resources);
 
   const dispatch = useDispatch();
@@ -22,33 +22,36 @@ const Dashboard = (props) => {
   }, [dispatch]);
 
   return (
-    <ScrollView>
-      <View style={styles.mainContainer}>
-        <DashboardWelcome />
-        <View style={styles.container}>
-          <View style={styles.eventContainter}>
-            <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{location.toUpperCase()}</Text></Text>
-            {events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card>)}
+      <ScrollView style={{ flex: 1 }}>
+        <View style={styles.mainContainer}>
+        <SafeAreaView>
+          <DashboardWelcome />
+        </SafeAreaView>
+          <View style={styles.container}>
+            <View style={styles.eventContainter}>
+              <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{location.toUpperCase()}</Text></Text>
+              {events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card>)}
+            </View>
+            <TouchableOpacity
+              style={styles.calendarButton}
+              onPress={() => props.navigation.navigate('Calendar')}
+            >
+              <Text style={styles.buttonText}>FULL CALENDAR</Text>
+              <Ionicons name="ios-arrow-round-forward" size={45} style={styles.arrowIcon} />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.calendarButton}
-            onPress={() => props.navigation.navigate('Calendar')}
-          >
-            <Text style={styles.buttonText}>FULL CALENDAR</Text>
-            <Ionicons name="ios-arrow-round-forward" size={45} style={styles.arrowIcon} />
-          </TouchableOpacity>
-        </View>
 
-        <View style={styles.container}>
-          <View style={styles.publicationContainter}>
-            <Text style={styles.location}>POPULAR RESOURCES</Text>
-            <ScrollView horizontal={true}>
-              {resources.map(resource => <Resource key={resource.docId} id={resource.docId} name={resource.name} title={resource.title} />)}
-            </ScrollView>
+          <View style={styles.container}>
+            <View style={styles.publicationContainter}>
+              <Text style={styles.location}>POPULAR RESOURCES</Text>
+              <ScrollView horizontal={true}>
+                {resources.map(resource => <Resource key={resource.docId} id={resource.docId} name={resource.name} title={resource.title} navigation={props.navigation} />)}
+              </ScrollView>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+        <View style={{height: 150}}></View>
+      </ScrollView>
   );
 };
 
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     backgroundColor: 'white',
     width:'100%',
-    padding: 20,
+    //padding: 20,
     borderBottomEndRadius: 30,
     borderBottomStartRadius: 30,
     marginBottom: 20,
