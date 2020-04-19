@@ -1,34 +1,36 @@
 import React, { Component } from 'react';
+import * as Font from "expo-font";
+import { ActivityIndicator } from "react-native";
 import { StyleSheet, Text, View } from 'react-native';
 
 class DashboardWelcome extends Component {
-    // trying to get fonts to load
+  constructor(props) {
+    super(props);
+    this.state = { loading: true };
+  }
 
-    /* state={
-        isReady: false
-      }
-    
-      async componentWillMount() {
-      await Expo.Font.loadAsync({
-        'Roboto': require('native-base/Fonts/Roboto.ttf'),
-        'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      });
-      this.setState({isReady:true})
+  async componentWillMount() {
+    await Font.loadAsync({
+      'ModernoFB': require('../assets/fonts/ModernoFB-Semibold.otf'),
+      'Futura-Light': require('../assets/fonts/Futura-Light.ttf'),
+      'Futura-Book': require('../assets/fonts/Futura-Book.ttf'),
+      'Futura-Medium': require('../assets/fonts/Futura-Medium.ttf'),
+      'Futura-Bold': require('../assets/fonts/Futura-Bold.ttf'),
+    });
+    this.setState({ loading: false });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return <ActivityIndicator />;
     }
-    
-      render() {
-        if (!this.state.isReady) {
-          return <Expo.AppLoading />;
-        }
-    } */
-        render() {
-          return (
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Welcome Back</Text>
-                <Text style={styles.subTitle}>Make today a great day.</Text>
-            </View>
-          )
-    }       
+    return (
+        <View style={styles.titleContainer}>
+        <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.subTitle}>Make today a great day.</Text>
+        </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: '#2B2B2B',
       marginTop: '20%',
-      // fontFamily: 'ModernoFB',
+      fontFamily: 'ModernoFB',
     },
     subTitle: {
       fontSize: 18,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
       margin: 8,
       marginBottom: 20,
       alignItems: 'center',
-      // fontFamily: 'Futura-Book'
+      fontFamily: 'Futura-Book'
     },
 });
 
