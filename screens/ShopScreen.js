@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
     margin: 20,
     marginTop: '10%',
     marginBottom: 50
-    // textAlign: "center"
   },
   textContainer: {
     alignItems: "center",
@@ -156,14 +155,12 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     paddingLeft: 30,
     backgroundColor: "black",
-    // maxWidth:  150,
     minWidth: 250,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
     textAlign: "center",
     marginBottom: 20,
-    // borderRadius: 35
   },
   buttonText: {
     color: "white",
@@ -174,26 +171,15 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     fontWeight: "700"
   },
-
   container: {
-    /* flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '100%',
-    columnWrapperStyle: '' 
-    alignItems: 'center'
-    */
     marginBottom: 50
   },
   item: {
-    // width: '20%',
     flex: 1,
     textAlign: "center",
-    alignSelf: "center"
   },
   containerTest: {
     flex: 1
-    // flexDirection: "column"
   },
   textBlock: {
     marginTop: 10,
