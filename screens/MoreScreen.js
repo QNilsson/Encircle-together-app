@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import { Button, Text, StyleSheet, View, TouchableOpacity } from "react-native";
-// @ts-ignore
-import Modal from "react-native-modal";
-// import ModalBaseScene from "../assets/utils/ModalBaseScene";
-// import DefaultModalContent from "../assets/utils/DefaultModalContent";
+import { Button, Text, StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 class MoreScreen extends Component {

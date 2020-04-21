@@ -2,6 +2,7 @@ import { FETCH_PROVO_EVENTS, FETCH_SLC_EVENTS, FETCH_TODAYS_EVENTS } from '../ac
 
 const initState = {
   events: [],
+  todaysEvents: [],
   markedItems: {},
   location: 'Provo'
 }
@@ -9,11 +10,11 @@ const initState = {
 const eventReducer = (state = initState, action) => {
   switch(action.type) {
     case FETCH_PROVO_EVENTS:
-      return { location: action.data.location, events: action.data.events };
+      return { ...state, location: action.data.location, events: action.data.events };
     case FETCH_SLC_EVENTS:
-      return { location: action.data.location, events: action.data.events };
+      return { ...state, location: action.data.location, events: action.data.events };
     case FETCH_TODAYS_EVENTS:
-      return { location: action.data.location, events: action.data.events };
+      return { ...state, location: action.data.location, todaysEvents: action.data.events };
     default:
       return state;
   }

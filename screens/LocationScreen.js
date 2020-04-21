@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Switch } from 'react-native';
+import { StyleSheet, Text, View, Switch, SafeAreaView } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import * as eventActions from '../store/actions/Event';
@@ -12,41 +12,46 @@ const LocationScreen = () => {
   const selectedLocation = (location) => {
     if(location === 'Provo') {
       dispatch(eventActions.fetchProvoEvents(location));
+      dispatch(eventActions.fetchTodaysEvents(location));
     } else if(location === 'Salt Lake City') {
       dispatch(eventActions.fetchSlcEvents(location));
+      dispatch(eventActions.fetchTodaysEvents(location));
     } else {
       dispatch(eventActions.fetchProvoEvents(location));
+      dispatch(eventActions.fetchTodaysEvents(location));
     }
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Change Location</Text>
-      <Text style={styles.subTitle}>Choose your primary Encircle location. This will change which calendar events you see.</Text>
-      <View style={styles.filterContainer}>
-        <Text style={styles.filterContainerText}>Provo</Text>
-        <Switch
-          value={provo}
-          onValueChange={v => {
-            setProvo(v);
-            setSlc(false);
-            selectedLocation('Provo');
-          }}
-        />
-      </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Change Location</Text>
+        <Text style={styles.subTitle}>Choose your primary Encircle location. This will change which calendar events you see.</Text>
+        <View style={styles.filterContainer}>
+          <Text style={styles.filterContainerText}>Provo</Text>
+          <Switch
+            value={provo}
+            onValueChange={v => {
+              setProvo(v);
+              setSlc(false);
+              selectedLocation('Provo');
+            }}
+          />
+        </View>
 
-      <View style={styles.filterContainer}>
-        <Text style={styles.filterContainerText}>Salt Lake City</Text>
-        <Switch
-          value={slc}
-          onValueChange={v => {
-            setSlc(v);
-            setProvo(false);
-            selectedLocation('Salt Lake City');
-          }}
-        />
+        <View style={styles.filterContainer}>
+          <Text style={styles.filterContainerText}>Salt Lake City</Text>
+          <Switch
+            value={slc}
+            onValueChange={v => {
+              setSlc(v);
+              setProvo(false);
+              selectedLocation('Salt Lake City');
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -55,7 +60,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-
   },
   title: {
     fontSize: 40,

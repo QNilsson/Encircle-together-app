@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
@@ -55,10 +55,13 @@ const ResourceScreen = (props) => {
   }
 
   return(
-    <WebView
-    androidHardwareAccelerationDisabled
-    source={{ uri: url }}
-    />
+    <SafeAreaView style={{flex: 1}}>
+      <WebView
+      style={{flex: 1}}
+      androidHardwareAccelerationDisabled
+      source={{ uri: url }}
+      />
+    </SafeAreaView>
   )
 };
 

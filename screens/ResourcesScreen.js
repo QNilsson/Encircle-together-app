@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView } from "react-native";
+
 import Publication from '../models/publication';
 
 export default class ResourcesScreen extends Component {
@@ -59,47 +60,50 @@ export default class ResourcesScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.resources}>Resources</Text>
-        <Text style={styles.paragraph}>
-          Publications and resources produced by Encircle.
-        </Text>
-        {
-          <FlatList
-            contentContainerStyle={{ margin: 10 }}
-            numColumns={2}
-            style={styles.flatlist}
-            data={this.state.publications}
-            keyExtractor={publication => publication.docId}
-            renderItem={({ item }) => (
-              <View style={styles.item} key={item.docId}>
-                <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.navigate("Resource", {
-                      resourceName: item.name
-                    })
-                  } 
-                >
-                  {
-                    <Image
-                      style={{
-                        height: 300,
-                        width: '99%',
-                        alignItems: "center",
-                      }}
-                      source={{
-                        uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg`
-                      }}
-                    />
-                  }
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Text style={styles.resources}>Resources</Text>
+          <Text style={styles.paragraph}>
+            Publications and resources produced by Encircle.
+          </Text>
+          {
+            <FlatList
+              contentContainerStyle={{ margin: 10 }}
+              numColumns={2}
+              style={styles.flatlist}
+              data={this.state.publications}
+              keyExtractor={publication => publication.docId}
+              renderItem={({ item }) => (
+                <View style={styles.item} key={item.docId}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate("Resource", {
+                        resourceName: item.name
+                      })
+                    }
+                  >
+                    {
+                      <Image
+                        style={{
+                          height: 300,
+                          width: '99%',
+                          alignItems: "center"
+                      
+                        }}
+                        source={{
+                          uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg`
+                        }}
+                      />
+                    }
 
-                  <Text style={styles.titleText}>{item.title}</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          />
-        }
-      </View>
+                    <Text style={styles.titleText}>{item.title}</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            />
+          }
+        </View>
+      </SafeAreaView>
     );
   }
 }

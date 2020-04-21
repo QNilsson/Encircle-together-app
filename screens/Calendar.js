@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
@@ -16,7 +16,6 @@ const CalendarScreen = (props) => {
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
-  // today = yyyy + '-' + mm + '-' + dd;
   today = yyyy + '-' + mm + '-' + dd;
 
   let [selectedDay, setSelectedDay] = useState(today);
@@ -104,39 +103,17 @@ const CalendarScreen = (props) => {
   }
 
   return (
+    
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <View>
+      <SafeAreaView>
         <Calendar
           markedDates={markItems()}
           onDayPress={onDayPress.bind(this)}
           hideExtraDays
           style={styles.calendar}
         />
-      </View>
+      </SafeAreaView>
       <View>{date}</View>
-      {/* <View style={styles.eventListContainer}>
-        <ScrollView>
-          <FlatList
-          
-          data={eventList[selectedDay]}
-          keyExtractor={event => event.id}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              <TouchableOpacity style={styles.textIconContainer} onPress={() => props.navigation.navigate("Event", {
-                id: item.id,
-                summ: item.summ,
-                start: item.start,
-                end: item.end,
-                loc: item.loc,
-                desc: item.desc
-              })}><Text style={styles.eventSummaryText}>{item.summ}</Text>
-                  <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon}/>
-              </TouchableOpacity>
-            </View>
-          )}
-          />
-        </ScrollView>
-      </View> */}
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.eventListContainer}>
           <FlatList
@@ -164,12 +141,13 @@ const CalendarScreen = (props) => {
         </ScrollView>
       </View>
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
   calendar: {
-    marginTop: 50,
+    
     marginBottom: 10
   },
   item: {
