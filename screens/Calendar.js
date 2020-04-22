@@ -6,6 +6,8 @@ import { Calendar } from 'react-native-calendars';
 import * as eventActions from '../store/actions/Event';
 import { Ionicons } from '@expo/vector-icons';
 
+import SafeViewAndroid from '../constants/SafeViewAndroid';
+
 const CalendarScreen = (props) => {
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ const CalendarScreen = (props) => {
 
   const markItems = () => {
     let items = {};
-    events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true });
+    events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true, dotColor: 'tomato', selectedDotColor: 'tomato' });
     return items;
   };
 
@@ -87,8 +89,7 @@ const CalendarScreen = (props) => {
         <Text style={styles.eventsOnText}>Select a date to see events</Text>
       </View>
     );
-  }
-  else if (!eventList[selectedDay]) {
+  } else if (!eventList[selectedDay]) {
     date = (
       <View style={styles.eventsOnContainer}>
         <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>
@@ -103,20 +104,37 @@ const CalendarScreen = (props) => {
   }
 
   return (
-    
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <Calendar
           markedDates={markItems()}
           onDayPress={onDayPress.bind(this)}
           hideExtraDays
           style={styles.calendar}
+          theme={{
+            calendarBackground: '#f2f2f2',
+            selectedDayTextColor: '#2B2B2B',
+            todayTextColor: 'tomato',
+            dayTextColor: '#2B2B2B',
+            arrowColor: '#2B2B2B',
+            dotColor: 'tomato',
+            selectedDotColor: 'tomato',
+            textDayFontFamily: 'Futura-Medium',
+            textMonthFontFamily: 'Futura-Medium',
+            textDayHeaderFontFamily: 'Futura-Light',
+            textDayFontSize: 14,
+            textMonthFontSize: 24,
+            textDayHeaderFontSize: 14
+          }}
         />
       </SafeAreaView>
-      <View>{date}</View>
+      
+      <View style={{zIndex: 100}}>{date}</View>
+
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.eventListContainer}>
           <FlatList
+            style={{ paddingTop: 25, paddingBottom: 50 }}
             data={eventList[selectedDay]}
             keyExtractor={event => event.id}
             renderItem={({ item }) => (
@@ -141,68 +159,66 @@ const CalendarScreen = (props) => {
         </ScrollView>
       </View>
     </View>
-    
+
   );
 };
 
 const styles = StyleSheet.create({
   calendar: {
-    
-    marginBottom: 10
+    paddingBottom: 20
   },
   item: {
     flex: 1,
     borderBottomWidth: 1,
-    borderBottomColor: '#777777',
-    padding: 20,
+    borderBottomColor: '#999999',
+    paddingVertical: 25,
+    paddingHorizontal: 35,
     marginTop: 17,
-    color: 'black'
+    color: '#2B2B2B'
   },
   eventsOnContainer: {
     alignItems: 'center',
+    alignSelf: 'center',
+    zIndex: 100,
     borderWidth: 1,
     borderColor: '#2B2B2B',
     backgroundColor: 'white',
     borderRadius: 30,
-    padding: 15,
+    padding: 10,
     marginRight: '10%',
     marginLeft: '10%',
-    marginTop: 5
+    width: '75%',
+    position: 'absolute',
+    top: -5
   },
   eventsOnText: {
     color: '#2B2B2B',
-    fontFamily: 'Futura-Book',
-    fontWeight: '700',
-    padding: 0
+    fontFamily: 'Futura-Medium',
   },
   selectedDayText: {
     color: '#686868',
-    fontWeight: '700'
+    fontFamily: 'Futura-Book',
   },
   textIconContainer: {
     display: 'flex',
     flexDirection: 'row',
   },
   eventSummaryText: {
-    fontFamily: 'Futura-Book',
+    fontFamily: 'Futura-Medium',
     color: '#2B2B2B',
-    fontWeight: '700'
+    //fontWeight: '700',
   },
   arrowIcon: {
     marginLeft: 'auto'
   },
   eventListContainer: {
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderColor: '#2B2B2B',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: 'white',
     paddingLeft: 12,
     paddingRight: 12,
     height: '100%',
-    marginTop: 12,
+    marginTop: 15,
   }
 });
 
