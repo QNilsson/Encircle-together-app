@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginBottom: 10,
     overflow: 'hidden',
-    minHeight: 84
+    minHeight: 84,
+    backgroundColor: 'white'
   },
   dateBox: {
     backgroundColor: 'black',

@@ -57,7 +57,6 @@ export const fetchSlcEvents = (location) => {
     const yyyy = today.getFullYear();
 
     today = yyyy + '-' + mm + '-' + dd;
-    console.log(today)
 
     // set timeMin url parameter to beginning of month
     const yearMonth = `${yyyy}-${mm}`;

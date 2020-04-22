@@ -128,7 +128,9 @@ const CalendarScreen = (props) => {
           }}
         />
       </SafeAreaView>
-      <View>{date}</View>
+      
+      <View style={{zIndex: 100}}>{date}</View>
+
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.eventListContainer}>
           <FlatList
@@ -168,16 +170,16 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     borderBottomWidth: 1,
-    borderBottomColor: '#777777',
-    padding: 25,
+    borderBottomColor: '#999999',
+    paddingVertical: 25,
+    paddingHorizontal: 35,
     marginTop: 17,
-    color: 'black'
+    color: '#2B2B2B'
   },
   eventsOnContainer: {
-    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    zIndex: 1,
+    zIndex: 100,
     borderWidth: 1,
     borderColor: '#2B2B2B',
     backgroundColor: 'white',
@@ -210,14 +212,13 @@ const styles = StyleSheet.create({
     marginLeft: 'auto'
   },
   eventListContainer: {
-    
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: 'white',
     paddingLeft: 12,
     paddingRight: 12,
     height: '100%',
-    marginTop: 15
+    marginTop: 15,
   }
 });
 
