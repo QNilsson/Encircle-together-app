@@ -1,12 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 
 const Card = props => {
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, '0');
   today = dd;
 
-  let month = new Date().toLocaleString('default', { month: 'short' });
+  month = "";
+
+  // As of April 2020, toLocaleDateString doesn't work on android. So for now I just removed the month from the card on android.
+  if(Platform.OS === 'ios'){
+    month = new Date().toLocaleDateString('en-US', { month: 'short' }); 
+    } else if(Platform.OS === 'android'){
+    month = null }  
 
   let time = props.time.split('T')[1];
   const hour = time.split('-')[0];
