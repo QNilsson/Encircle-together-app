@@ -43,76 +43,48 @@ const Dashboard = (props) => {
 
           <View style={styles.container}>
             <View style={styles.publicationContainter}>
-              <Text style={styles.location}>POPULAR RESOURCES</Text>
+            <Text style={styles.resourcesHeading}>POPULAR RESOURCES</Text>
               <ScrollView horizontal={true}>
                 {resources.map(resource => <Resource key={resource.docId} id={resource.docId} name={resource.name} title={resource.title} navigation={props.navigation} />)}
               </ScrollView>
             </View>
           </View>
         </View>
-        <View style={{height: 150}}></View>
+        <View style={{height: 125, backgroundColor: '#f2f2f2'}}></View>
       </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F2F2F2',
     flex: 1,
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    // margin: 20,
-    // marginTop: 100,
-    // marginBottom: 50,
-    backgroundColor: '#F5F5F5'
-  },
-  titleContainer: {
-    backgroundColor: 'white',
-    width:'100%',
-    //padding: 20,
-    borderBottomEndRadius: 30,
-    borderBottomStartRadius: 30,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#2B2B2B',
-
-    paddingLeft: 12,
-    paddingRight: 12,
-    top: 0,
-    // height: '100%',
-   
-  },
-  title: {
-    fontSize: 40,
-    textAlign: 'center',
-    color: '#2B2B2B',
-    marginTop: '20%'
-    // fontFamily: 'ModernoFB',
-  },
-  subTitle: {
-    fontSize: 18,
-    color: '#686868',
-    textAlign: 'center',
-    margin: 8,
-    marginBottom: 20,
-    alignItems: 'center',
-    // fontFamily: 'Futura-Book'
+    justifyContent: 'center'
   },
   eventContainter: {
     flex: 1,
     alignItems: 'center'
   },
   location: {
-    color: 'black',
-    fontSize: 14,
+    color: '#2B2B2B',
+    fontSize: 16,
     fontWeight: '600',
     marginBottom: 15
   },
   locationText: {
     color: '#686868'
+  },
+  resourcesHeading: {
+    alignSelf: 'flex-start',
+    color: '#2B2B2B',
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 15,
+    paddingLeft: 12
   },
   event: {
     marginBottom: 10
@@ -144,11 +116,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
     paddingBottom: 30,
-    backgroundColor: 'white',
     paddingTop: 30,
-  },
-  publication: {
-
+    marginHorizontal: 10
   }
 });
 
