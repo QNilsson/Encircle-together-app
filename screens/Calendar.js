@@ -22,6 +22,7 @@ const CalendarScreen = (props) => {
 
   let [selectedDay, setSelectedDay] = useState(today);
   let [eventList, setEventList] = useState([]);
+  let [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (location === 'Provo') {
@@ -81,6 +82,8 @@ const CalendarScreen = (props) => {
 
     setEventList(list);
   };
+
+  console.log(eventList['2020-04-28']);
 
   let date;
   if (selectedDay === '') {
