@@ -22,6 +22,7 @@ const CalendarScreen = (props) => {
 
   let [selectedDay, setSelectedDay] = useState(today);
   let [eventList, setEventList] = useState([]);
+  let [isLoading, setIsLoading] = useState(events.length > 0 ? false : true);
 
   useEffect(() => {
     if (location === 'Provo') {
@@ -35,7 +36,9 @@ const CalendarScreen = (props) => {
 
   const markItems = () => {
     let items = {};
+
     events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true, dotColor: 'tomato', selectedDotColor: 'tomato' });
+
     return items;
   };
 
@@ -83,26 +86,16 @@ const CalendarScreen = (props) => {
   };
 
   let date;
+  
   if (selectedDay === '') {
-    date = (
-      <View style={styles.eventsOnContainer}>
-        <Text style={styles.eventsOnText}>Select a date to see events</Text>
-      </View>
-    );
+    date = <Text style={styles.eventsOnText}>Select a date to see events</Text>;
   } else if (!eventList[selectedDay]) {
-    date = (
-      <View style={styles.eventsOnContainer}>
-        <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>
-      </View>
-    );
+    date = <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>;
   } else {
-    date = (
-      <View style={styles.eventsOnContainer}>
-        <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>
-      </View>
-    );
+    date = <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>;
   }
-
+  
+  
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
@@ -129,12 +122,16 @@ const CalendarScreen = (props) => {
         />
       </SafeAreaView>
       
-      <View style={{zIndex: 100}}>{date}</View>
+      <View style={{zIndex: 100}}>
+        <View style={styles.eventsOnContainer}>
+          { date }
+        </View>
+      </View>
 
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.eventListContainer}>
           <FlatList
-            style={{ paddingTop: 25, paddingBottom: 50 }}
+            style={{ paddingTop: 25, paddingBottom: 50, flex: 1 }}
             data={eventList[selectedDay]}
             keyExtractor={event => event.id}
             renderItem={({ item }) => (
@@ -150,7 +147,15 @@ const CalendarScreen = (props) => {
                       desc: item.desc
                     }
                   )}>
-                  <Text style={styles.eventSummaryText}>{item.summ}</Text>
+                  <View>
+                    <View style={styles.eventTimeLoc}>
+                      <Text><Ionicons name="ios-clock" size={16} color="#686868" /> { item.start }    <Ionicons name="ios-pin" size={16} color="#686868" /> { location }</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.eventSummaryText}>{ item.summ }</Text>
+                    </View>
+                  </View>
+                  
                   <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon} />
                 </TouchableOpacity>
               </View>
@@ -159,22 +164,12 @@ const CalendarScreen = (props) => {
         </ScrollView>
       </View>
     </View>
-
   );
 };
 
 const styles = StyleSheet.create({
   calendar: {
-    paddingBottom: 20
-  },
-  item: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: '#999999',
-    paddingVertical: 25,
-    paddingHorizontal: 35,
-    marginTop: 17,
-    color: '#2B2B2B'
+    paddingBottom: 10
   },
   eventsOnContainer: {
     alignItems: 'center',
@@ -199,19 +194,33 @@ const styles = StyleSheet.create({
     color: '#686868',
     fontFamily: 'Futura-Book',
   },
+  item: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#999999',
+    paddingVertical: 25,
+    paddingHorizontal: 20,
+    color: '#2B2B2B',
+    justifyContent: 'center',
+    alignContent: 'space-between'
+  },
   textIconContainer: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   eventSummaryText: {
+    flex: 1,
     fontFamily: 'Futura-Medium',
     color: '#2B2B2B',
-    //fontWeight: '700',
   },
   arrowIcon: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    marginVertical: 'auto'
   },
   eventListContainer: {
+    flex: 1,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: 'white',
@@ -219,6 +228,7 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     height: '100%',
     marginTop: 15,
+    marginBottom: 50
   }
 });
 

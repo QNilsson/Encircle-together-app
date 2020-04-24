@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   Image,
   Linking,
-  SafeAreaView
+  SafeAreaView,
+  Platform
 } from "react-native";
 
 import Product from "../models/product";
+import { PRODUCTS } from '../constants/products';
 import { Ionicons } from "@expo/vector-icons";
 
 export default class ShopScreen extends Component {
@@ -34,43 +36,50 @@ export default class ShopScreen extends Component {
   }
 
   getProducts() {
-    const url = `https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json`;
+    if(Platform.OS === 'ios'){
+      const url = `https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json`;
 
-    fetch(url)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        const products = result.products;
-        console.log(products);
-        const productData = [];
-
-        for (const key in products) {
-          if (products[key].image) {
-            /* this is conditionally see if the products have an image. If they don't have an image, then they are used interally for Encirlce */
-            console.log(
-              `This product has an image src of: ${products[key].image.src}`
-            );
-            productData.push(
-              new Product(
-                products[key].image.src,
-                products[key].title,
-                products[key].variants[0].price
-              )
-            );
-          } else {
-            console.log(`This product has no image src property`);
+      fetch(url)
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+          const products = result.products;
+          console.log(products);
+          const productData = [];
+  
+          for (const key in products) {
+            if (products[key].image) {
+              /* this is conditionally see if the products have an image. If they don't have an image, then they are used interally for Encirlce */
+              console.log(
+                `This product has an image src of: ${products[key].image.src}`
+              );
+              productData.push(
+                new Product(
+                  products[key].image.src,
+                  products[key].title,
+                  products[key].variants[0].price
+                )
+              );
+            } else {
+              console.log(`This product has no image src property`);
+            }
           }
-        }
-
-        for (const i in productData) {
-          console.log(productData[i]);
-        }
-
-        this.setState({
-          products: productData
-        });
+  
+          for (const i in productData) {
+            console.log(productData[i]);
+          }
+  
+          this.setState({
+            products: productData
+          });
+        })
+        .catch(err => console.log(err));
+    } else {
+      this.setState({
+        products: PRODUCTS
       })
-      .catch(err => console.log(err));
+    }
+    
   }
 
   render() {
