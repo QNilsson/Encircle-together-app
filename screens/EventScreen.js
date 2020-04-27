@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView, SafeAreaView } from 'react-native';
 
+// imports expo icons
 import { Ionicons } from '@expo/vector-icons';
 
 const EventScreen = (props) => {
+  // recieved event parameters sent from calendar screen
   const id = props.navigation.getParam('id');
   const summ = props.navigation.getParam('summ');
   const start = props.navigation.getParam('start');

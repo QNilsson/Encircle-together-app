@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Switch, SafeAreaView } from 'react-native';
 import { useDispatch } from 'react-redux';
 
+// imports store actions to dispatch
 import * as eventActions from '../store/actions/Event';
 
 const LocationScreen = () => {
+  // controls on/off for provo switch (app default)
   const [provo, setProvo] = useState(true);
+  // controls on/off for salt lake city switch 
   const [slc, setSlc] = useState(false);
 
   const dispatch = useDispatch();
+  // method used to update events in store based on selected location
   const selectedLocation = (location) => {
     if(location === 'Provo') {
       dispatch(eventActions.fetchProvoEvents(location));

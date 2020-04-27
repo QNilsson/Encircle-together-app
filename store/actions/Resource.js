@@ -1,3 +1,4 @@
+// imports publication model used to load publicationData array
 import Publication from '../../models/publication';
 export const FETCH_RESOURCES = 'FETCH_RESOURCES';
 
@@ -7,9 +8,12 @@ export const fetchResources = () => {
 
     const response = await fetch(url);
     const resData = await response.json();
+    // stores unpackaged response data
     const items = resData.rsp._content.result._content;
+    // stores publication objects
     const publicationData = [];
 
+    // loads array with publication objects
     for(const key in items) {
       publicationData.push(
         new Publication(
@@ -23,10 +27,12 @@ export const fetchResources = () => {
       );
     }
 
-    // for (const i in publicationData) {
-    //   console.log(publicationData[i])
-    // }
+    // use this to see loaded publication objects
+    for (const i in publicationData) {
+      // console.log(publicationData[i])
+    }
 
+    // async dispatch - sends publication object array to resource reducer
     dispatch({ type: FETCH_RESOURCES, resources: publicationData });
   }
 };

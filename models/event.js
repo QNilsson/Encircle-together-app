@@ -1,3 +1,4 @@
+// event model based on google api response values
 class Event {
     constructor(id, creator_email, description, end__dateTime, start__dateTime, summary, location) {
         this.id = id;

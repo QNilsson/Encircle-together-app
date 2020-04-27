@@ -7,6 +7,7 @@ const ResourceScreen = (props) => {
   const name = props.navigation.getParam('resourceName');
   let url = '';
 
+  // points webview uri to issuu publication story url (https://issuu.com/) - cannot pull this url using api (https://developer.issuu.com/)
   switch(name) {
     case 'gsatoolkit':
       url = 'https://issuu.com/encircletogether/docs/gsatoolkit/s/10192081';

@@ -2,20 +2,30 @@ import React, { useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
+// imports card component - styled event containers
 import Card from '../components/Card';
+// imports resource component - styled resource containers
 import Resource from '../components/Resource';
+// imports dashboard welcome component - styled header container
 import DashboardWelcome from '../components/DashboardWelcome';
+// imports expo icons
 import { Ionicons } from '@expo/vector-icons';
+// imports store actions to dispatch
 import * as eventActions from '../store/actions/Event';
+// imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
 const Dashboard = (props) => {
+  // pulls set location from store (provo default)
   let location = useSelector(state => state.events.location);
+  // pulls events from store (based on selected location)
   let events = useSelector(state => state.events.todaysEvents);
+  // pulls resources from store
   let resources = useSelector(state => state.resources.resources);
 
   const dispatch = useDispatch();
 
+  // updates component when a new location is selected - loads resources from issuu api
   useEffect(() => {
     dispatch(eventActions.fetchTodaysEvents(location));
     dispatch(resourceActions.fetchResources());
