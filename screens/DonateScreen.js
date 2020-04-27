@@ -7,6 +7,7 @@ export default class DonateScreen extends Component {
   constructor(props) {
     super(props);
 
+    // points webview uri to encircle donate website page
     this.state = {
       url: 'https://encircletogether.org/donate'
     };

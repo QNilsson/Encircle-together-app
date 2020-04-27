@@ -1,5 +1,7 @@
+// imports product model used to populate products array
 import Product from '../models/product';
 
+// static product data used to display on shop screen for android devices
 export const PRODUCTS = [
   new Product(
     'https://cdn.shopify.com/s/files/1/0156/5841/8276/products/NoSidesOnlyLove-11_360x.jpg?v=1583945446',

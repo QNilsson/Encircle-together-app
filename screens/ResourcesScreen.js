@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView } from "react-native";
 
+// imports publication model used to load publicationData array
 import Publication from '../models/publication';
 
 export default class ResourcesScreen extends Component {
@@ -15,6 +16,7 @@ export default class ResourcesScreen extends Component {
   imageHeight = "100%";
   imageWidth = "90%";
 
+  // component will load with resources from issuu api (https://developer.issuu.com/)
   componentDidMount() {
     this.getPublications();
   }
@@ -25,9 +27,12 @@ export default class ResourcesScreen extends Component {
     fetch(url)
       .then(res => res.json())
       .then(resData => {
+        // stores unpackaged response data
         const publications = resData.rsp._content.result._content;
+        // stores publication objects
         const publicationData = [];
 
+        // loads array with publication objects
         for (const key in publications) {
           publicationData.push(
             new Publication(
@@ -41,6 +46,7 @@ export default class ResourcesScreen extends Component {
           );
         }
 
+        // use this to see loaded publication objects
         for (const i in publicationData) {
           // console.log(publicationData[i])
         }
@@ -52,6 +58,7 @@ export default class ResourcesScreen extends Component {
       .catch(err => console.log(err));
   }
 
+  // navigates to resource screen - sends resource name as parameter
   selectedResource(name) {
     this.props.navigation.navigate("ResourceScreen", {
       resourceName: name
@@ -90,6 +97,8 @@ export default class ResourcesScreen extends Component {
                           alignItems: "center"
                       
                         }}
+
+                        // points to resource cover image (see issuu api docs)
                         source={{
                           uri: `https://image.issuu.com/${item.docId}/jpg/page_1_thumb_large.jpg`
                         }}

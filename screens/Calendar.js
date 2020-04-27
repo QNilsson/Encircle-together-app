@@ -2,28 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
+// imports calendar component (https://github.com/wix/react-native-calendars)
 import { Calendar } from 'react-native-calendars';
+// imports store actions to dispatch
 import * as eventActions from '../store/actions/Event';
+// imports expo icons
 import { Ionicons } from '@expo/vector-icons';
-
+// imports android SafeAreaView workaround
 import SafeViewAndroid from '../constants/SafeViewAndroid';
 
 const CalendarScreen = (props) => {
   const dispatch = useDispatch();
 
+  // pulls set location from store (provo default)
   let location = useSelector(state => state.events.location);
+  // pulls events from store (based on selected location)
   let events = useSelector(state => state.events.events);
 
+  // sets date to today
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd;
 
+  // stores selected date on calendar (initialized to today)
   let [selectedDay, setSelectedDay] = useState(today);
+  // stores list of events for selected day
   let [eventList, setEventList] = useState([]);
+  // track when events from store are loaded
   let [isLoading, setIsLoading] = useState(events.length > 0 ? false : true);
 
+  // updates component when a new location is selected - loads events from google api (https://developers.google.com/calendar)
   useEffect(() => {
     if (location === 'Provo') {
       dispatch(eventActions.fetchProvoEvents('Provo'));
@@ -34,6 +44,7 @@ const CalendarScreen = (props) => {
     }
   }, [dispatch]);
 
+  // marks dates on calendar
   const markItems = () => {
     let items = {};
 
@@ -42,6 +53,7 @@ const CalendarScreen = (props) => {
     return items;
   };
 
+  // triggered when a day is selected - creates a list of events for the day
   const onDayPress = (day) => {
     let selected = '';
 
@@ -53,6 +65,7 @@ const CalendarScreen = (props) => {
 
     setSelectedDay(selected);
 
+    // creates object array of events for selected day
     let list = {};
     events.forEach(e => {
       let strTime = e.start__dateTime.split('T')[0];
@@ -86,7 +99,7 @@ const CalendarScreen = (props) => {
   };
 
   let date;
-  
+  // conditional text to display for selected day
   if (selectedDay === '') {
     date = <Text style={styles.eventsOnText}>Select a date to see events</Text>;
   } else if (!eventList[selectedDay]) {
@@ -137,6 +150,7 @@ const CalendarScreen = (props) => {
             renderItem={({ item }) => (
               <View style={styles.item}>
                 <TouchableOpacity style={styles.textIconContainer}
+                // navigates to event screen - sends event data as parameters
                   onPress={() => props.navigation.navigate("Event",
                     {
                       id: item.id,

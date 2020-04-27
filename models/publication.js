@@ -1,3 +1,4 @@
+// publication model based on issuu api response values
 class Publication {
     constructor(docId, publicationId, title, name, description, publishDate) {
         this.docId = docId;

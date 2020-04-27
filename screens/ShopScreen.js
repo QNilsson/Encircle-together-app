@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import Product from "../models/product";
+// imports static product data array (loaded with product objects)
 import { PRODUCTS } from '../constants/products';
 import { Ionicons } from "@expo/vector-icons";
 
@@ -36,6 +37,7 @@ export default class ShopScreen extends Component {
   }
 
   getProducts() {
+    // dynamically loads products using shopify api on ios platform
     if(Platform.OS === 'ios'){
       const url = `https://ab08f5570806f2750ab286a8c8256e99:1022e7dc7806cc2b88825a76fa7386d1@encircle-lgbtq-family-youth-resource-center.myshopify.com/admin/api/2020-01/products.json`;
 
@@ -75,6 +77,7 @@ export default class ShopScreen extends Component {
         })
         .catch(err => console.log(err));
     } else {
+      // loads static products on android platform (android receives invalid shopify api response?)
       this.setState({
         products: PRODUCTS
       })
