@@ -15,6 +15,7 @@ import LocationScreen from "../screens/LocationScreen";
 import ShopScreen from "../screens/ShopScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
+// import { DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from "react-native-dark-mode";
 
 // more screen stack
 const MoreNavigator = createStackNavigator(
@@ -54,6 +55,16 @@ const CalendarNavigator = createStackNavigator(
   }
 );
 
+// dark mode
+// const DynamicStyles = new DynamicStyleSheet( {
+//   container: {
+//     backgroundColor: new DynamicValue('white', 'black')
+//   },
+//   text: {
+//     color: new DynamicValue('black', 'white')
+//   }
+// })
+
 // app bottom tab stack
 const AppNavigator = createBottomTabNavigator(
   {
@@ -67,6 +78,7 @@ const AppNavigator = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
+        // const styles = useDynamicStyleSheet(DynamicStyles); //dark mode
         let IconComponent = Ionicons;
         let iconName;
 
@@ -90,6 +102,7 @@ const AppNavigator = createBottomTabNavigator(
         return (
           <IconComponent
             // sets icon based on platform
+            // style={styles.container} //dark mode
             name={Platform.OS === "ios" ? "ios-" + iconName : "md-" + iconName}
             size={25}
             color={tintColor}
