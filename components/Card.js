@@ -3,10 +3,9 @@ import { View, Text, StyleSheet, Platform } from 'react-native';
 
 const Card = props => {
   let today = new Date();
+  let month = "";
   const dd = String(today.getDate()).padStart(2, '0');
   today = dd;
-
-  month = "";
 
   // As of April 2020, toLocaleDateString doesn't work on android. So for now I just removed the month from the card on android.
   if(Platform.OS === 'ios'){
