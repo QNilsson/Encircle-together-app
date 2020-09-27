@@ -40,8 +40,15 @@ const Dashboard = (props) => {
           <View style={styles.container}>
             <View style={styles.eventContainter}>
               <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{location.toUpperCase()}</Text></Text>
-              {events.map(event => <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card>)}
+              
+              {events.map(event => 
+              <TouchableOpacity style={styles.eventBox} onPress={() => props.navigation.navigate('Calendar')}>
+              <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card></TouchableOpacity> )}
+              
+             
+              
             </View>
+            
             <TouchableOpacity
               style={styles.calendarButton}
               onPress={() => props.navigation.navigate('Calendar')}
@@ -128,6 +135,12 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingTop: 30,
     marginHorizontal: 10
+  },
+  eventBox:{
+    width:500,
+    height:90,
+    margin:'auto',
+    marginLeft:120,
   }
 });
 
