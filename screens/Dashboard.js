@@ -45,14 +45,11 @@ const Dashboard = (props) => {
               <TouchableOpacity style={styles.eventBox} onPress={() => props.navigation.navigate('Calendar')}>
               <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card></TouchableOpacity> )}
               
-             
-              
             </View>
             
             <TouchableOpacity
               style={styles.calendarButton}
-              onPress={() => props.navigation.navigate('Calendar')}
-            >
+              onPress={() => props.navigation.navigate('Calendar')}>
               <Text style={styles.buttonText}>FULL CALENDAR</Text>
               <Ionicons name="ios-arrow-round-forward" size={45} style={styles.arrowIcon} />
             </TouchableOpacity>
@@ -104,7 +101,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12
   },
   event: {
-    marginBottom: 10
+    marginBottom: 12
   },
   calendarButton: {
     display: 'flex',
@@ -118,6 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 60,
     textAlign: 'center',
+    marginTop:5
   },
   buttonText: {
     color: 'white',
