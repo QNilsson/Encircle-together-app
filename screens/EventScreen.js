@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView, SafeAreaView, Dimensions, Linking } from 'react-native';
 
 // imports expo icons
 import { Ionicons } from '@expo/vector-icons';
+
+import HTML from "react-native-render-html";
 
 const EventScreen = (props) => {
   // recieved event parameters sent from calendar screen
@@ -13,6 +15,15 @@ const EventScreen = (props) => {
   const loc = props.navigation.getParam('loc');
   const desc = props.navigation.getParam('desc');
   const day = props.navigation.getParam('day');
+
+  // Function to ensure zoom links are properly anchored
+  const urlify = (text) => {
+      var urlRegex = /( https?:\/\/[^\s | <]+)/g;
+      return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+      })
+    }
+  let html = urlify(desc);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -40,8 +51,13 @@ const EventScreen = (props) => {
               <Ionicons name="md-clock" size={25} style={styles.arrowIcon} />
               <Text style={styles.time}>{day} | {start} - {end}</Text>
             </View>
-
-            <Text style={styles.description}>{desc}</Text>
+        
+            <HTML 
+              style={styles.description}
+              html={html}
+              onLinkPress={ (evt, href) => { Linking.openURL(href); }}
+              imagesMaxWidth={Dimensions.get("window").width}
+            />
           </View>
         </ScrollView>
       </View>
