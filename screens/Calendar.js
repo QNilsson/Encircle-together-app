@@ -27,7 +27,7 @@ const CalendarScreen = (props) => {
   today = yyyy + '-' + mm + '-' + dd;
 
   // stores selected date on calendar (initialized to today)
-  let [selectedDay, setSelectedDay] = useState(today);
+  let [selectedDay, setSelectedDay] = useState('');
   // stores list of events for selected day
   let [eventList, setEventList] = useState([]);
   // track when events from store are loaded
@@ -45,10 +45,27 @@ const CalendarScreen = (props) => {
   }, [dispatch]);
 
   // marks dates on calendar
+  let items = {};
+
   const markItems = () => {
     let items = {};
 
+    // Styling for each date with an event
     events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true, dotColor: 'tomato', selectedDotColor: 'tomato' });
+
+    // Styling for the currently selected date
+    items[selectedDay] = {
+      dotColor: 'tomato',
+      marked: true,
+      selected: true,
+      textColor: 'tomato',
+      selectedColor: '#ccc',
+      selectedTextColor: 'tomato',
+      disabled: true, 
+      disableTouchEvent: true,
+    }
+
+    console.log(items)
 
     return items;
   };
@@ -64,6 +81,10 @@ const CalendarScreen = (props) => {
     }
 
     setSelectedDay(selected);
+
+    /*items = {
+      selected: {selected: true, marked: true, selectedColor: 'blue'}
+    }*/
 
     // creates object array of events for selected day
     let list = {};
@@ -108,7 +129,8 @@ const CalendarScreen = (props) => {
     date = <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>;
   }
   
-  
+  markItems()
+
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
@@ -120,7 +142,7 @@ const CalendarScreen = (props) => {
           theme={{
             calendarBackground: '#f2f2f2',
             selectedDayTextColor: '#2B2B2B',
-            todayTextColor: 'tomato',
+            todayTextColor: '#ccc',
             dayTextColor: '#2B2B2B',
             arrowColor: '#2B2B2B',
             dotColor: 'tomato',
