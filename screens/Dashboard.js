@@ -15,6 +15,8 @@ import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
+import Calendar from '../screens/Calendar';
+
 const Dashboard = (props) => {
   // pulls set location from store (provo default)
   let location = useSelector(state => state.events.location);
@@ -42,7 +44,17 @@ const Dashboard = (props) => {
               <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{location.toUpperCase()}</Text></Text>
               
               {events.map(event => 
-              <TouchableOpacity style={styles.eventBox} onPress={() => props.navigation.navigate('Calendar')}>
+              <TouchableOpacity style={styles.eventBox} onPress={() => props.navigation.navigate('Event',
+              {
+                id: event.id,
+                summ: event.summ,
+                start: event.start,
+                end: event.end,
+                loc: event.loc,
+                desc: event.desc
+              })}>
+                 
+                
               <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card></TouchableOpacity> )}
               
             </View>
