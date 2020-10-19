@@ -171,7 +171,7 @@ const CalendarScreen = props => {
       <View style={{flex: 1}}>
         <ScrollView style={styles.eventListContainer}>
           <FlatList
-            style={{paddingTop: 25, paddingBottom: 50, flex: 1, backgroundColor:'lightblue'}}
+            style={{paddingTop: 25, paddingBottom: 50, flex: 1}}
             data={eventList[selectedDay]}
             keyExtractor={event => event.id}
             renderItem={({item}) => (
@@ -256,7 +256,6 @@ const styles = StyleSheet.create ({
     paddingVertical: 25,
     paddingHorizontal: 20,
     color: '#2B2B2B',
-    backgroundColor:'pink',
     justifyContent: 'center',
     alignContent: 'space-between',
   },
