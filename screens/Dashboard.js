@@ -47,11 +47,11 @@ const Dashboard = (props) => {
               <TouchableOpacity style={styles.eventBox} onPress={() => props.navigation.navigate('Event',
               {
                 id: event.id,
-                summ: event.summ,
+                summ: event.summary,
                 start: event.start,
                 end: event.end,
-                loc: event.loc,
-                desc: event.desc
+                loc: event.location,
+                desc: event.description
               })}>
                  
                 
