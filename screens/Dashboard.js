@@ -48,8 +48,8 @@ const Dashboard = (props) => {
               {
                 id: event.id,
                 summ: event.summary,
-                start: event.start,
-                end: event.end,
+                start: event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5),
+                end: event.end__dateTime.split ('T')[1].split ('-')[0].slice (0, 5),
                 loc: event.location,
                 desc: event.description
               })}>
