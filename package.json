@@ -16,6 +16,7 @@
     "@types/react": "~16.9.35",
     "axios": "^0.19.2",
     "expo": "^39.0.3",
+    "expo-cli": "^3.28.2",
     "expo-constants": "~9.2.0",
     "expo-file-system": "~9.2.0",
     "gradle": "^1.2.3",
