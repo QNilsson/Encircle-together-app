@@ -19,6 +19,9 @@ const CalendarScreen = (props) => {
   // pulls events from store (based on selected location)
   let events = useSelector(state => state.events.events);
 
+  // setting global variable to display full date on calendar
+  let selectedFullDate = ''
+
   // sets date to today
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
@@ -28,6 +31,7 @@ const CalendarScreen = (props) => {
 
   // stores selected date on calendar (initialized to today)
   let [selectedDay, setSelectedDay] = useState('');
+  let [selectedFullDay, setSelectedFullDay] = useState('');
   // stores list of events for selected day
   let [eventList, setEventList] = useState([]);
   // track when events from store are loaded
@@ -55,17 +59,14 @@ const CalendarScreen = (props) => {
 
     // Styling for the currently selected date
     items[selectedDay] = {
-      dotColor: 'tomato',
       marked: true,
       selected: true,
       textColor: 'tomato',
-      selectedColor: '#ccc',
-      selectedTextColor: 'tomato',
+      selectedColor: '#f2f2f2',
+      selectedTextColor: '#000',
       disabled: true, 
       disableTouchEvent: true,
     }
-
-    console.log(items)
 
     return items;
   };
@@ -80,7 +81,14 @@ const CalendarScreen = (props) => {
       selected = day;
     }
 
+    // changing date format
+    let selectedNew = selected.split('-')
+    const monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    selectedFullDate = monthArray[(Number(selectedNew[1])-1)].toUpperCase()
+    selectedFullDate = selectedFullDate + ' ' + selectedNew[2] + ', ' + selectedNew[0]
+
     setSelectedDay(selected);
+    setSelectedFullDay(selectedFullDate)
 
     /*items = {
       selected: {selected: true, marked: true, selectedColor: 'blue'}
@@ -90,6 +98,34 @@ const CalendarScreen = (props) => {
     let list = {};
     events.forEach(e => {
       let strTime = e.start__dateTime.split('T')[0];
+      const timeConversion = (x) => {
+        let output = []
+        x = x.split(':')
+        if (Number(x[0]) == 24) {
+          x[0] = '12'
+          output.push((x[0]+':'+x[1]))
+          output.push('AM')
+        } else if (Number(x[0]) == 12) {
+          output.push((x[0]+':'+x[1]))
+          output.push('PM')
+        } else if (Number(x[0]) > 12) {
+          x[0] = Number(x[0]) - 12
+          x[0] = x[0].toString()
+          output.push((x[0]+':'+x[1]))
+          output.push('PM')
+        } else {
+          output.push((x[0]+':'+x[1]))
+          output.push('AM')
+        }
+        return output
+      }
+
+      let timeStart = timeConversion(e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5))
+      let timeEnd = timeConversion(e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5))
+      let timeStampStart = timeStart[1]
+      let timeStampEnd = timeEnd[1]
+      timeStart = timeStart[0]
+      timeEnd = timeEnd[0]
 
       if (!list[strTime]) {
         list[strTime] = [];
@@ -99,8 +135,10 @@ const CalendarScreen = (props) => {
           summ: e.summary,
           desc: e.description,
           loc: e.location,
-          start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
-          end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          start: timeStart,
+          startstamp: timeStampStart,
+          end: timeEnd,
+          endstamp: timeStampEnd,
           height: 200
         });
       } else {
@@ -109,8 +147,10 @@ const CalendarScreen = (props) => {
           summ: e.summary,
           desc: e.description,
           loc: e.location,
-          start: e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5),
-          end: e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5),
+          start: timeStart,
+          startstamp: timeStampStart,
+          end: timeEnd,
+          endstamp: timeStampEnd,
           height: 200
         });
       }
@@ -124,12 +164,14 @@ const CalendarScreen = (props) => {
   if (selectedDay === '') {
     date = <Text style={styles.eventsOnText}>Select a date to see events</Text>;
   } else if (!eventList[selectedDay]) {
-    date = <Text style={styles.eventsOnText}>NO EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>;
+    date = <Text style={styles.selectedDayText}>{selectedFullDay}</Text>;
   } else {
-    date = <Text style={styles.eventsOnText}>EVENTS ON <Text style={styles.selectedDayText}>{selectedDay}</Text></Text>;
+    date = <Text style={styles.selectedDayText}>{selectedFullDay}</Text>;
   }
   
   markItems()
+
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -140,9 +182,9 @@ const CalendarScreen = (props) => {
           hideExtraDays
           style={styles.calendar}
           theme={{
-            calendarBackground: '#f2f2f2',
+            calendarBackground: '#fff',
             selectedDayTextColor: '#2B2B2B',
-            todayTextColor: '#ccc',
+            todayTextColor: '#f2f2f2',
             dayTextColor: '#2B2B2B',
             arrowColor: '#2B2B2B',
             dotColor: 'tomato',
@@ -178,21 +220,22 @@ const CalendarScreen = (props) => {
                       id: item.id,
                       summ: item.summ,
                       start: item.start,
+                      startstamp: item.startstamp,
                       end: item.end,
+                      endstamp: item.endstamp,
                       loc: item.loc,
                       desc: item.desc
                     }
                   )}>
-                  <View>
+                  <View style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
                     <View style={styles.eventTimeLoc}>
-                      <Text><Ionicons name="ios-clock" size={16} color="#686868" /> { item.start }    <Ionicons name="ios-pin" size={16} color="#686868" /> { location }</Text>
+                      <Text style={{textAligh: 'center'}}>{item.start}</Text>
+                      <Text style={{textAligh: 'center', color: '#767B82'}}>{item.startstamp}</Text>
                     </View>
-                    <View>
-                      <Text style={styles.eventSummaryText}>{ item.summ }</Text>
+                    <View style={{flexDirection:'row', flexWrap: 'wrap',flexShrink: 1}}>
+                      <Text style={[styles.eventSummaryText,]}>{ item.summ }</Text>
                     </View>
                   </View>
-                  
-                  <Ionicons name="ios-arrow-forward" size={20} color="#686868" style={styles.arrowIcon} />
                 </TouchableOpacity>
               </View>
             )}
@@ -208,19 +251,14 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   eventsOnContainer: {
-    alignItems: 'center',
     alignSelf: 'center',
     zIndex: 100,
-    borderWidth: 1,
-    borderColor: '#2B2B2B',
-    backgroundColor: 'white',
-    borderRadius: 30,
+    backgroundColor: '#f9f9f9',
     padding: 10,
-    marginRight: '10%',
-    marginLeft: '10%',
-    width: '75%',
+    paddingVertical: 10,
+    paddingLeft: 30,
+    width: '100%',
     position: 'absolute',
-    top: -5
   },
   eventsOnText: {
     color: '#2B2B2B',
@@ -232,24 +270,35 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: '#999999',
-    paddingVertical: 25,
+    marginBottom: 12,
+    marginHorizontal: 12,
+    paddingVertical: 15,
     paddingHorizontal: 20,
     color: '#2B2B2B',
     justifyContent: 'center',
-    alignContent: 'space-between'
+    alignContent: 'space-between',
+    backgroundColor: '#fff',
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 0.09
   },
   textIconContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    paddingHorizontal: -130,
+    alignItems: 'center',
   },
   eventSummaryText: {
-    flex: 1,
+    flexShrink: 1,
     fontFamily: 'Futura-Medium',
     color: '#2B2B2B',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   arrowIcon: {
     marginLeft: 'auto',
@@ -257,14 +306,22 @@ const styles = StyleSheet.create({
   },
   eventListContainer: {
     flex: 1,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    backgroundColor: 'white',
+    backgroundColor: '#f9f9f9',
     paddingLeft: 12,
     paddingRight: 12,
     height: '100%',
     marginTop: 15,
     marginBottom: 50
+  },
+  eventTimeLoc: {
+    borderStyle: 'solid',
+    borderRightWidth: 2,
+    borderRightColor: '#D4D6D8',
+    paddingRight: 5,
+    marginRight: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+    width: '15%'
   }
 });
 

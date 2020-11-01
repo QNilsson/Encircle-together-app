@@ -53,7 +53,7 @@ class MoreScreen extends Component {
               this.props.navigation.navigate("Donate");
             }}
           >
-            <View style={styles.titleContainer}>
+            <View style={[styles.titleContainer, {borderBottomWidth: 0}]}>
               <Text style={styles.title}>Donate</Text>
               <Ionicons
                 name="ios-arrow-forward"
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
     width: "100%",
     marginVertical: 20,
+    paddingBottom: 17,
     borderBottomWidth: 1,
     borderBottomColor: "#2B2B2B",
     display: "flex",

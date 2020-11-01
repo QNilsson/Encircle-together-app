@@ -54,7 +54,7 @@ const Dashboard = (props) => {
           <View style={styles.container}>
             <View style={styles.publicationContainter}>
             <Text style={styles.resourcesHeading}>POPULAR RESOURCES</Text>
-              <ScrollView horizontal={true}>
+              <ScrollView horizontal={true} style={{paddingBottom: 20}}>
                 {resources.map(resource => <Resource key={resource.docId} id={resource.docId} name={resource.name} title={resource.title} navigation={props.navigation} />)}
               </ScrollView>
             </View>

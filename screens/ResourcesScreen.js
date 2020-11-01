@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView, ScrollView } from "react-native";
 
 // imports publication model used to load publicationData array
 import Publication from '../models/publication';
@@ -67,12 +67,11 @@ export default class ResourcesScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
-          <Text style={styles.resources}>Resources</Text>
-          <Text style={styles.paragraph}>
-            Publications and resources produced by Encircle.
-          </Text>
+          <View style={styles.resourceHeader}>
+            <Text style={styles.resources}>Encircle Resources</Text>
+          </View>
           {
             <FlatList
               contentContainerStyle={{ margin: 10 }}
@@ -112,7 +111,7 @@ export default class ResourcesScreen extends Component {
             />
           }
         </View>
-      </SafeAreaView>
+      </ScrollView>
     );
   }
 }
@@ -120,14 +119,20 @@ export default class ResourcesScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '20%',
     backgroundColor: "#fff",
+    paddingBottom: 100,
   },
   resources: {
-    fontSize: 40,
-    marginTop: '20%',
+    fontSize: 34,
+    marginBottom: '20%',
+    marginTop: '30%',
     textAlign: "center",
-    color: "#2B2B2B",
-    fontFamily: 'ModernoFB',
+    color: "#fff",
+    fontFamily: 'Clarendon',
+  },
+  resourceHeader: {
+    backgroundColor: '#000'
   },
   paragraph: {
     fontSize: 20,

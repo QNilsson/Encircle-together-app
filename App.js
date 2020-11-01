@@ -26,6 +26,16 @@ const componentDidMount = () => {
     'Futura-Book': require('./assets/fonts/Futura-Book.ttf'),
     'Futura-Medium': require('./assets/fonts/Futura-Medium.ttf'),
     'Futura-Bold': require('./assets/fonts/Futura-Bold.ttf'),
+    'Clarendon': require('./assets/fonts/clarendon.otf'),
+    'Clarendon-Italic': require('./assets/fonts/clarendon-italic.otf'),
+    'Clarendon-Bold': require('./assets/fonts/clarendon-bold.otf'),
+    'Clarendon-Bold-Italic': require('./assets/fonts/clarendon-bold-italic.otf'),
+    'Din': require('./assets/fonts/din.otf'),
+    'Din-Bold': require('./assets/fonts/din-bold.otf'),
+    'Garamond': require('./assets/fonts/garamond.otf'),
+    'Garamond-Bold': require('./assets/fonts/garamond-bold.otf'),
+    'Garamond-Italic': require('./assets/fonts/garamond-italic.otf'),
+    'Garamond-Bold-Italic': require('./assets/fonts/garamond-bold-italic.otf'),
   });
 };
 

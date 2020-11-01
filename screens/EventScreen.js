@@ -11,7 +11,9 @@ const EventScreen = (props) => {
   const id = props.navigation.getParam('id');
   const summ = props.navigation.getParam('summ');
   const start = props.navigation.getParam('start');
+  const startstamp = props.navigation.getParam('startstamp');
   const end = props.navigation.getParam('end');
+  const endstamp = props.navigation.getParam('endstamp');
   const loc = props.navigation.getParam('loc');
   const desc = props.navigation.getParam('desc');
   const day = props.navigation.getParam('day');
@@ -23,7 +25,13 @@ const EventScreen = (props) => {
         return '<a href="' + url + '">' + url + '</a>';
       })
     }
-  let html = urlify(desc);
+
+  let html = desc
+  if(html == undefined) {
+    html = ''
+  }
+  html = urlify(html);
+  html = '<div style="color:#2B2B2B; font-family: Futura-Book; margin-bottom: 120px;">'+html+'</div>'
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -48,12 +56,11 @@ const EventScreen = (props) => {
             </View>
 
             <View style={styles.iconContainer}>
-              <Ionicons name="md-clock" size={25} style={styles.arrowIcon} />
-              <Text style={styles.time}>{day} | {start} - {end}</Text>
+              <Ionicons name="ios-time" size={25} style={styles.arrowIcon} />
+              <Text style={styles.time}>{day} | {start}{startstamp} - {end}{endstamp}</Text>
             </View>
         
             <HTML 
-              style={styles.description}
               html={html}
               onLinkPress={ (evt, href) => { Linking.openURL(href); }}
               imagesMaxWidth={Dimensions.get("window").width}
