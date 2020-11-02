@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     marginLeft: '5%'
   },
   description: {
-    color: 'red',
+   
     fontFamily: 'Futura-Book',
     fontSize: 20,
     marginBottom: 70
