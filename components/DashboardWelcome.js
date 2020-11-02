@@ -45,12 +45,8 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    width: 414,
+    width: "100%",
     height: 167,
-  },
-  image: {
-    resizeMode: "contain",
-    height: 100,
   },
 });
 
