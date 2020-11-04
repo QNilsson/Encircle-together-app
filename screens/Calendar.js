@@ -55,18 +55,47 @@ const CalendarScreen = (props) => {
     let items = {};
 
     // Styling for each date with an event
-    events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true, dotColor: 'tomato', selectedDotColor: 'tomato' });
+    events.forEach(e => items[e.start__dateTime.split('T')[0]] = { marked: true, dotColor: '#000', selectedDotColor: '#000' });
 
-    // Styling for the currently selected date
-    items[selectedDay] = {
-      marked: true,
-      selected: true,
-      textColor: 'tomato',
-      selectedColor: '#f2f2f2',
-      selectedTextColor: '#000',
-      disabled: true, 
-      disableTouchEvent: true,
+    if (items[today]) {
+      items[today] = {
+        selected: true,
+        marked: true,
+        textColor: '#000',
+        selectedTextColor: '#bbb',
+        selectedColor: '#fff'
+      }
+    } else {
+      items[today] = {
+        selected: true,
+        selectedColor: '#f2f2f2',
+        selectedTextColor: '#000',
+      }
     }
+
+    // Styling for the currently selected date (conditional to display dot)
+    if (items[selectedDay]) {
+      items[selectedDay] = {
+        marked: true,
+        selected: true,
+        textColor: '#000',
+        selectedColor: '#f2f2f2',
+        selectedTextColor: '#000',
+        disabled: true, 
+        disableTouchEvent: true,
+      }
+    } else {
+      items[selectedDay] = {
+        selected: true,
+        textColor: '#000',
+        selectedColor: '#f2f2f2',
+        selectedTextColor: '#000',
+        disabled: true, 
+        disableTouchEvent: true,
+      }
+    }
+
+  
 
     return items;
   };
@@ -164,7 +193,7 @@ const CalendarScreen = (props) => {
   if (selectedDay === '') {
     date = <Text style={styles.eventsOnText}>Select a date to see events</Text>;
   } else if (!eventList[selectedDay]) {
-    date = <Text style={styles.selectedDayText}>{selectedFullDay}</Text>;
+    date = <Text style={styles.selectedDayText}>{selectedFullDay}{'\n'}<Text style={{color: '#767B82', fontSize: 16}}>No Events on Selected Day</Text></Text>;
   } else {
     date = <Text style={styles.selectedDayText}>{selectedFullDay}</Text>;
   }
@@ -179,38 +208,42 @@ const CalendarScreen = (props) => {
         <Calendar
           markedDates={markItems()}
           onDayPress={onDayPress.bind(this)}
-          hideExtraDays
           style={styles.calendar}
+          monthFormat={'MMMM'}
           theme={{
             calendarBackground: '#fff',
-            selectedDayTextColor: '#2B2B2B',
-            todayTextColor: '#f2f2f2',
+            todayTextColor: '#000',
             dayTextColor: '#2B2B2B',
             arrowColor: '#2B2B2B',
-            dotColor: 'tomato',
-            selectedDotColor: 'tomato',
-            textDayFontFamily: 'Futura-Medium',
-            textMonthFontFamily: 'Futura-Medium',
-            textDayHeaderFontFamily: 'Futura-Light',
-            textDayFontSize: 14,
+            dotColor: '#000',
+            selectedDotColor: '#000',
+            textDayFontFamily: 'Garamond-Bold',
+            textMonthFontFamily: 'Clarendon',
+            textMonthTransform: 'Uppercase',
+            textDayHeaderFontFamily: 'Garamond',
+            textDayHeaderColor: '#2B2B2B',
+            textDayFontSize: 16,
             textMonthFontSize: 24,
             textDayHeaderFontSize: 14
           }}
         />
       </SafeAreaView>
       
-      <View style={{zIndex: 100}}>
+      <View style={{zIndex: 100,}}>
         <View style={styles.eventsOnContainer}>
           { date }
         </View>
       </View>
 
       <View style={{ flex: 1 }}>
-        <ScrollView style={styles.eventListContainer}>
+        <SafeAreaView style={styles.eventListContainer}>
           <FlatList
-            style={{ paddingTop: 25, paddingBottom: 50, flex: 1 }}
+            style={{ paddingTop: 25, flex: 1 }}
             data={eventList[selectedDay]}
             keyExtractor={event => event.id}
+            ListFooterComponent={
+              <View style={{height: 80}}/>
+            }
             renderItem={({ item }) => (
               <View style={styles.item}>
                 <TouchableOpacity style={styles.textIconContainer}
@@ -229,8 +262,8 @@ const CalendarScreen = (props) => {
                   )}>
                   <View style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
                     <View style={styles.eventTimeLoc}>
-                      <Text style={{textAligh: 'center'}}>{item.start}</Text>
-                      <Text style={{textAligh: 'center', color: '#767B82'}}>{item.startstamp}</Text>
+                      <Text style={{textAlign: 'center', justifyContent: 'center', fontFamily: 'Garamond-Bold', fontSize: 16, letterSpacing: 1.6}}>{item.start}</Text>
+                      <Text style={{textAlign: 'center', justifyContent: 'center', color: '#767B82', fontFamily: 'Garamond'}}>{item.startstamp}</Text>
                     </View>
                     <View style={{flexDirection:'row', flexWrap: 'wrap',flexShrink: 1}}>
                       <Text style={[styles.eventSummaryText,]}>{ item.summ }</Text>
@@ -240,7 +273,7 @@ const CalendarScreen = (props) => {
               </View>
             )}
           />
-        </ScrollView>
+        </SafeAreaView>
       </View>
     </View>
   );
@@ -248,12 +281,13 @@ const CalendarScreen = (props) => {
 
 const styles = StyleSheet.create({
   calendar: {
-    paddingBottom: 10
+    paddingBottom: 4,
   },
   eventsOnContainer: {
     alignSelf: 'center',
     zIndex: 100,
     backgroundColor: '#f9f9f9',
+    color: '#2B2B2B',
     padding: 10,
     paddingVertical: 10,
     paddingLeft: 30,
@@ -261,12 +295,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   eventsOnText: {
-    color: '#2B2B2B',
-    fontFamily: 'Futura-Medium',
+    color: '#767B82', 
+    fontSize: 16,
+    fontFamily: 'Garamond',
   },
   selectedDayText: {
-    color: '#686868',
-    fontFamily: 'Futura-Book',
+    color: '#2B2B2B',
+    fontSize: 22,
+    fontFamily: 'Clarendon',
   },
   item: {
     flex: 1,
@@ -295,7 +331,7 @@ const styles = StyleSheet.create({
   },
   eventSummaryText: {
     flexShrink: 1,
-    fontFamily: 'Futura-Medium',
+    fontFamily: 'Clarendon',
     color: '#2B2B2B',
     paddingVertical: 10,
     paddingHorizontal: 10,
@@ -318,10 +354,11 @@ const styles = StyleSheet.create({
     borderRightWidth: 2,
     borderRightColor: '#D4D6D8',
     paddingRight: 5,
+    marginLeft: -10,
     marginRight: 10,
     paddingVertical: 10,
     alignItems: 'center',
-    width: '15%'
+    width: '20%'
   }
 });
 

@@ -67,11 +67,8 @@ export default class ResourcesScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <View style={styles.container}>
-          <View style={styles.resourceHeader}>
-            <Text style={styles.resources}>Encircle Resources</Text>
-          </View>
           {
             <FlatList
               contentContainerStyle={{ margin: 10 }}
@@ -79,6 +76,11 @@ export default class ResourcesScreen extends Component {
               style={styles.flatlist}
               data={this.state.publications}
               keyExtractor={publication => publication.docId}
+              ListHeaderComponent={
+                <View style={styles.resourceHeader}>
+                  <Text style={styles.resources}>Encircle Resources</Text>
+                </View>
+              }
               renderItem={({ item }) => (
                 <View style={styles.item} key={item.docId}>
                   <TouchableOpacity
@@ -111,7 +113,7 @@ export default class ResourcesScreen extends Component {
             />
           }
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -126,13 +128,16 @@ const styles = StyleSheet.create({
   resources: {
     fontSize: 34,
     marginBottom: '20%',
-    marginTop: '30%',
+    marginTop: '25%',
     textAlign: "center",
     color: "#fff",
     fontFamily: 'Clarendon',
   },
   resourceHeader: {
-    backgroundColor: '#000'
+    backgroundColor: '#767B82',
+    width: '110%',
+    marginLeft: '-5%',
+    top: -20,
   },
   paragraph: {
     fontSize: 20,
