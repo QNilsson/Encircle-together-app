@@ -1,6 +1,7 @@
 import React from "react";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { MenuProvider } from "react-native-popup-menu";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import GeneralStatusBarColor from "./components/GeneralStatusBarColor";
@@ -37,8 +38,13 @@ export default function App() {
   componentDidMount();
   return (
     <Provider store={store}>
-      <GeneralStatusBarColor backgroundColor="black" barStyle="light-content" />
-      <AppNavigator />
+      <MenuProvider>
+        <GeneralStatusBarColor
+          backgroundColor="black"
+          barStyle="light-content"
+        />
+        <AppNavigator />
+      </MenuProvider>
     </Provider>
   );
 }
