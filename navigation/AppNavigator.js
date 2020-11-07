@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Ionicons } from "@expo/vector-icons";
+import Icon from "../constants/Icon";
 
 import Dashboard from "../screens/Dashboard";
 import EncircleLiveScreen from "../screens/EncircleLiveScreen";
@@ -68,7 +69,7 @@ const AppNavigator = createBottomTabNavigator(
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         // const styles = useDynamicStyleSheet(DynamicStyles); //dark mode
-        let IconComponent = Ionicons;
+        let IconComponent = Icon;
         let iconName;
 
         // sets tab icon based on values in AppNavigator
@@ -92,7 +93,7 @@ const AppNavigator = createBottomTabNavigator(
           <IconComponent
             // sets icon based on platform
             // style={styles.container} //dark mode
-            name={Platform.OS === "ios" ? "ios-" + iconName : "md-" + iconName}
+            name={iconName}
             size={25}
             color={tintColor}
           />

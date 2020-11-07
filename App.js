@@ -3,6 +3,7 @@ import React from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { MenuProvider } from "react-native-popup-menu";
 import { Provider } from "react-redux";
+import { MenuProvider } from "react-native-popup-menu";
 import ReduxThunk from "redux-thunk";
 import GeneralStatusBarColor from "./components/GeneralStatusBarColor";
 
@@ -28,6 +29,7 @@ const componentDidMount = () => {
     "Futura-Book": require("./assets/fonts/Futura-Book.ttf"),
     "Futura-Medium": require("./assets/fonts/Futura-Medium.ttf"),
     "Futura-Bold": require("./assets/fonts/Futura-Bold.ttf"),
+    "nav-icons": require("./assets/fonts/navicon.ttf"),
   });
 };
 
