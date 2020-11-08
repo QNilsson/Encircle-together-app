@@ -15,19 +15,14 @@ const Card = props => {
     month = null;
   }
 
-  
-
-  let time = props.start
-  // const hour = time.split ('-')[0];
   return (
     <View style={styles.card}>
       <View style={styles.dateBox}>
-        <View><span className={styles.dateBox}>{time}</span><span className={styles.dateBox}>{time}</span> </View>
-
+        <View><span className={styles.dateBoxText}>{props.time}</span><span className={styles.dateBox}>{props.time}</span> </View>
       </View>
       <View style={styles.textBox}>
-
         <Text style={styles.summary} numberOfLines={2}>{props.summary}</Text>
+        
       </View>
     </View>
   );
@@ -67,7 +62,11 @@ const styles = StyleSheet.create ({
     justifyContent: 'center',
     textAlign:'center',
     margin:'auto',
-    padding:6
+    padding:6,
+    color:'red'
+  },
+  dateBoxText:{
+    color:'black'
   },
 
   time: {

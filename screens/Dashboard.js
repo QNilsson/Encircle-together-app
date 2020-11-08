@@ -22,7 +22,7 @@ import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
-import Calendar from '../screens/Calendar';
+
 
 const Dashboard = props => {
   // pulls set location from store (provo default)
@@ -33,7 +33,36 @@ const Dashboard = props => {
   let resources = useSelector (state => state.resources.resources);
 
   const dispatch = useDispatch ();
+  events.forEach(e => {
+  const timeConversion = (x) => {
+    let output = []
+    x = x.split(':')
+    if (Number(x[0]) == 24) {
+      x[0] = '12'
+      output.push((x[0]+':'+x[1]))
+      output.push('AM')
+    } else if (Number(x[0]) == 12) {
+      output.push((x[0]+':'+x[1]))
+      output.push('PM')
+    } else if (Number(x[0]) > 12) {
+      x[0] = Number(x[0]) - 12
+      x[0] = x[0].toString()
+      output.push((x[0]+':'+x[1]))
+      output.push('PM')
+    } else {
+      output.push((x[0]+':'+x[1]))
+      output.push('AM')
+    }
+    return output
+  }
 
+  let timeStart = timeConversion(e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5))
+  let timeEnd = timeConversion(e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5))
+  let timeStampStart = timeStart[1]
+  let timeStampEnd = timeEnd[1]
+  timeStart = timeStart[0]
+  timeEnd = timeEnd[0]
+})
   
 //prepare to get month names
   const monthNames = [
@@ -74,11 +103,12 @@ const Dashboard = props => {
           <DashboardWelcome />
         </SafeAreaView>
         <View style={styles.container}>
-          <View style={styles.eventContainter}>
-            <Text style={styles.todayDate}>
+        <Text style={styles.todayDate}>
               {today}
              
             </Text>
+          <View style={styles.eventContainter}>
+            
 
             {events.map (event => (
               <TouchableOpacity
@@ -87,10 +117,10 @@ const Dashboard = props => {
                   props.navigation.navigate ('Event', {
                     id: event.id,
                     summ: event.summary,
-                    start: event.start,
+                    start: event.timeStart,
                     end: event.end,
                     loc: event.location,
-                    desc: event.description,
+                   
                   })}
               >
 
@@ -99,6 +129,7 @@ const Dashboard = props => {
                   key={event.id}
                   time={event.start}
                   summary={event.summary}
+                 
                 />
               </TouchableOpacity>
             ))}
@@ -172,6 +203,7 @@ const styles = StyleSheet.create ({
   },
   event: {
     marginBottom: 12,
+ 
   },
   calendarButton: {
     display: 'flex',
