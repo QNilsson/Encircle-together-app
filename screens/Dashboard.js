@@ -1,7 +1,14 @@
-import React, { useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
 
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 // imports card component - styled event containers
 import Card from '../components/Card';
 // imports resource component - styled resource containers
@@ -9,7 +16,7 @@ import Resource from '../components/Resource';
 // imports dashboard welcome component - styled header container
 import DashboardWelcome from '../components/DashboardWelcome';
 // imports expo icons
-import { Ionicons } from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 // imports store actions to dispatch
 import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
@@ -17,71 +24,119 @@ import * as resourceActions from '../store/actions/Resource';
 
 import Calendar from '../screens/Calendar';
 
-const Dashboard = (props) => {
+const Dashboard = props => {
   // pulls set location from store (provo default)
-  let location = useSelector(state => state.events.location);
+  let location = useSelector (state => state.events.location);
   // pulls events from store (based on selected location)
-  let events = useSelector(state => state.events.todaysEvents);
+  let events = useSelector (state => state.events.todaysEvents);
   // pulls resources from store
-  let resources = useSelector(state => state.resources.resources);
+  let resources = useSelector (state => state.resources.resources);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch ();
+
+  
+//prepare to get month names
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  // sets date to today
+  let today = new Date ();
+  let dd = String (today.getDate ()).padStart (2, '0');
+  let mm = monthNames[today.getMonth()].toUpperCase();
+  let yyyy = today.getFullYear ();
+  today = mm + ' ' + dd + ', ' + yyyy;
 
   // updates component when a new location is selected - loads resources from issuu api
-  useEffect(() => {
-    dispatch(eventActions.fetchTodaysEvents(location));
-    dispatch(resourceActions.fetchResources());
-  }, [dispatch]);
+  useEffect (
+    () => {
+      dispatch (eventActions.fetchTodaysEvents (location));
+      dispatch (resourceActions.fetchResources ());
+    },
+    [dispatch]
+  );
 
   return (
-      <ScrollView style={{ flex: 1 }}>
-        <View style={styles.mainContainer}>
+    <ScrollView style={{flex: 1}}>
+      <View style={styles.mainContainer}>
         <SafeAreaView>
           <DashboardWelcome />
         </SafeAreaView>
-          <View style={styles.container}>
-            <View style={styles.eventContainter}>
-              <Text style={styles.location}>LATER TODAY IN <Text style={styles.locationText}>{location.toUpperCase()}</Text></Text>
-              
-              {events.map(event => 
-              <TouchableOpacity style={styles.eventBox} onPress={() => props.navigation.navigate('Event',
-              {
-                id: event.id,
-                summ: event.summary,
-                start: event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5),
-                end: event.end__dateTime.split ('T')[1].split ('-')[0].slice (0, 5),
-                loc: event.location,
-                desc: event.description
-              })}>
-                 
-                
-              <Card style={styles.event} key={event.id} time={event.start__dateTime} summary={event.summary}></Card></TouchableOpacity> )}
-              
-            </View>
-            
-            <TouchableOpacity
-              style={styles.calendarButton}
-              onPress={() => props.navigation.navigate('Calendar')}>
-              <Text style={styles.buttonText}>FULL CALENDAR</Text>
-              <Ionicons name="ios-arrow-round-forward" size={45} style={styles.arrowIcon} />
-            </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.eventContainter}>
+            <Text style={styles.todayDate}>
+              {today}
+             
+            </Text>
+
+            {events.map (event => (
+              <TouchableOpacity
+                style={styles.eventBox}
+                onPress={() =>
+                  props.navigation.navigate ('Event', {
+                    id: event.id,
+                    summ: event.summary,
+                    start: event.start,
+                    end: event.end,
+                    loc: event.location,
+                    desc: event.description,
+                  })}
+              >
+
+                <Card
+                  style={styles.event}
+                  key={event.id}
+                  time={event.start}
+                  summary={event.summary}
+                />
+              </TouchableOpacity>
+            ))}
+
           </View>
 
-          <View style={styles.container}>
-            <View style={styles.publicationContainter}>
+          <TouchableOpacity
+            style={styles.calendarButton}
+            onPress={() => props.navigation.navigate ('Calendar')}
+          >
+            <Text style={styles.buttonText}>See Full Calendar</Text>
+
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.container}>
+          <View style={styles.publicationContainter}>
             <Text style={styles.resourcesHeading}>POPULAR RESOURCES</Text>
-              <ScrollView horizontal={true}>
-                {resources.map(resource => <Resource key={resource.docId} id={resource.docId} name={resource.name} title={resource.title} navigation={props.navigation} />)}
-              </ScrollView>
-            </View>
+            <ScrollView horizontal={true}>
+              {resources.map (resource => (
+                <Resource
+                  key={resource.docId}
+                  id={resource.docId}
+                  name={resource.name}
+                  title={resource.title}
+                  navigation={props.navigation}
+                />
+              ))}
+            </ScrollView>
           </View>
         </View>
-        <View style={{height: 125, backgroundColor: '#f2f2f2'}}></View>
-      </ScrollView>
+      </View>
+      <View style={{height: 125, backgroundColor: '#f2f2f2'}} />
+    </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create ({
   mainContainer: {
     backgroundColor: '#F2F2F2',
     flex: 1,
@@ -89,55 +144,65 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   eventContainter: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  location: {
-    color: '#2B2B2B',
-    fontSize: 16,
+  todayDate: {
+    color: '#222222',
+    fontSize: 28,
     fontWeight: '600',
-    marginBottom: 15
+    marginBottom: 15,
+    fontFamily:'clarendon'
   },
   locationText: {
-    color: '#686868'
+    color: '#686868',
   },
   resourcesHeading: {
     alignSelf: 'flex-start',
-    color: '#2B2B2B',
+    color: '#b6acab',
     fontSize: 16,
+    letterSpacing:2,
     fontWeight: '600',
     marginBottom: 15,
-    paddingLeft: 12
+    paddingLeft: 12,
+    fontFamily:'Garamond'
   },
   event: {
-    marginBottom: 12
+    marginBottom: 12,
   },
   calendarButton: {
     display: 'flex',
     flexDirection: 'row',
-    padding: 8,
+    padding: 4,
     paddingRight: 30,
     paddingLeft: 30,
+    borderRadius: 10,
     backgroundColor: 'black',
     minWidth: 250,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
+    height: 50,
     textAlign: 'center',
-    marginTop:5
+    marginTop: 20,
+    shadowColor: '#b6acab',
+    shadowOffset: {
+      width:5, height:4
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: blur / 8.0,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
-    fontFamily:'Din'
+    fontSize: 22,
+    fontFamily: 'din-bold',
   },
   arrowIcon: {
     color: 'white',
     marginLeft: 'auto',
-    fontWeight: '700'
+    fontWeight: '700',
   },
   publicationContainter: {
     flex: 1,
@@ -145,14 +210,15 @@ const styles = StyleSheet.create({
     marginTop: 40,
     paddingBottom: 30,
     paddingTop: 30,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    fontFamily:'Garamond'
   },
-  eventBox:{
-    width:500,
-    height:90,
-    margin:'auto',
-    marginLeft:120,
-  }
+  eventBox: {
+    width: 500,
+    height: 90,
+    margin: 'auto',
+    marginLeft: 120,
+  },
 });
 
 export default Dashboard;
