@@ -1,10 +1,10 @@
 import React from "react";
-import { Platform } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Ionicons } from "@expo/vector-icons";
-import Icon from "../constants/Icon";
+import CustomIcon from "../constants/Icon";
 
 import Dashboard from "../screens/Dashboard";
 import EncircleLiveScreen from "../screens/EncircleLiveScreen";
@@ -68,21 +68,19 @@ const AppNavigator = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        // const styles = useDynamicStyleSheet(DynamicStyles); //dark mode
-        let IconComponent = Icon;
         let iconName;
 
         // sets tab icon based on values in AppNavigator
         if (routeName === "Dashboard") {
-          iconName = focused ? "home" : "home";
+          iconName = focused ? "Home" : "Home";
         } else if (routeName === "Calendar") {
-          iconName = focused ? "calendar" : "calendar";
+          iconName = focused ? "Calendar" : "Calendar";
         } else if (routeName === "Resources") {
-          iconName = focused ? "book" : "book";
+          iconName = focused ? "Book" : "Book";
         } else if (routeName === "EncircleLive") {
-          iconName = focused ? "analytics" : "analytics";
+          iconName = focused ? "Analytics" : "Analytics";
         } else if (routeName === "More") {
-          iconName = focused ? "more" : "more";
+          iconName = focused ? "More" : "More";
         } else if (routeName === "Donate") {
           iconName = focused ? "gift" : "gift";
         } else if (routeName === "Shop") {
@@ -90,13 +88,9 @@ const AppNavigator = createBottomTabNavigator(
         }
 
         return (
-          <IconComponent
-            // sets icon based on platform
-            // style={styles.container} //dark mode
-            name={iconName}
-            size={25}
-            color={tintColor}
-          />
+          <TouchableOpacity>
+            <CustomIcon style={styles.icon} name={iconName} />
+          </TouchableOpacity>
         );
       },
     }),
@@ -118,5 +112,11 @@ const AppNavigator = createBottomTabNavigator(
     },
   }
 );
+
+const styles = StyleSheet.create({
+  icon: {
+    color: "red",
+  },
+});
 
 export default createAppContainer(AppNavigator);

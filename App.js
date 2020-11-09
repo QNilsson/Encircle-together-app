@@ -3,7 +3,6 @@ import React from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { MenuProvider } from "react-native-popup-menu";
 import { Provider } from "react-redux";
-import { MenuProvider } from "react-native-popup-menu";
 import ReduxThunk from "redux-thunk";
 import GeneralStatusBarColor from "./components/GeneralStatusBarColor";
 
