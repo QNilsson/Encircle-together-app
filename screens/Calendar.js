@@ -242,7 +242,10 @@ const CalendarScreen = (props) => {
             data={eventList[selectedDay]}
             keyExtractor={event => event.id}
             ListFooterComponent={
-              <View style={{height: 80}}/>
+              <View style={{height: 22}}/>
+            }
+            ListHeaderComponent={
+              <View style={{height: 10}}/>
             }
             renderItem={({ item }) => (
               <View style={styles.item}>
@@ -347,7 +350,6 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     height: '100%',
     marginTop: 15,
-    marginBottom: 50
   },
   eventTimeLoc: {
     borderStyle: 'solid',

@@ -1,18 +1,37 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView, SafeAreaView, Dimensions, Linking } from 'react-native';
 
 // imports expo icons
 import { Ionicons } from '@expo/vector-icons';
+
+import HTML from "react-native-render-html";
 
 const EventScreen = (props) => {
   // recieved event parameters sent from calendar screen
   const id = props.navigation.getParam('id');
   const summ = props.navigation.getParam('summ');
   const start = props.navigation.getParam('start');
+  const startstamp = props.navigation.getParam('startstamp');
   const end = props.navigation.getParam('end');
+  const endstamp = props.navigation.getParam('endstamp');
   const loc = props.navigation.getParam('loc');
   const desc = props.navigation.getParam('desc');
   const day = props.navigation.getParam('day');
+
+  // Function to ensure zoom links are properly anchored
+  const urlify = (text) => {
+      var urlRegex = /( https?:\/\/[^\s | <]+)/g;
+      return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+      })
+    }
+
+  let html = desc
+  if(html == undefined) {
+    html = ''
+  }
+  html = urlify(html);
+  html = '<div style="color:#2B2B2B; font-family: Futura-Book; margin-bottom: 120px;">'+html+'</div>'
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -26,7 +45,7 @@ const EventScreen = (props) => {
             <Text style={styles.buttonText}>BACK TO EVENTS</Text>
           </TouchableOpacity>
         </View>
-        <ScrollView style={{ marginBottom: 70, paddingBottom: 70 }}>
+        <ScrollView style={{ marginBottom: 20, paddingBottom: 20 }}>
           <View style={styles.container}>
             {/* <Text>{id}</Text> */}
             <Text style={styles.title}>{summ}</Text>
@@ -37,11 +56,15 @@ const EventScreen = (props) => {
             </View>
 
             <View style={styles.iconContainer}>
-              <Ionicons name="md-clock" size={25} style={styles.arrowIcon} />
-              <Text style={styles.time}>{day} | {start} - {end}</Text>
+              <Ionicons name="ios-time" size={25} style={styles.arrowIcon} />
+              <Text style={styles.time}>{day} | {start}{startstamp} - {end}{endstamp}</Text>
             </View>
-
-            <Text style={styles.description}>{desc}</Text>
+        
+            <HTML 
+              html={html}
+              onLinkPress={ (evt, href) => { Linking.openURL(href); }}
+              imagesMaxWidth={Dimensions.get("window").width}
+            />
           </View>
         </ScrollView>
       </View>
@@ -72,9 +95,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#2B2B2B',
     fontSize: 16,
-    fontFamily: 'Futura-Book',
-    marginLeft: '15%',
-    fontWeight: '700'
+    fontFamily: 'Clarendon',
+    marginLeft: '5%',
   },
   arrowIcon: {
     color: '#2B2B2B',
@@ -98,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'left',
     color: '#2B2B2B',
-    fontFamily: 'Futura-Book',
+    fontFamily: 'Garamond',
     marginTop: 15
   },
   iconContainer: {
@@ -112,19 +134,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'left',
     color: '#2B2B2B',
-    fontFamily: 'Futura-Book',
+    fontFamily: 'Din',
     marginLeft: '5%'
   },
   time: {
     fontSize: 15,
     textAlign: 'left',
     color: '#2B2B2B',
-    fontFamily: 'Futura-Book',
+    fontFamily: 'Garamond',
     marginLeft: '5%'
   },
   description: {
-   
-    fontFamily: 'Futura-Book',
+    color: '#2B2B2B',
+    fontFamily: 'Din',
     fontSize: 20,
     marginBottom: 70
   }
