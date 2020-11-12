@@ -18,7 +18,7 @@ const Card = props => {
   return (
     <View style={styles.card}>
       <View style={styles.dateBox}>
-        <View><span className={styles.dateBoxText}>{props.time}</span><span className={styles.dateBox}>{props.time}</span> </View>
+        <View><span className={styles.dateBoxText}>{props.start}</span> </View>
       </View>
       <View style={styles.textBox}>
         <Text style={styles.summary} numberOfLines={2}>{props.summary}</Text>
@@ -63,7 +63,8 @@ const styles = StyleSheet.create ({
     textAlign:'center',
     margin:'auto',
     padding:6,
-    color:'red'
+    fontFamily:'Garamond-bold'
+    
   },
   dateBoxText:{
     color:'black'

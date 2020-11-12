@@ -22,8 +22,6 @@ import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
-
-
 const Dashboard = props => {
   // pulls set location from store (provo default)
   let location = useSelector (state => state.events.location);
@@ -33,38 +31,8 @@ const Dashboard = props => {
   let resources = useSelector (state => state.resources.resources);
 
   const dispatch = useDispatch ();
-  events.forEach(e => {
-  const timeConversion = (x) => {
-    let output = []
-    x = x.split(':')
-    if (Number(x[0]) == 24) {
-      x[0] = '12'
-      output.push((x[0]+':'+x[1]))
-      output.push('AM')
-    } else if (Number(x[0]) == 12) {
-      output.push((x[0]+':'+x[1]))
-      output.push('PM')
-    } else if (Number(x[0]) > 12) {
-      x[0] = Number(x[0]) - 12
-      x[0] = x[0].toString()
-      output.push((x[0]+':'+x[1]))
-      output.push('PM')
-    } else {
-      output.push((x[0]+':'+x[1]))
-      output.push('AM')
-    }
-    return output
-  }
 
-  let timeStart = timeConversion(e.start__dateTime.split('T')[1].split('-')[0].slice(0, 5))
-  let timeEnd = timeConversion(e.end__dateTime.split('T')[1].split('-')[0].slice(0, 5))
-  let timeStampStart = timeStart[1]
-  let timeStampEnd = timeEnd[1]
-  timeStart = timeStart[0]
-  timeEnd = timeEnd[0]
-})
-  
-//prepare to get month names
+  //prepare to get month names
   const monthNames = [
     'January',
     'February',
@@ -83,9 +51,34 @@ const Dashboard = props => {
   // sets date to today
   let today = new Date ();
   let dd = String (today.getDate ()).padStart (2, '0');
-  let mm = monthNames[today.getMonth()].toUpperCase();
+  let mm = monthNames[today.getMonth ()].toUpperCase ();
   let yyyy = today.getFullYear ();
   today = mm + ' ' + dd + ', ' + yyyy;
+
+  //trying to get correct time
+  const timeConversion = x => {
+    let output = [];
+    x = x.split (':');
+    if (Number (x[0]) == 24) {
+      x[0] = '12';
+      output.push (x[0] + ':' + x[1]);
+      output.push ('AM');
+    } else if (Number (x[0]) == 12) {
+      output.push (x[0] + ':' + x[1]);
+      output.push ('PM');
+    } else if (Number (x[0]) > 12) {
+      x[0] = Number (x[0]) - 12;
+      x[0] = x[0].toString ();
+      output.push (x[0] + ':' + x[1]);
+      output.push ('PM');
+    } else {
+      output.push (x[0] + ':' + x[1]);
+      output.push ('AM');
+    }
+    return output;
+  };
+
+ 
 
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
@@ -103,33 +96,31 @@ const Dashboard = props => {
           <DashboardWelcome />
         </SafeAreaView>
         <View style={styles.container}>
-        <Text style={styles.todayDate}>
-              {today}
-             
-            </Text>
+          <Text style={styles.todayDate}>
+            {today}
+
+          </Text>
           <View style={styles.eventContainter}>
-            
 
             {events.map (event => (
               <TouchableOpacity
-                style={styles.eventBox}
                 onPress={() =>
                   props.navigation.navigate ('Event', {
                     id: event.id,
                     summ: event.summary,
-                    start: event.timeStart,
-                    end: event.end,
+                    start: timeConversion(event.start__dateTime.split('T')[1].split('-')[0].slice(0, 5)),
+                    // startstamp: event.startstamp,
+                    end: timeConversion(event.end__dateTime.split('T')[1].split('-')[0].slice(0, 5)),
+                    // endstamp: event.endstamp,
                     loc: event.location,
-                   
+                    desc: event.description,
                   })}
               >
-
                 <Card
                   style={styles.event}
                   key={event.id}
-                  time={event.start}
+                  start={timeConversion(event.start__dateTime.split('T')[1].split('-')[0].slice(0,5))}
                   summary={event.summary}
-                 
                 />
               </TouchableOpacity>
             ))}
@@ -186,7 +177,7 @@ const styles = StyleSheet.create ({
     fontSize: 28,
     fontWeight: '600',
     marginBottom: 15,
-    fontFamily:'clarendon'
+    fontFamily: 'clarendon',
   },
   locationText: {
     color: '#686868',
@@ -195,15 +186,14 @@ const styles = StyleSheet.create ({
     alignSelf: 'flex-start',
     color: '#b6acab',
     fontSize: 16,
-    letterSpacing:2,
+    letterSpacing: 2,
     fontWeight: '600',
     marginBottom: 15,
     paddingLeft: 12,
-    fontFamily:'Garamond'
+    fontFamily: 'Garamond',
   },
   event: {
     marginBottom: 12,
- 
   },
   calendarButton: {
     display: 'flex',
@@ -221,7 +211,8 @@ const styles = StyleSheet.create ({
     marginTop: 20,
     shadowColor: '#b6acab',
     shadowOffset: {
-      width:5, height:4
+      width: 5,
+      height: 4,
     },
     shadowOpacity: 0.3,
     shadowRadius: blur / 8.0,
@@ -243,7 +234,7 @@ const styles = StyleSheet.create ({
     paddingBottom: 30,
     paddingTop: 30,
     marginHorizontal: 10,
-    fontFamily:'Garamond'
+    fontFamily: 'Garamond',
   },
   eventBox: {
     width: 500,
