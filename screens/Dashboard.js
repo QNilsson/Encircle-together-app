@@ -51,34 +51,51 @@ const Dashboard = props => {
   // sets date to today
   let today = new Date ();
   let dd = String (today.getDate ()).padStart (2, '0');
-  let mm = monthNames[today.getMonth ()].toUpperCase ();
+  let mm = String (today.getMonth () + 1).padStart (2, '0');
+  let monthName = monthNames[today.getMonth ()].toUpperCase ();
   let yyyy = today.getFullYear ();
   today = mm + ' ' + dd + ', ' + yyyy;
+  let todayName = monthName + ' ' + dd + ',' + ' ' + yyyy;
 
   //trying to get correct time
-  const timeConversion = x => {
-    let output = [];
-    x = x.split (':');
-    if (Number (x[0]) == 24) {
-      x[0] = '12';
-      output.push (x[0] + ':' + x[1]);
-      output.push ('AM');
-    } else if (Number (x[0]) == 12) {
-      output.push (x[0] + ':' + x[1]);
-      output.push ('PM');
-    } else if (Number (x[0]) > 12) {
-      x[0] = Number (x[0]) - 12;
-      x[0] = x[0].toString ();
-      output.push (x[0] + ':' + x[1]);
-      output.push ('PM');
-    } else {
-      output.push (x[0] + ':' + x[1]);
-      output.push ('AM');
-    }
-    return output;
-  };
 
- 
+  {
+    events.map (event => {
+      let strTime = event.start__dateTime.split ('T')[0];
+      const timeConversion = x => {
+        let output = [];
+        x = x.split (':');
+        if (Number (x[0]) == 24) {
+          x[0] = '12';
+          output.push (x[0] + ':' + x[1]);
+          output.push ('AM');
+        } else if (Number (x[0]) == 12) {
+          output.push (x[0] + ':' + x[1]);
+          output.push ('PM');
+        } else if (Number (x[0]) > 12) {
+          x[0] = Number (x[0]) - 12;
+          x[0] = x[0].toString ();
+          output.push (x[0] + ':' + x[1]);
+          output.push ('PM');
+        } else {
+          output.push (x[0] + ':' + x[1]);
+          output.push ('AM');
+        }
+        return output;
+      };
+
+      let timeStart = timeConversion (
+        event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
+      );
+      let timeEnd = timeConversion (
+        event.end__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
+      );
+      let timeStampStart = timeStart[1];
+      let timeStampEnd = timeEnd[1];
+      timeStart = timeStart[0];
+      timeEnd = timeEnd[0];
+    });
+  }
 
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
@@ -96,10 +113,12 @@ const Dashboard = props => {
           <DashboardWelcome />
         </SafeAreaView>
         <View style={styles.container}>
-          <Text style={styles.todayDate}>
-            {today}
+          <View style={styles.dateContain}>
+            <Text style={styles.todayDate}>
+              {todayName}
 
-          </Text>
+            </Text>
+          </View>
           <View style={styles.eventContainter}>
 
             {events.map (event => (
@@ -108,10 +127,10 @@ const Dashboard = props => {
                   props.navigation.navigate ('Event', {
                     id: event.id,
                     summ: event.summary,
-                    start: timeConversion(event.start__dateTime.split('T')[1].split('-')[0].slice(0, 5)),
-                    // startstamp: event.startstamp,
-                    end: timeConversion(event.end__dateTime.split('T')[1].split('-')[0].slice(0, 5)),
-                    // endstamp: event.endstamp,
+                    start: event.timeStart,
+                    startstamp: event.timeStampStart,
+                    end: event.timeEnd,
+                    endstamp: event.timeStampEnd,
                     loc: event.location,
                     desc: event.description,
                   })}
@@ -119,7 +138,9 @@ const Dashboard = props => {
                 <Card
                   style={styles.event}
                   key={event.id}
-                  start={timeConversion(event.start__dateTime.split('T')[1].split('-')[0].slice(0,5))}
+                  start={event.start}
+                  stamp={event.startstamp}
+                  // start={timeConversion(event.start__dateTime.split('T')[1].split('-')[0].slice(0,5))}
                   summary={event.summary}
                 />
               </TouchableOpacity>
@@ -168,6 +189,10 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  dateContain: {
+    flex: 1,
+    alignItems: 'left',
+  },
   eventContainter: {
     flex: 1,
     alignItems: 'center',
@@ -177,7 +202,8 @@ const styles = StyleSheet.create ({
     fontSize: 28,
     fontWeight: '600',
     marginBottom: 15,
-    fontFamily: 'clarendon',
+    marginRight: 85,
+    fontFamily: 'Clarendon',
   },
   locationText: {
     color: '#686868',
@@ -215,7 +241,6 @@ const styles = StyleSheet.create ({
       height: 4,
     },
     shadowOpacity: 0.3,
-    shadowRadius: blur / 8.0,
   },
   buttonText: {
     color: 'white',

@@ -18,10 +18,11 @@ const Card = props => {
   return (
     <View style={styles.card}>
       <View style={styles.dateBox}>
-        <View><span className={styles.dateBoxText}>{props.start}</span> </View>
+        <View><span className={styles.dateBoxText}>{props.start}</span><span className={styles.dateBoxText}>{props.stamp}</span> </View>
       </View>
       <View style={styles.textBox}>
         <Text style={styles.summary} numberOfLines={2}>{props.summary}</Text>
+      
         
       </View>
     </View>
