@@ -189,19 +189,21 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  dateContain: {
-    flex: 1,
-    alignItems: 'left',
-  },
+  // dateContain: {
+  //   flex: 1,
+  //   alignItems: 'flex-start',
+  // },
   eventContainter: {
     flex: 1,
     alignItems: 'center',
+    marginBottom:220
   },
   todayDate: {
     color: '#222222',
     fontSize: 28,
     fontWeight: '600',
-    marginBottom: 15,
+    marginBottom: 25,
+    marginTop: 25,
     marginRight: 85,
     fontFamily: 'Clarendon',
   },
@@ -245,7 +247,7 @@ const styles = StyleSheet.create ({
   buttonText: {
     color: 'white',
     fontSize: 22,
-    fontFamily: 'din-bold',
+    fontFamily: 'Din-Bold',
   },
   arrowIcon: {
     color: 'white',
@@ -255,7 +257,7 @@ const styles = StyleSheet.create ({
   publicationContainter: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 30,
     paddingBottom: 30,
     paddingTop: 30,
     marginHorizontal: 10,
