@@ -17,12 +17,12 @@ const Card = props => {
       output.push('AM')
     } else if (Number(x[0]) == 12) {
       output.push((x[0]+':'+x[1]))
-      output.push('PM')
+      output.push('        PM')
     } else if (Number(x[0]) > 12) {
       x[0] = Number(x[0]) - 12
       x[0] = x[0].toString()
       output.push((x[0]+':'+x[1]))
-      output.push('PM')
+      output.push('        PM')
     } else {
       output.push((x[0]+':'+x[1]))
       output.push('AM')
