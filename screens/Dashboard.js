@@ -59,9 +59,9 @@ const Dashboard = props => {
 
   //trying to get correct time
 
-  {
-    events.forEach(event => {
-      let strTime = event.start__dateTime.split ('T')[0];
+  
+    
+      
       const timeConversion = x => {
         let output = [];
         x = x.split (':');
@@ -84,20 +84,20 @@ const Dashboard = props => {
         return output;
       };
 
-      let timeStart = timeConversion (
-        event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
-      );
-      let timeEnd = timeConversion (
-        event.end__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
-      );
-      let timeStampStart = timeStart[1];
-      let timeStampEnd = timeEnd[1];
-      timeStart = timeStart[0];
-      timeEnd = timeEnd[0];
+      // let timeStart = timeConversion (
+      //   event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
+      // );
+      // let timeEnd = timeConversion (
+      //   event.end__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
+      // );
+      // let timeStampStart = timeStart[1];
+      // let timeStampEnd = timeEnd[1];
+      // let timeStart = timeStart[0];
+      // let timeEnd = timeEnd[0];
 
       
-    });
-  }
+    
+  
 
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
@@ -125,19 +125,20 @@ const Dashboard = props => {
 
             {events.map (event => (
               
+              
+                
               <TouchableOpacity
-                onPress={() =>
-                  props.navigation.navigate ('Event', {
-                    id: event.id,
-                    summ: event.summary,
-                   
-                    start: event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5),
-                    end: event.end__dateTime.split('T')[1].split ('-')[0].slice (0, 5),
-                    // endstamp: event.timeStampEnd,
-                    loc: event.location,
-                    desc: event.description,
-                  })}
-              >
+              onPress={() =>
+                props.navigation.navigate ('Event', {
+                  id: event.id,
+                  summ: event.summary,
+                 
+                  start: timeConversion(event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)),
+                  end: timeConversion(event.end__dateTime.split('T')[1].split ('-')[0].slice (0, 5)),
+                  // endstamp: event.timeStampEnd,
+                  loc: event.location,
+                  desc: event.description,
+                })}>
                 <Card
                   style={styles.event}
                   key={event.id}
@@ -179,8 +180,8 @@ const Dashboard = props => {
       </View>
       <View style={{height: 125, backgroundColor: '#f2f2f2'}} />
     </ScrollView>
-  );
-};
+  )};
+
 
 const styles = StyleSheet.create ({
   mainContainer: {
