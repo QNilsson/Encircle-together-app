@@ -60,7 +60,7 @@ const Dashboard = props => {
   //trying to get correct time
 
   {
-    events.map (event => {
+    events.forEach(event => {
       let strTime = event.start__dateTime.split ('T')[0];
       const timeConversion = x => {
         let output = [];
@@ -94,6 +94,8 @@ const Dashboard = props => {
       let timeStampEnd = timeEnd[1];
       timeStart = timeStart[0];
       timeEnd = timeEnd[0];
+
+      
     });
   }
 
@@ -122,15 +124,16 @@ const Dashboard = props => {
           <View style={styles.eventContainter}>
 
             {events.map (event => (
+              
               <TouchableOpacity
                 onPress={() =>
                   props.navigation.navigate ('Event', {
                     id: event.id,
                     summ: event.summary,
-                    start: event.timeStart,
-                    startstamp: event.timeStampStart,
-                    end: event.timeEnd,
-                    endstamp: event.timeStampEnd,
+                   
+                    start: event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5),
+                    end: event.end__dateTime.split('T')[1].split ('-')[0].slice (0, 5),
+                    // endstamp: event.timeStampEnd,
                     loc: event.location,
                     desc: event.description,
                   })}
@@ -138,9 +141,9 @@ const Dashboard = props => {
                 <Card
                   style={styles.event}
                   key={event.id}
-                  start={event.start}
-                  stamp={event.startstamp}
-                  // start={timeConversion(event.start__dateTime.split('T')[1].split('-')[0].slice(0,5))}
+                 start={event.start__dateTime.split('T')[1].split ('-')[0].slice (0,5)}
+                  end={event.end__dateTime.split('T')[1].split ('-')[0].slice(0,5)}
+                 
                   summary={event.summary}
                 />
               </TouchableOpacity>
@@ -261,7 +264,7 @@ const styles = StyleSheet.create ({
     paddingBottom: 30,
     paddingTop: 30,
     marginHorizontal: 10,
-    fontFamily: 'Garamond',
+    fontFamily: 'Din-Bold',
   },
   eventBox: {
     width: 500,

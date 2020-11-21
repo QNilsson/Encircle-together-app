@@ -8,6 +8,32 @@ const Card = props => {
   const dd = String (today.getDate ()).padStart (2, '0');
   today = dd;
 
+   const timeConversion = (x) => {
+    let output = []
+    x = x.split(':')
+    if (Number(x[0]) == 24) {
+      x[0] = '12'
+      output.push((x[0]+':'+x[1]))
+      output.push('AM')
+    } else if (Number(x[0]) == 12) {
+      output.push((x[0]+':'+x[1]))
+      output.push('PM')
+    } else if (Number(x[0]) > 12) {
+      x[0] = Number(x[0]) - 12
+      x[0] = x[0].toString()
+      output.push((x[0]+':'+x[1]))
+      output.push('PM')
+    } else {
+      output.push((x[0]+':'+x[1]))
+      output.push('AM')
+    }
+    return output
+  }
+
+  
+
+
+
   // As of April 2020, toLocaleDateString doesn't work on android. So for now I just removed the month from the card on android.
   if (Platform.OS === 'ios') {
     month = new Date ().toLocaleDateString ('en-US', {month: 'short'});
@@ -18,14 +44,14 @@ const Card = props => {
   return (
     <View style={styles.card}>
       <View style={styles.timeBox}>
-       
         <View>
-          <Text className={styles.timeBoxText} numberOfLines={2}>4:30 pm</Text>
+          <Text style={styles.timeBoxText} numberOfLines={2}>{timeConversion(props.start)}</Text>
         
         </View>
       </View>
       <View style={styles.textBox}>
-        <Text style={styles.summary} numberOfLines={3}>{props.summary}</Text>
+        
+        <Text style={styles.summary} numberOfLines={2}>{props.summary}</Text>
       </View>
     </View>
   );
@@ -37,31 +63,21 @@ const styles = StyleSheet.create ({
     flexDirection: 'row',
     height: 15,
     width: 375,
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: 'white',
-    borderBottomWidth: 0,
-    shadowColor: 'grey',
+    paddingHorizontal:20,
+    backgroundColor: '#fff',
+    shadowColor: '#000000',
     shadowOffset: {
-      width: 5,
-      height: 5,
+      width: 0,
+      height: 3
     },
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
+    shadowRadius: 5,
+    shadowOpacity: 0.09,
     elevation: 4,
     marginBottom: 20,
     overflow: 'hidden',
     backgroundColor: 'white',
   },
-  // horline:{
-  //   borderRightColor:'#b6acab',
-  //   borderRightWidth:1,
-  //   alignContent:'center',
-  //   width:70,
-  //   height:60,
-  //   marginTop:60
 
-  // },
   timeBox: {
     maxWidth: 70,
     width: 70,
@@ -69,38 +85,22 @@ const styles = StyleSheet.create ({
     alignItems:'center',
     alignContent:'center',
     textAlign:'center',
-    marginTop:23
-    
+    marginTop:23,
+    color:'black',
+    fontFamily:'Garamond-Bold'
   },
-  timeBoxText: {
-    elevation:4,
-    color:'white',
-    fontFamily: 'Garamond',
-    marginRight:'auto',
-    marginLeft:'auto',
+  timeBoxText:{
+    fontFamily:'Garamond-Bold'
   },
 
-  time: {
-    textAlign: 'center',
-  },
-  // date: {
-  //   color: 'white',
-  //   fontFamily: 'ModernoFB',
-  //   fontSize: 36,
-  //   textAlign: 'center',
-  //   marginBottom: -10
-  // },
   textBox: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+   
     paddingLeft: 12,
   },
-  // time: {
-  //   color: '#8C8C8C',
-  //   fontSize: 15,
-  //   fontFamily:'Futura-Book',
-  // },
+ 
   summary: {
     fontSize: 18,
     fontFamily: 'Clarendon',
