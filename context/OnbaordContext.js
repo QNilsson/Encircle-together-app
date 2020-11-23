@@ -1,24 +1,28 @@
 import React, { useState, createContext } from "react";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage } from "@react-native-community/async-storage";
+import { useDispatch } from "react-redux";
+
+// imports store actions to dispatch
+import * as eventActions from "../store/actions/Event";
 
 export const Onboard = createContext({
   firstOpen: false,
   house: "",
-  setHouse: () => {},
+  setChoice: () => {},
   loadData: () => {},
 });
 
 const OnboardProvider = (props) => {
   const [firstOpen, setFirstOpen] = useState(true);
   const [house, setHouse] = useState(null);
-  const [data, setData] = useState();
+
+  const dispatch = useDispatch();
 
   const storeData = async (_house, _firstOpen) => {
     const storeKey = {
       firstOpen: _firstOpen,
       house: _house,
     };
-    setHouse();
     try {
       await AsyncStorage.setItem(storeKey, "I like to save it.");
     } catch (error) {
@@ -41,7 +45,19 @@ const OnboardProvider = (props) => {
     retrieveData();
   };
   const setChoice = (choice) => {
+    if (choice === "Provo") {
+      dispatch(eventActions.fetchProvoEvents(choice));
+      dispatch(eventActions.fetchTodaysEvents(choice));
+    } else if (choice === "Salt Lake City") {
+      dispatch(eventActions.fetchSlcEvents(choice));
+      dispatch(eventActions.fetchTodaysEvents(choice));
+    } else if (choice) {
+      dispatch(eventActions.fetchProvoEvents(choice));
+      dispatch(eventActions.fetchTodaysEvents(choice));
+    }
     storeData(choice, false);
+    setHouse(choice);
+    setFirstOpen(false);
   };
   return (
     <Onboard.Provider

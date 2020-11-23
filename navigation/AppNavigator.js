@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Platform } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Ionicons } from "@expo/vector-icons";
 
-import Dashboard from '../screens/Dashboard';
+import Dashboard from "../screens/Dashboard";
 import EncircleLiveScreen from "../screens/EncircleLiveScreen";
 import MoreScreen from "../screens/MoreScreen";
 import ResourcesScreen from "../screens/ResourcesScreen";
@@ -15,7 +15,8 @@ import LocationScreen from "../screens/LocationScreen";
 import ShopScreen from "../screens/ShopScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
-// import { DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from "react-native-dark-mode";
+import { Onboard } from "../context/OnbaordContext";
+import OnBoarding from "../screens/OnBoarding";
 
 // more screen stack
 const MoreNavigator = createStackNavigator(
@@ -54,16 +55,6 @@ const CalendarNavigator = createStackNavigator(
     headerMode: "none",
   }
 );
-
-// dark mode
-// const DynamicStyles = new DynamicStyleSheet( {
-//   container: {
-//     backgroundColor: new DynamicValue('white', 'black')
-//   },
-//   text: {
-//     color: new DynamicValue('black', 'white')
-//   }
-// })
 
 // app bottom tab stack
 const AppNavigator = createBottomTabNavigator(
@@ -121,11 +112,11 @@ const AppNavigator = createBottomTabNavigator(
         borderTopWidth: 1,
         borderRightWidth: 1,
         borderLeftWidth: 1,
-        borderColor: '#BABDC1',
+        borderColor: "#BABDC1",
         paddingTop: 5,
         paddingBottom: 30,
         height: 100,
-        position: 'relative'
+        position: "relative",
       },
     },
   }
