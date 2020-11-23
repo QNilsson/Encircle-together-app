@@ -54,60 +54,46 @@ const Dashboard = props => {
   let mm = String (today.getMonth () + 1).padStart (2, '0');
   let monthName = monthNames[today.getMonth ()].toUpperCase ();
   let yyyy = today.getFullYear ();
-  today = mm + ' ' + dd + ', ' + yyyy;
+  today = yyyy + '-' + mm + '-' + dd;
   let todayName = monthName + ' ' + dd + ',' + ' ' + yyyy;
 
   //trying to get correct time
 
-  
-    
-      
-      const timeConversion = x => {
-        let output = [];
-        x = x.split (':');
-        if (Number (x[0]) == 24) {
-          x[0] = '12';
-          output.push (x[0] + ':' + x[1]);
-          output.push ('AM');
-        } else if (Number (x[0]) == 12) {
-          output.push (x[0] + ':' + x[1]);
-          output.push ('PM');
-        } else if (Number (x[0]) > 12) {
-          x[0] = Number (x[0]) - 12;
-          x[0] = x[0].toString ();
-          output.push (x[0] + ':' + x[1]);
-          output.push ('PM');
-        } else {
-          output.push (x[0] + ':' + x[1]);
-          output.push ('AM');
-        }
-        return output;
-      };
-
-      // let timeStart = timeConversion (
-      //   event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
-      // );
-      // let timeEnd = timeConversion (
-      //   event.end__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)
-      // );
-      // let timeStampStart = timeStart[1];
-      // let timeStampEnd = timeEnd[1];
-      // let timeStart = timeStart[0];
-      // let timeEnd = timeEnd[0];
-
-      
-    
-  
+  const timeConversion = x => {
+    let output = [];
+    x = x.split (':');
+    if (Number (x[0]) == 24) {
+      x[0] = '12';
+      output.push (x[0] + ':' + x[1]);
+      output.push ('AM');
+    } else if (Number (x[0]) == 12) {
+      output.push (x[0] + ':' + x[1]);
+      output.push ('PM');
+    } else if (Number (x[0]) > 12) {
+      x[0] = Number (x[0]) - 12;
+      x[0] = x[0].toString ();
+      output.push (x[0] + ':' + x[1]);
+      output.push ('PM');
+    } else {
+      output.push (x[0] + ':' + x[1]);
+      output.push ('AM');
+    }
+    return output;
+  };
 
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
+      
     },
     [dispatch]
   );
+  
+  
 
+ 
   return (
     <ScrollView style={{flex: 1}}>
       <View style={styles.mainContainer}>
@@ -124,27 +110,48 @@ const Dashboard = props => {
           <View style={styles.eventContainter}>
 
             {events.map (event => (
-              
-              
-                
               <TouchableOpacity
-              onPress={() =>
-                props.navigation.navigate ('Event', {
-                  id: event.id,
-                  summ: event.summary,
-                 
-                  start: timeConversion(event.start__dateTime.split ('T')[1].split ('-')[0].slice (0, 5)),
-                  end: timeConversion(event.end__dateTime.split('T')[1].split ('-')[0].slice (0, 5)),
-                  // endstamp: event.timeStampEnd,
-                  loc: event.location,
-                  desc: event.description,
-                })}>
+                onPress={() =>
+                  props.navigation.navigate ('Event', {
+               
+                   
+                      // start: event.start,
+                      // startstamp: event.startstamp,
+                      // end: event.end,
+                      // endstamp: event.endstamp,
+                      
+
+                    id: event.id,
+                    summ: event.summary,
+                    start: timeConversion (
+                      event.start__dateTime
+                        .split ('T')[1]
+                        .split ('-')[0]
+                        .slice (0, 5)
+                    ),
+                    end: timeConversion (
+                      event.end__dateTime
+                        .split ('T')[1]
+                        .split ('-')[0]
+                        .slice (0, 5)
+                    ),
+                    endstamp: event.timeStampEnd,
+                    loc: event.location,
+                    desc: event.description,
+                  })}
+              >
                 <Card
                   style={styles.event}
                   key={event.id}
-                 start={event.start__dateTime.split('T')[1].split ('-')[0].slice (0,5)}
-                  end={event.end__dateTime.split('T')[1].split ('-')[0].slice(0,5)}
-                 
+                  
+                  start={event.start__dateTime
+                    .split ('T')[1]
+                    .split ('-')[0]
+                    .slice (0, 5)}
+                  end={event.end__dateTime
+                    .split ('T')[1]
+                    .split ('-')[0]
+                    .slice (0, 5)}
                   summary={event.summary}
                 />
               </TouchableOpacity>
@@ -180,8 +187,8 @@ const Dashboard = props => {
       </View>
       <View style={{height: 125, backgroundColor: '#f2f2f2'}} />
     </ScrollView>
-  )};
-
+  );
+};
 
 const styles = StyleSheet.create ({
   mainContainer: {
@@ -200,7 +207,7 @@ const styles = StyleSheet.create ({
   eventContainter: {
     flex: 1,
     alignItems: 'center',
-    marginBottom:220
+    marginBottom: 220,
   },
   todayDate: {
     color: '#222222',
@@ -265,7 +272,7 @@ const styles = StyleSheet.create ({
     paddingBottom: 30,
     paddingTop: 30,
     marginHorizontal: 10,
-    fontFamily: 'Din-Bold',
+    fontFamily: 'Garamond',
   },
   eventBox: {
     width: 500,

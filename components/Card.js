@@ -81,13 +81,16 @@ const styles = StyleSheet.create ({
   timeBox: {
     maxWidth: 70,
     width: 70,
-    padding: 7,
+    padding: 8,
     alignItems:'center',
     alignContent:'center',
     textAlign:'center',
-    marginTop:23,
+    marginTop:18,
+    marginBottom:15,
     color:'black',
-    fontFamily:'Garamond-Bold'
+    fontFamily:'Garamond-Bold',
+    borderRightColor:'#D4D6D8',
+    borderRightWidth:2,
   },
   timeBoxText:{
     fontFamily:'Garamond-Bold'
