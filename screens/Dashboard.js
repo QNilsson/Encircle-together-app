@@ -28,7 +28,7 @@ const Dashboard = props => {
   // pulls set location from store (provo default)
   let location = useSelector (state => state.events.location);
   // pulls events from store (based on selected location)
-  let events = useSelector (state => state.events.todaysEvents);
+  let events = useSelector (state => state.events.events);
   // pulls resources from store
   let resources = useSelector (state => state.resources.resources);
 
@@ -87,107 +87,18 @@ const Dashboard = props => {
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
-      Font.loadAsync({
-        'Clarendon' : require('../assets/fonts/clarendon.otf'),
-      });
-      setFontLoaded(true)
+      // Font.loadAsync({
+      //   'Clarendon' : require('../assets/fonts/clarendon.otf'),
+      //   'Din-Bold' : require('../assets/fonts/din-bold.otf'),
+      // });
+      
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
     },
     [dispatch]
   );
 
-  const styles = StyleSheet.create ({
-    mainContainer: {
-      backgroundColor: '#F2F2F2',
-      flex: 1,
-    },
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    // dateContain: {
-    //   flex: 1,
-    //   alignItems: 'flex-start',
-    // },
-    eventContainter: {
-      flex: 1,
-      alignItems: 'center',
-      marginBottom: 220,
-    },
-    todayDate: {
-      color: '#222222',
-      fontSize: 28,
-      fontWeight: '600',
-      marginBottom: 25,
-      marginTop: 25,
-      marginRight: 85,
-      fontFamily: 'Clarendon',
-    },
-    locationText: {
-      color: '#686868',
-    },
-    resourcesHeading: {
-      alignSelf: 'flex-start',
-      color: '#b6acab',
-      fontSize: 16,
-      letterSpacing: 2,
-      fontWeight: '600',
-      marginBottom: 15,
-      paddingLeft: 12,
-      fontFamily: 'Garamond',
-    },
-    event: {
-      marginBottom: 12,
-    },
-    calendarButton: {
-      display: 'flex',
-      flexDirection: 'row',
-      padding: 4,
-      paddingRight: 30,
-      paddingLeft: 30,
-      borderRadius: 10,
-      backgroundColor: 'black',
-      minWidth: 250,
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 50,
-      textAlign: 'center',
-      marginTop: 20,
-      shadowColor: '#b6acab',
-      shadowOffset: {
-        width: 5,
-        height: 4,
-      },
-      shadowOpacity: 0.3,
-    },
-    buttonText: {
-      color: 'white',
-      fontSize: 22,
-      fontFamily: 'Din-Bold',
-    },
-    arrowIcon: {
-      color: 'white',
-      marginLeft: 'auto',
-      fontWeight: '700',
-    },
-    publicationContainter: {
-      flex: 1,
-      alignItems: 'center',
-      marginTop: 30,
-      paddingBottom: 30,
-      paddingTop: 30,
-      marginHorizontal: 10,
-      fontFamily: 'Garamond',
-    },
-    eventBox: {
-      width: 500,
-      height: 90,
-      margin: 'auto',
-      marginLeft: 120,
-    },
-  });
+  
 
   return (
     <ScrollView style={{flex: 1}}>
@@ -280,5 +191,95 @@ const Dashboard = props => {
     </ScrollView>
   );
 };
-
+const styles = StyleSheet.create ({
+  mainContainer: {
+    backgroundColor: '#F2F2F2',
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // dateContain: {
+  //   flex: 1,
+  //   alignItems: 'flex-start',
+  // },
+  eventContainter: {
+    flex: 1,
+    alignItems: 'center',
+    marginBottom: 220,
+  },
+  todayDate: {
+    color: '#222222',
+    fontSize: 28,
+    fontWeight: '600',
+    marginBottom: 25,
+    marginTop: 25,
+    marginRight: 85,
+    fontFamily: 'Clarendon',
+  },
+  locationText: {
+    color: '#686868',
+  },
+  resourcesHeading: {
+    alignSelf: 'flex-start',
+    color: '#b6acab',
+    fontSize: 16,
+    letterSpacing: 2,
+    fontWeight: '600',
+    marginBottom: 15,
+    paddingLeft: 12,
+    fontFamily: 'Garamond-Bold',
+  },
+  event: {
+    marginBottom: 12,
+  },
+  calendarButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 4,
+    paddingRight: 30,
+    paddingLeft: 30,
+    borderRadius: 10,
+    backgroundColor: 'black',
+    minWidth: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    textAlign: 'center',
+    marginTop: 20,
+    shadowColor: '#b6acab',
+    shadowOffset: {
+      width: 5,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 22,
+    fontFamily: 'Din-Bold',
+  },
+  arrowIcon: {
+    color: 'white',
+    marginLeft: 'auto',
+    fontWeight: '700',
+  },
+  publicationContainter: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 30,
+    paddingBottom: 30,
+    paddingTop: 30,
+    marginHorizontal: 10,
+    fontFamily: 'Garamond',
+  },
+  eventBox: {
+    width: 500,
+    height: 90,
+    margin: 'auto',
+    marginLeft: 120,
+  },
+});
 export default Dashboard;

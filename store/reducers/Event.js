@@ -18,7 +18,7 @@ const eventReducer = (state = initState, action) => {
     case FETCH_SLC_EVENTS:
       return { ...state, location: action.data.location, events: action.data.events };
     case FETCH_TODAYS_EVENTS:
-      return { ...state, location: action.data.location, todaysEvents: action.data.events };
+      return { ...state, location: action.data.location, events: action.data.events };
     default:
       return state;
   }
