@@ -22,6 +22,7 @@ import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
+import * as font from 'expo-font'
 
 
 const Dashboard = props => {
@@ -87,7 +88,7 @@ const Dashboard = props => {
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
-       Font.loadAsync({
+       font.loadAsync({
         ModernoFB: require("../assets/fonts/ModernoFB-Semibold.otf"),
         "Futura-Light": require("../assets/fonts/Futura-Light.ttf"),
         "Futura-Book": require("../assets/fonts/Futura-Book.ttf"),
@@ -97,7 +98,7 @@ const Dashboard = props => {
         "Garamond-Bold": require("../assets/fonts/garamond-bold.otf"),
         "Din-Bold":require("../assets/fonts/din-bold.otf")
       });
-      this.setState({ loading: false });
+     
       
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
