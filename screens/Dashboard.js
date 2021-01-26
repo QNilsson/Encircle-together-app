@@ -22,7 +22,7 @@ import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
-import * as Font from 'expo-font';
+
 
 const Dashboard = props => {
   // pulls set location from store (provo default)
@@ -34,7 +34,7 @@ const Dashboard = props => {
 
   const dispatch = useDispatch ();
 
-  const [fontLoaded, setFontLoaded] = useState(false)
+  const [loading, setLoading] = useState(false)
   //prepare to get month names
   const monthNames = [
     'January',
@@ -87,10 +87,17 @@ const Dashboard = props => {
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
-      // Font.loadAsync({
-      //   'Clarendon' : require('../assets/fonts/clarendon.otf'),
-      //   'Din-Bold' : require('../assets/fonts/din-bold.otf'),
-      // });
+       Font.loadAsync({
+        ModernoFB: require("../assets/fonts/ModernoFB-Semibold.otf"),
+        "Futura-Light": require("../assets/fonts/Futura-Light.ttf"),
+        "Futura-Book": require("../assets/fonts/Futura-Book.ttf"),
+        "Futura-Medium": require("../assets/fonts/Futura-Medium.ttf"),
+        "Futura-Bold": require("../assets/fonts/Futura-Bold.ttf"),
+        "Clarendon": require("../assets/fonts/clarendon.otf"),
+        "Garamond-Bold": require("../assets/fonts/garamond-bold.otf"),
+        "Din-Bold":require("../assets/fonts/din-bold.otf")
+      });
+      this.setState({ loading: false });
       
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
@@ -195,6 +202,7 @@ const styles = StyleSheet.create ({
   mainContainer: {
     backgroundColor: '#F2F2F2',
     flex: 1,
+    
   },
   container: {
     flex: 1,
@@ -216,8 +224,9 @@ const styles = StyleSheet.create ({
     fontWeight: '600',
     marginBottom: 25,
     marginTop: 25,
-    marginRight: 85,
+    marginRight: 123,
     fontFamily: 'Clarendon',
+
   },
   locationText: {
     color: '#686868',

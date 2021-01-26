@@ -16,6 +16,9 @@ class DashboardWelcome extends Component {
       "Futura-Book": require("../assets/fonts/Futura-Book.ttf"),
       "Futura-Medium": require("../assets/fonts/Futura-Medium.ttf"),
       "Futura-Bold": require("../assets/fonts/Futura-Bold.ttf"),
+      "Clarendon": require("../assets/fonts/clarendon.otf"),
+      "Garamond-Bold": require("../assets/fonts/garamond-bold.otf"),
+      "Din-Bold":require("../assets/fonts/din-bold.otf")
     });
     this.setState({ loading: false });
   }
@@ -27,6 +30,7 @@ class DashboardWelcome extends Component {
     return (
       <View style={styles.titleContainer}>
         <ImageBackground
+        //need to change background image to new logo
           source={require("../assets/backgroundImage.png")}
           style={styles.backgroundImage}
         ></ImageBackground>

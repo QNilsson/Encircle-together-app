@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Platform} from 'react-native';
 import {block} from 'react-native-reanimated';
 
+
 const Card = props => {
   let today = new Date ();
   let month = '';
