@@ -30,6 +30,8 @@ const Dashboard = props => {
   let location = useSelector (state => state.events.location);
   // pulls events from store (based on selected location)
   let events = useSelector (state => state.events.events);
+
+  
   // pulls resources from store
   let resources = useSelector (state => state.resources.resources);
 
