@@ -31,7 +31,7 @@ class DashboardWelcome extends Component {
       <View style={styles.titleContainer}>
         <ImageBackground
         //need to change background image to new logo
-          source={require("../assets/backgroundImage.png")}
+          source={require("../assets/provoHouseTitle.png")}
           style={styles.backgroundImage}
         ></ImageBackground>
       </View>
