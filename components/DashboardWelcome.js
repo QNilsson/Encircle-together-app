@@ -3,13 +3,12 @@ import * as Font from 'expo-font';
 import {ActivityIndicator} from 'react-native';
 import {StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
 
-let location = useSelector (state => state.events.location);
 
-// const ProvoImage = require ('../assets/provoHouseTitle.png');
-// const StGImage = require ('../assets/StGeorgeHouseTitle.png');
-// const SLCImage = require ('../assets/SaltLakeHouseTitle.png');
-// let background;
 
+const ProvoImage = require ('../assets/provoHouseTitle.png');
+const StGImage = require ('../assets/StGeorgeHouseTitle.png');
+const SLCImage = require ('../assets/SaltLakeHouseTitle.png');
+let background;
 export const getLocationImage = (location) => {
 	if (location == 'Provo') {
 		background = ProvoImage;
@@ -37,7 +36,9 @@ class DashboardWelcome extends Component {
 			'Garamond-Bold': require('../assets/fonts/garamond-bold.otf'),
 			'Din-Bold': require('../assets/fonts/din-bold.otf'),
 		});
-		this.setState({loading: false});
+    this.setState({loading: false});
+    getLocationImage()
+    
 	}
 
 	render() {

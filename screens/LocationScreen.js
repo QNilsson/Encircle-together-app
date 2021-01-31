@@ -5,9 +5,7 @@ import { useDispatch } from 'react-redux';
 // imports store actions to dispatch
 import * as eventActions from '../store/actions/Event';
 
-const ProvoHouse = require('../assets/provoHouseTitle.png')
 
-const SLCHouse = require('../assets/SaltLakeHouseTitle.png')
 
 const LocationScreen = () => {
   // controls on/off for provo switch (app default)
@@ -45,7 +43,7 @@ const LocationScreen = () => {
               setProvo(v);
               setSlc(false);
               selectedLocation('Provo');
-              // backgroundImage(ProvoHouse)
+            
             }}
           />
         </View>
@@ -58,7 +56,7 @@ const LocationScreen = () => {
               setSlc(v);
               setProvo(false);
               selectedLocation('Salt Lake City');
-              // backgroundImage(SLCHouse)
+              
             }}
           />
         </View>
