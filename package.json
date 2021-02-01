@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
-    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-async-storage/async-storage": "^1.13.3",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.2.9",
     "@types/react": "~16.9.35",
+    "async-storage": "^0.1.0",
     "axios": "^0.19.2",
     "expo": "^39.0.3",
     "expo-cli": "^3.28.2",
