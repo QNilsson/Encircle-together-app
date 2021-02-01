@@ -16,14 +16,26 @@ import Resource from '../components/Resource';
 // imports dashboard welcome component - styled header container
 import DashboardWelcome from '../components/DashboardWelcome';
 // imports expo icons
-import {Ionicons} from '@expo/vector-icons';
+import {FontAwesome, Ionicons} from '@expo/vector-icons';
 // imports store actions to dispatch
 import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
-import * as font from 'expo-font'
+import * as Font from 'expo-font';
 
+const fonts = {
+  'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
+  'Clarendon-Italic': require ('../assets/fonts/clarendon-italic.otf'),
+  'Clarendon-Bold': require ('../assets/fonts/clarendon-bold.otf'),
+  'Clarendon-Bold-Italic': require ('../assets/fonts/clarendon-bold-italic.otf'),
+  'Din-Regular': require ('../assets/fonts/din.otf'),
+  'Din-Bold': require ('../assets/fonts/din-bold.otf'),
+  'Garamond-Regular': require ('../assets/fonts/garamond.otf'),
+  'Garamond-Bold': require ('../assets/fonts/garamond-bold.otf'),
+  'Garamond-Italic': require ('../assets/fonts/garamond-italic.otf'),
+  'Garamond-Bold-Italic': require ('../assets/fonts/garamond-bold-italic.otf'),
+};
 
 const Dashboard = props => {
   // pulls set location from store (provo default)
@@ -31,13 +43,16 @@ const Dashboard = props => {
   // pulls events from store (based on selected location)
   let events = useSelector (state => state.events.events);
 
-  
   // pulls resources from store
   let resources = useSelector (state => state.resources.resources);
 
   const dispatch = useDispatch ();
 
-  const [loading, setLoading] = useState(false)
+  const [fontsLoaded, setFontsLoaded] = useState (false);
+
+  const loadFonts = async () => {
+    await Font.loadAsync (fonts);
+  };
   //prepare to get month names
   const monthNames = [
     'January',
@@ -90,122 +105,111 @@ const Dashboard = props => {
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
-       font.loadAsync({
-        ModernoFB: require("../assets/fonts/ModernoFB-Semibold.otf"),
-        "Futura-Light": require("../assets/fonts/Futura-Light.ttf"),
-        "Futura-Book": require("../assets/fonts/Futura-Book.ttf"),
-        "Futura-Medium": require("../assets/fonts/Futura-Medium.ttf"),
-        "Futura-Bold": require("../assets/fonts/Futura-Bold.ttf"),
-        "Clarendon": require("../assets/fonts/clarendon.otf"),
-        "Garamond-Bold": require("../assets/fonts/garamond-bold.otf"),
-        "Din-Bold":require("../assets/fonts/din-bold.otf")
-      });
-     
-      
+      loadFonts ().then (() => setFontsLoaded (true));
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
     },
     [dispatch]
   );
 
-  
+  if (fontsLoaded) {
+    return (
+      <ScrollView style={{flex: 1}}>
+        <View style={styles.mainContainer}>
+          <SafeAreaView>
+            <DashboardWelcome />
+          </SafeAreaView>
+          <View style={styles.container}>
+            <View style={styles.dateContain}>
+              <Text style={styles.todayDate}>
+                {todayName}
 
-  return (
-    <ScrollView style={{flex: 1}}>
-      <View style={styles.mainContainer}>
-        <SafeAreaView>
-          <DashboardWelcome />
-        </SafeAreaView>
-        <View style={styles.container}>
-          <View style={styles.dateContain}>
-            <Text style={styles.todayDate}>
-              {todayName}
+              </Text>
+            </View>
+            <View style={styles.eventContainter}>
 
-            </Text>
-          </View>
-          <View style={styles.eventContainter}>
+              {events.map (event => (
+                <TouchableOpacity
+                  onPress={() =>
+                    props.navigation.navigate ('Event', {
+                      // start: event.start,
+                      // startstamp: event.startstamp,
+                      // end: event.end,
+                      // endstamp: event.endstamp,
 
-            {events.map (event => (
-              <TouchableOpacity
-                onPress={() =>
-                  props.navigation.navigate ('Event', {
-                    // start: event.start,
-                    // startstamp: event.startstamp,
-                    // end: event.end,
-                    // endstamp: event.endstamp,
-
-                    id: event.id,
-                    summ: event.summary,
-                    start: timeConversion (
-                      event.start__dateTime
-                        .split ('T')[1]
-                        .split ('-')[0]
-                        .slice (0, 5)
-                    ),
-                    end: timeConversion (
-                      event.end__dateTime
-                        .split ('T')[1]
-                        .split ('-')[0]
-                        .slice (0, 5)
-                    ),
-                    endstamp: event.timeStampEnd,
-                    loc: event.location,
-                    desc: event.description,
-                  })}
-              >
-                <Card
-                  style={styles.event}
-                  key={event.id}
-                  start={event.start__dateTime
-                    .split ('T')[1]
-                    .split ('-')[0]
-                    .slice (0, 5)}
-                  end={event.end__dateTime
-                    .split ('T')[1]
-                    .split ('-')[0]
-                    .slice (0, 5)}
-                  summary={event.summary}
-                />
-              </TouchableOpacity>
-            ))}
-
-          </View>
-
-          <TouchableOpacity
-            style={styles.calendarButton}
-            onPress={() => props.navigation.navigate ('Calendar')}
-          >
-            <Text style={styles.buttonText}>See Full Calendar</Text>
-
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.container}>
-          <View style={styles.publicationContainter}>
-            <Text style={styles.resourcesHeading}>POPULAR RESOURCES</Text>
-            <ScrollView horizontal={true}>
-              {resources.map (resource => (
-                <Resource
-                  key={resource.docId}
-                  id={resource.docId}
-                  name={resource.name}
-                  title={resource.title}
-                  navigation={props.navigation}
-                />
+                      id: event.id,
+                      summ: event.summary,
+                      start: timeConversion (
+                        event.start__dateTime
+                          .split ('T')[1]
+                          .split ('-')[0]
+                          .slice (0, 5)
+                      ),
+                      end: timeConversion (
+                        event.end__dateTime
+                          .split ('T')[1]
+                          .split ('-')[0]
+                          .slice (0, 5)
+                      ),
+                      endstamp: event.timeStampEnd,
+                      loc: event.location,
+                      desc: event.description,
+                    })}
+                >
+                  <Card
+                    style={styles.event}
+                    key={event.id}
+                    start={event.start__dateTime
+                      .split ('T')[1]
+                      .split ('-')[0]
+                      .slice (0, 5)}
+                    end={event.end__dateTime
+                      .split ('T')[1]
+                      .split ('-')[0]
+                      .slice (0, 5)}
+                    summary={event.summary}
+                  />
+                </TouchableOpacity>
               ))}
-            </ScrollView>
+
+            </View>
+
+            <TouchableOpacity
+              style={styles.calendarButton}
+              onPress={() => props.navigation.navigate ('Calendar')}
+            >
+              <Text style={styles.buttonText}>See Full Calendar</Text>
+
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.container}>
+            <View style={styles.publicationContainter}>
+              <Text style={styles.resourcesHeading}>POPULAR RESOURCES</Text>
+              <ScrollView horizontal={true}>
+                {resources.map (resource => (
+                  <Resource
+                    key={resource.docId}
+                    id={resource.docId}
+                    name={resource.name}
+                    title={resource.title}
+                    navigation={props.navigation}
+                  />
+                ))}
+              </ScrollView>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={{height: 125, backgroundColor: '#f2f2f2'}} />
-    </ScrollView>
-  );
+        <View style={{height: 125, backgroundColor: '#f2f2f2'}} />
+      </ScrollView>
+    );
+  }
 };
+
 const styles = StyleSheet.create ({
   mainContainer: {
     backgroundColor: '#F2F2F2',
     flex: 1,
-    
   },
   container: {
     flex: 1,
@@ -229,7 +233,6 @@ const styles = StyleSheet.create ({
     marginTop: 25,
     marginRight: 123,
     fontFamily: 'Clarendon',
-
   },
   locationText: {
     color: '#686868',
