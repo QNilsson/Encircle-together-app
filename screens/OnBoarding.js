@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, Button, Platform } from "react-native";
 import { Onboard } from "../context/OnbaordContext";
 
@@ -19,10 +19,17 @@ const fonts = {
 
 const OnBoarding = () => {
   const OnboardContext = useContext(Onboard);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
-    Font.loadAsync(fonts);
+    Font.loadAsync(fonts).then(() => setFontsLoaded(true));
   });
+
+  if (!fontsLoaded) {
+    return <View>
+      <Text>Loading...</Text>
+    </View>;
+  }
 
   return (
     <View style={styles.container}>
