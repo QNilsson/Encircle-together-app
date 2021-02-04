@@ -63,7 +63,7 @@ const OnBoarding = () => {
       </View>
       <View
         style={styles.houseButtons}
-        onStartShouldSetResponder={() => OnboardContext.setChoice("StGeorge")}
+        onStartShouldSetResponder={() => OnboardContext.setChoice("St. George")}
       >
         <Image
           style={styles.buttonImage}

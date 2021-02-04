@@ -46,6 +46,7 @@ const OnboardProvider = (props) => {
     retrieveData();
   };
   const setChoice = (choice) => {
+    debugger;
     if (choice === "Provo") {
       dispatch(eventActions.fetchProvoEvents(choice));
       dispatch(eventActions.fetchTodaysEvents(choice));

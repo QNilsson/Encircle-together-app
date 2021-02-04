@@ -57,7 +57,7 @@ const Dashboard = (props) => {
         <View style={styles.container}>
           <View style={styles.eventContainter}>
             <Text style={styles.location}>
-              LATER TODAY IN{" "}
+              LATER TODAY IN {""}
               <Text style={styles.locationText}>{location.toUpperCase()}</Text>
             </Text>
 
