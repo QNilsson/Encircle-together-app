@@ -24,20 +24,28 @@ import * as resourceActions from '../store/actions/Resource';
 
 import * as Font from 'expo-font';
 
-const fonts = {
-  'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
-  'Clarendon-Italic': require ('../assets/fonts/clarendon-italic.otf'),
-  'Clarendon-Bold': require ('../assets/fonts/clarendon-bold.otf'),
-  'Clarendon-Bold-Italic': require ('../assets/fonts/clarendon-bold-italic.otf'),
-  'Din-Regular': require ('../assets/fonts/din.otf'),
-  'Din-Bold': require ('../assets/fonts/din-bold.otf'),
-  'Garamond-Regular': require ('../assets/fonts/garamond.otf'),
-  'Garamond-Bold': require ('../assets/fonts/garamond-bold.otf'),
-  'Garamond-Italic': require ('../assets/fonts/garamond-italic.otf'),
-  'Garamond-Bold-Italic': require ('../assets/fonts/garamond-bold-italic.otf'),
-};
+import { useFonts } from 'expo-font'
+
+
+
+
 
 const Dashboard = props => {
+
+  const [fonts] = useFonts({
+    'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
+    'Clarendon-Italic': require ('../assets/fonts/clarendon-italic.otf'),
+    'Clarendon-Bold': require ('../assets/fonts/clarendon-bold.otf'),
+    'Clarendon-Bold-Italic': require ('../assets/fonts/clarendon-bold-italic.otf'),
+    'Din-Regular': require ('../assets/fonts/din.otf'),
+    'Din-Bold': require ('../assets/fonts/din-bold.otf'),
+    'Garamond-Regular': require ('../assets/fonts/garamond.otf'),
+    'Garamond-Bold': require ('../assets/fonts/garamond-bold.otf'),
+    'Garamond-Italic': require ('../assets/fonts/garamond-italic.otf'),
+    'Garamond-Bold-Italic': require ('../assets/fonts/garamond-bold-italic.otf'),
+  });
+
+  
   // pulls set location from store (provo default)
   let location = useSelector (state => state.events.location);
   // pulls events from store (based on selected location)
@@ -47,12 +55,12 @@ const Dashboard = props => {
   let resources = useSelector (state => state.resources.resources);
 
   const dispatch = useDispatch ();
-
   const [fontsLoaded, setFontsLoaded] = useState (false);
 
   const loadFonts = async () => {
     await Font.loadAsync (fonts);
   };
+ 
   //prepare to get month names
   const monthNames = [
     'January',
@@ -105,14 +113,17 @@ const Dashboard = props => {
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
-      loadFonts ().then (() => setFontsLoaded (true));
+      // loadFonts ().then (() => setFontsLoaded (true));
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
     },
     [dispatch]
   );
 
-  if (fontsLoaded) {
+  if(!fonts){
+    return null;
+  }
+  else{
     return (
       <ScrollView style={{flex: 1}}>
         <View style={styles.mainContainer}>
@@ -204,7 +215,8 @@ const Dashboard = props => {
       </ScrollView>
     );
   }
-};
+
+}
 
 const styles = StyleSheet.create ({
   mainContainer: {
