@@ -22,8 +22,6 @@ import * as eventActions from '../store/actions/Event';
 // imports store actions to dispatch
 import * as resourceActions from '../store/actions/Resource';
 
-import * as Font from 'expo-font';
-
 import { useFonts } from 'expo-font'
 
 
@@ -55,11 +53,6 @@ const Dashboard = props => {
   let resources = useSelector (state => state.resources.resources);
 
   const dispatch = useDispatch ();
-  const [fontsLoaded, setFontsLoaded] = useState (false);
-
-  const loadFonts = async () => {
-    await Font.loadAsync (fonts);
-  };
  
   //prepare to get month names
   const monthNames = [
@@ -113,7 +106,6 @@ const Dashboard = props => {
   // updates component when a new location is selected - loads resources from issuu api
   useEffect (
     () => {
-      // loadFonts ().then (() => setFontsLoaded (true));
       dispatch (eventActions.fetchTodaysEvents (location));
       dispatch (resourceActions.fetchResources ());
     },
