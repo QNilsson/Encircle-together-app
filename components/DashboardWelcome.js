@@ -15,7 +15,7 @@ export const getLocationImage = (location) => {
 	} else if (location == 'Salt Lake City') {
 		background = SLCImage;
 	} else {
-		background = ProvoImage;
+		background = StGImage;
 	}
 };
 
