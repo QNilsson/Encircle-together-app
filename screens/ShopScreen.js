@@ -70,8 +70,8 @@ const ShopScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Image source={require("../assets/storeHeader.png")} style={styles.headerImage}/>
-      <View>
-
+      <View styles={styles.filters}>
+        
       </View>
     </SafeAreaView>
   );

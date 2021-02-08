@@ -27,6 +27,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.0.tar.gz",
     "react-native-calendars": "^1.789.0",
     "react-native-cli": "^2.0.1",
+    "react-native-collapsible": "^1.5.3",
     "react-native-dark-mode": "^0.2.2",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-modal": "^11.5.6",
