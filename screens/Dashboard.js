@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import React, { useEffect, useContext } from "react";
+=======
 import React, {useEffect, useState} from 'react';
+>>>>>>> master
 import {
   Text,
   View,
@@ -6,23 +10,39 @@ import {
   StyleSheet,
   ScrollView,
   SafeAreaView,
+<<<<<<< HEAD
+} from "react-native";
+
+import { useSelector, useDispatch } from "react-redux";
+=======
 } from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
+>>>>>>> master
 // imports card component - styled event containers
-import Card from '../components/Card';
+import Card from "../components/Card";
 // imports resource component - styled resource containers
-import Resource from '../components/Resource';
+import Resource from "../components/Resource";
 // imports dashboard welcome component - styled header container
-import DashboardWelcome from '../components/DashboardWelcome';
+import DashboardWelcome from "../components/DashboardWelcome";
 // imports expo icons
+<<<<<<< HEAD
+import { Ionicons } from "@expo/vector-icons";
+=======
 import {FontAwesome, Ionicons} from '@expo/vector-icons';
+>>>>>>> master
 // imports store actions to dispatch
-import * as eventActions from '../store/actions/Event';
+import * as eventActions from "../store/actions/Event";
 // imports store actions to dispatch
-import * as resourceActions from '../store/actions/Resource';
+import * as resourceActions from "../store/actions/Resource";
 
+<<<<<<< HEAD
+import Calendar from "../screens/Calendar";
+import { Onboard } from "../context/OnbaordContext";
+import OnBoarding from "./OnBoarding";
+=======
 import { useFonts } from 'expo-font'
+>>>>>>> master
 
 
 
@@ -45,12 +65,22 @@ const Dashboard = props => {
 
   
   // pulls set location from store (provo default)
+<<<<<<< HEAD
+  let location = useSelector((state) => state.events.location);
+  // pulls events from store (based on selected location)
+  let events = useSelector((state) => state.events.todaysEvents);
+  // pulls resources from store
+  let resources = useSelector((state) => state.resources.resources);
+
+  const onboardContext = useContext(Onboard);
+=======
   let location = useSelector (state => state.events.location);
   // pulls events from store (based on selected location)
   let events = useSelector (state => state.events.events);
 
   // pulls resources from store
   let resources = useSelector (state => state.resources.resources);
+>>>>>>> master
 
   const dispatch = useDispatch ();
  
@@ -112,6 +142,89 @@ const Dashboard = props => {
     [dispatch]
   );
 
+<<<<<<< HEAD
+  if (onboardContext.firstOpen) {
+    return <OnBoarding />;
+  }
+
+  return (
+    <ScrollView style={{ flex: 1 }}>
+      <View style={styles.mainContainer}>
+        <SafeAreaView>
+          <DashboardWelcome />
+        </SafeAreaView>
+        <View style={styles.container}>
+          <View style={styles.eventContainter}>
+            <Text style={styles.location}>
+              LATER TODAY IN {""}
+              <Text style={styles.locationText}>{location.toUpperCase()}</Text>
+            </Text>
+
+            {events.map((event) => (
+              <TouchableOpacity
+                style={styles.eventBox}
+                onPress={() =>
+                  props.navigation.navigate("Event", {
+                    id: event.id,
+                    summ: event.summary,
+                    start: event.start__dateTime
+                      .split("T")[1]
+                      .split("-")[0]
+                      .slice(0, 5),
+                    end: event.end__dateTime
+                      .split("T")[1]
+                      .split("-")[0]
+                      .slice(0, 5),
+                    loc: event.location,
+                    desc: event.description,
+                  })
+                }
+              >
+                <Card
+                  style={styles.event}
+                  key={event.id}
+                  time={event.start__dateTime}
+                  summary={event.summary}
+                ></Card>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <TouchableOpacity
+            style={styles.calendarButton}
+            onPress={() => props.navigation.navigate("Calendar")}
+          >
+            <Text style={styles.buttonText}>FULL CALENDAR</Text>
+            <Ionicons
+              name="ios-arrow-round-forward"
+              size={45}
+              style={styles.arrowIcon}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.container}>
+          <View style={styles.publicationContainter}>
+            <Text style={styles.resourcesHeading}>POPULAR RESOURCES</Text>
+            <ScrollView horizontal={true}>
+              {resources.map((resource) => (
+                <Resource
+                  key={resource.docId}
+                  id={resource.docId}
+                  name={resource.name}
+                  title={resource.title}
+                  navigation={props.navigation}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </View>
+      <View style={{ height: 125, backgroundColor: "#f2f2f2" }}></View>
+    </ScrollView>
+  );
+};
+=======
   if(!fonts){
     return null;
   }
@@ -207,18 +320,24 @@ const Dashboard = props => {
       </ScrollView>
     );
   }
+>>>>>>> master
 
 }
 
 const styles = StyleSheet.create ({
   mainContainer: {
-    backgroundColor: '#F2F2F2',
+    backgroundColor: "#F2F2F2",
     flex: 1,
   },
   container: {
     flex: 1,
+<<<<<<< HEAD
+    alignItems: "center",
+    justifyContent: "center",
+=======
     alignItems: 'center',
     justifyContent: 'center',
+>>>>>>> master
   },
   // dateContain: {
   //   flex: 1,
@@ -226,6 +345,26 @@ const styles = StyleSheet.create ({
   // },
   eventContainter: {
     flex: 1,
+<<<<<<< HEAD
+    alignItems: "center",
+  },
+  location: {
+    color: "#2B2B2B",
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 15,
+  },
+  locationText: {
+    color: "#686868",
+  },
+  resourcesHeading: {
+    alignSelf: "flex-start",
+    color: "#2B2B2B",
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 15,
+    paddingLeft: 12,
+=======
     alignItems: 'center',
     marginBottom: 220,
   },
@@ -250,11 +389,43 @@ const styles = StyleSheet.create ({
     marginBottom: 15,
     paddingLeft: 12,
     fontFamily: 'Garamond-Bold',
+>>>>>>> master
   },
   event: {
     marginBottom: 12,
   },
   calendarButton: {
+<<<<<<< HEAD
+    display: "flex",
+    flexDirection: "row",
+    padding: 8,
+    paddingRight: 30,
+    paddingLeft: 30,
+    backgroundColor: "black",
+    minWidth: 250,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 60,
+    textAlign: "center",
+    marginTop: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+  },
+  arrowIcon: {
+    color: "white",
+    marginLeft: "auto",
+    fontWeight: "700",
+  },
+  publicationContainter: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 40,
+    paddingBottom: 30,
+    paddingTop: 30,
+    marginHorizontal: 10,
+=======
     display: 'flex',
     flexDirection: 'row',
     padding: 4,
@@ -293,12 +464,21 @@ const styles = StyleSheet.create ({
     paddingTop: 30,
     marginHorizontal: 10,
     fontFamily: 'Garamond',
+>>>>>>> master
   },
   eventBox: {
     width: 500,
     height: 90,
+<<<<<<< HEAD
+    margin: "auto",
+    marginLeft: 120,
+  },
+});
+
+=======
     margin: 'auto',
     marginLeft: 120,
   },
 });
+>>>>>>> master
 export default Dashboard;

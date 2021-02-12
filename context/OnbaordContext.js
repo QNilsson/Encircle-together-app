@@ -1,33 +1,38 @@
 import React, { useState, createContext } from "react";
-import { AsyncStorage } from "react-native";
+import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// imports store actions to dispatch
+import * as eventActions from "../store/actions/Event";
 
 export const Onboard = createContext({
   firstOpen: false,
   house: "",
-  setHouse: () => {},
+  setChoice: () => {},
   loadData: () => {},
 });
 
 const OnboardProvider = (props) => {
   const [firstOpen, setFirstOpen] = useState(true);
   const [house, setHouse] = useState(null);
-  const [data, setData] = useState();
+
+  const dispatch = useDispatch();
 
   const storeData = async (_house, _firstOpen) => {
-    const storeKey = {
-      firstOpen: _firstOpen,
+    let data = {
       house: _house,
+      firstOpen: _firstOpen,
     };
-    setHouse();
+    data = JSON.stringify(data);
     try {
-      await AsyncStorage.setItem(storeKey, "I like to save it.");
-    } catch (error) {
-      console.log(error);
+      await AsyncStorage.setItem("@storagekey", data);
+    } catch (e) {
+      console.log(e);
     }
   };
   const retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem(storeKey);
+      const value = await AsyncStorage.getItem("@storagekey");
       if (value != null) {
         setFirstOpen(value.firstOpen);
         setHouse(value.house);
@@ -41,7 +46,20 @@ const OnboardProvider = (props) => {
     retrieveData();
   };
   const setChoice = (choice) => {
+    debugger;
+    if (choice === "Provo") {
+      dispatch(eventActions.fetchProvoEvents(choice));
+      dispatch(eventActions.fetchTodaysEvents(choice));
+    } else if (choice === "Salt Lake City") {
+      dispatch(eventActions.fetchSlcEvents(choice));
+      dispatch(eventActions.fetchTodaysEvents(choice));
+    } else if (choice === "St George") {
+      dispatch(eventActions.fetchProvoEvents(choice));
+      dispatch(eventActions.fetchTodaysEvents(choice));
+    }
     storeData(choice, false);
+    setHouse(choice);
+    setFirstOpen(false);
   };
   return (
     <Onboard.Provider
