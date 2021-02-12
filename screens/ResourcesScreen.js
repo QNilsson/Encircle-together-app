@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '20%',
     backgroundColor: "#fff",
-    paddingBottom: 100,
   },
   resources: {
     fontSize: 34,

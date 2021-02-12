@@ -196,6 +196,7 @@ export const fetchTodaysEvents = (location) => {
 
     // loads array with event objects
     for(const key in items) {
+      
       eventData.push(
         new Event(
           items[key].id,
@@ -207,6 +208,7 @@ export const fetchTodaysEvents = (location) => {
           items[key].location
         )
       );
+        
     }
 
     // use this to see loaded event objects

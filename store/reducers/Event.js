@@ -36,11 +36,15 @@ const eventReducer = (state = initState, action) => {
         events: action.data.events,
       };
     case FETCH_TODAYS_EVENTS:
+<<<<<<< HEAD
       return {
         ...state,
         location: action.data.location,
         todaysEvents: action.data.events,
       };
+=======
+      return { ...state, location: action.data.location, events: action.data.events };
+>>>>>>> master
     default:
       return state;
   }
