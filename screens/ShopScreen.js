@@ -20,9 +20,11 @@ import {
 import Product from "../models/product";
 // imports static product data array (loaded with product objects)
 import { PRODUCTS } from "../constants/products";
+import { AntDesign } from "@expo/vector-icons";
 
 const ShopScreen = () => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
+  const [isOpen, setIsOpen] = useState(Boolean);
   const [productType, setProductType] = useState(null);
 
   const setFilter = (productString) => {
@@ -31,18 +33,26 @@ const ShopScreen = () => {
     } else {
       switch (productString) {
         case "Clothing":
-          setProductType("Clothing");
+          setProductType(productString);
         case "Accessories":
-          setProductType("Accessories");
+          setProductType(productString);
         case "Resources":
-          setProductType("Resources");
+          setProductType(productString);
         case "Sale":
-          setProductType("Sale");
+          setProductType(productString);
         case "Last Chance":
-          setProductType("Last Chance");
+          setProductType(productString);
       }
     }
-    setProductType(productString);
+  };
+
+  const changeOpen = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+    if (!isOpen) {
+      setIsOpen(true);
+    }
   };
 
   useEffect(() => {
@@ -81,17 +91,18 @@ const ShopScreen = () => {
               console.log(productData[i]);
             }
 
-            setProducts(productData);
+            setProducts([...productData]);
           })
           .catch((err) => console.log(err));
       } else {
         // loads static products on android platform (android receives invalid shopify api response?)
 
-        setProducts(PRODUCTS);
-        console.log(PRODUCTS);
+        setProducts([...PRODUCTS]);
       }
-      getProducts();
     };
+    if (products.length === 0) {
+      getProducts();
+    }
   });
 
   return (
@@ -100,61 +111,64 @@ const ShopScreen = () => {
         source={require("../assets/storeHeader.png")}
         style={styles.headerImage}
       />
-      <View styles={styles.filters}>
-        <Collapse>
+      <View style={styles.filter}>
+        <Collapse onToggle={changeOpen}>
           <CollapseHeader>
             <View>
-              <Text>{productType == null ? "All Products" : productType}</Text>
+              <Text>
+                {isOpen ? (
+                  <AntDesign name="down" size={24} color="black" />
+                ) : (
+                  <AntDesign name="up" size={24} color="black" />
+                )}
+                {productType == null ? "All Products" : productType}
+              </Text>
             </View>
           </CollapseHeader>
           <CollapseBody>
             <Button
-              onPress={setFilter("Clothing")}
+              onPress={() => setFilter("Clothing")}
               title="Clothing"
               accessibilityLabel="Click this to filter clothing"
             />
             <Button
-              onPress={setFilter("Accessories")}
+              onPress={() => setFilter("Accessories")}
               title="Accessories"
               accessibilityLabel="Click this to filter clothing"
             />
             <Button
-              onPress={setFilter("Resources")}
+              onPress={() => setFilter("Resources")}
               title="Resources"
               accessibilityLabel="Click this to filter clothing"
             />
             <Button
-              onPress={setFilter("Sale")}
+              onPress={() => setFilter("Sale")}
               title="Sale"
               accessibilityLabel="Click this to filter clothing"
             />
             <Button
-              onPress={setFilter("Last Chance")}
-              title="Clothing"
+              onPress={() => setFilter("Last Chance")}
+              title="Last chances"
               accessibilityLabel="Click this to filter clothing"
             />
           </CollapseBody>
         </Collapse>
       </View>
-        {/* <FlatList
-          numColumns={2}
-          style={}
-          data={products}
-          keyExtractor={(product) => product.title}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              {
-                <Image
-                  source={{ uri: item.image }}
-                />
-              }
-              <TouchableOpacity>
-                <Text>{item.title}</Text>
-                <Text>{item.price}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        /> */}
+      <FlatList
+        numColumns={2}
+        style={styles.items}
+        data={products}
+        keyExtractor={(product) => product.title}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            {<Image source={{ uri: item.image }} />}
+            <TouchableOpacity>
+              <Text>{item.title}</Text>
+              <Text>{item.price}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
     </SafeAreaView>
   );
 };
@@ -165,7 +179,9 @@ const styles = StyleSheet.create({
   headerImage: {
     resizeMode: "contain",
     width: "100%",
+    height: 167,
   },
   filter: {},
   items: {},
+  item: {},
 });
