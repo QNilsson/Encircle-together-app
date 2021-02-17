@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   Platform,
   Button,
+  ImageBackground,
 } from "react-native";
 import {
   Collapse,
@@ -107,10 +108,13 @@ const ShopScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Image
-        source={require("../assets/storeHeader.png")}
-        style={styles.headerImage}
-      />
+      <View style={styles.headerContainer}>
+        <ImageBackground
+          source={require("../assets/storeHeader.png")}
+          style={styles.headerImage}
+        />
+      </View>
+
       <View style={styles.filter}>
         <Collapse onToggle={changeOpen}>
           <CollapseHeader>
@@ -177,9 +181,14 @@ export default ShopScreen;
 
 const styles = StyleSheet.create({
   headerImage: {
-    resizeMode: "contain",
+    resizeMode: "cover",
+    justifyContent: "center",
+    height: 197,
     width: "100%",
-    height: 167,
+  },
+  headerContainer: {
+    width: "100%",
+    top: 0,
   },
   filter: {},
   items: {},
