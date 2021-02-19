@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, Button, Platform, LayoutAnimation, UIManager} from 'react-native';
+import {View, Text, StyleSheet, Image, Button, Platform, SafeAreaView, Switch, ScrollView, LayoutAnimation} from 'react-native';
 import {Onboard} from '../context/OnbaordContext';
-
+import * as Animatable from 'react-native-animatable'
 import * as Font from 'expo-font';
 import { Touchable } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -49,8 +49,8 @@ const Support = () => {
 			  & safe, however; Encircle can not guarantee these resources. Encircle does not endorse
 			  the listed facilities, service providers, or support groups. 
 		  </Text>
-		  <Item/>
-		  <Item/>
+		  <Item header={"header1"}/>
+		  <Item header={"header2"}/>
 		  
 	  </View>
     </View>
