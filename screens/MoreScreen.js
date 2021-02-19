@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: "#2B2B2B",
-    fontFamily: "Futura-Book",
+    fontFamily: "Garamond",
     marginLeft: "10%",
     marginBottom: 10
   },
