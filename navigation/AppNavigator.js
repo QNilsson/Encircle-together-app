@@ -15,6 +15,7 @@ import LocationScreen from "../screens/LocationScreen";
 import ShopScreen from "../screens/ShopScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
+import SupportScreen from "../screens/SupportScreen"
 import { Onboard } from "../context/OnbaordContext";
 import OnBoarding from "../screens/OnBoarding";
 
@@ -25,6 +26,7 @@ const MoreNavigator = createStackNavigator(
     Location: LocationScreen,
     Donate: DonateScreen,
     Shop: ShopScreen,
+    Support: SupportScreen
   },
   {
     header: null,
