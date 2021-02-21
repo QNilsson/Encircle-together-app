@@ -1,15 +1,26 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, Button, Platform, SafeAreaView, Switch, ScrollView, LayoutAnimation} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Button,
+  Platform,
+  SafeAreaView,
+  Switch,
+  ScrollView,
+  LayoutAnimation,
+} from 'react-native';
 import {Onboard} from '../context/OnbaordContext';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
 import * as Font from 'expo-font';
-import { Touchable } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Touchable} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-if(Platform.OS === 'android'){
-	if(UIManager.setLayoutAnimationEnabledExperimental){
-		UIManager.setLayoutAnimationEnabledExperimental(true)
-	}
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental (true);
+  }
 }
 const fonts = {
   'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
@@ -41,40 +52,49 @@ const Support = () => {
 
   return (
     <View>
-      <Image source={require ('../assets/Hotlines.png')} />
-	  <View style={styles.content}>
-		  <Text style = {styles.headerText}>Additional Resources</Text>
-		  <Text style={styles.subHeaderText}>A currated list of local and national resources</Text>
-		  <Text style={styles.disclaimerText}>DISCLAIMER: Significant efforts were made to ensure that this resource list is reputable
-			  & safe, however; Encircle can not guarantee these resources. Encircle does not endorse
-			  the listed facilities, service providers, or support groups. 
-		  </Text>
-		  <Item header={"header1"}/>
-		  <Item header={"header2"}/>
-		  
-	  </View>
+      <Image
+        style={styles.backgroundImage}
+        source={require ('../assets/SupportImage.jpg')}
+      />
+      <View style={styles.content}>
+        <Text style={styles.headerText}>Additional Resources</Text>
+        <Text style={styles.subHeaderText}>
+          A currated list of local and national resources
+        </Text>
+        <Text style={styles.disclaimerText}>
+          DISCLAIMER: Significant efforts were made to ensure that this resource list is reputable
+          & safe, however; Encircle can not guarantee these resources. Encircle does not endorse
+          the listed facilities, service providers, or support groups.{' '}
+        </Text>
+        <Item header={'header1'} />
+        <Item header={'header2'} />
+
+      </View>
     </View>
   );
 };
 
-function Item(){
-	const [open, setopen] = useState(false);
-	const onPress = () =>{
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-		setopen(!open)
-	};
-	return(
-		<TouchableOpacity style={[styles.item, !open && {height:40}]} onPress={onPress} activeOpacity={1}>
-			<Text>Header</Text>
-			
-			{open && (
-				<View>
-					<Text>Some Data</Text>
-					<Text>Some Data</Text>
-				</View>
-			)}
-		</TouchableOpacity>
-	);
+function Item () {
+  const [open, setopen] = useState (false);
+  const onPress = () => {
+    LayoutAnimation.configureNext (LayoutAnimation.Presets.easeInEaseOut);
+    setopen (!open);
+  };
+  return (
+    <TouchableOpacity
+      style={[styles.item, !open && {height: 40}]}
+      onPress={onPress}
+      activeOpacity={1}
+    >
+      <Text>Header</Text>
+
+      {open &&
+        <View>
+          <Text>Some Data</Text>
+          <Text>Some Data</Text>
+        </View>}
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create ({
@@ -82,35 +102,40 @@ const styles = StyleSheet.create ({
     flex: 1,
     flexDirection: 'column',
   },
-  content:{
-	  paddingLeft:29,
-	  paddingRight:40
+  content: {
+    paddingLeft: 29,
+    paddingRight: 40,
   },
-  headerText:{
-	  paddingTop:30,
-	  fontFamily:"Clarendon",
-	  fontSize:24,
-	  lineHeight:28.8,
+  headerText: {
+    paddingTop: 30,
+    fontFamily: 'Clarendon',
+    fontSize: 24,
+    lineHeight: 28.8,
   },
-  subHeaderText:{
-	  paddingTop:5,
-	  fontFamily:"Garamond",
-	  fontSize: 18,
-	  lineHeight:21.6,
+  subHeaderText: {
+    paddingTop: 5,
+    fontFamily: 'Garamond',
+    fontSize: 18,
+    lineHeight: 21.6,
   },
-  disclaimerText:{
-	  paddingTop:18,
-	  fontFamily:"Garamond-Italic",
-	  lineHeight:18
+  disclaimerText: {
+    paddingTop: 18,
+    fontFamily: 'Garamond-Italic',
+    lineHeight: 18,
   },
-  item:{
-	  width:'100%',
-	borderWidth:1,
-	paddingHorizontal:20,
-	overflow:'hidden',
-	paddingVertical:10,
-	marginBottom:5
-  }
-})
+  item: {
+    width: '100%',
+    borderWidth: 1,
+    paddingHorizontal: 20,
+    overflow: 'hidden',
+    paddingVertical: 10,
+    marginBottom: 5,
+  },
+  backgroundImage: {
+    height: 167,
+    width: '100%',
+    resizeMode: 'cover',
+  },
+});
 
 export default Support;
