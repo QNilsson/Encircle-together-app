@@ -24,6 +24,8 @@ if (Platform.OS === 'android') {
     UIManager.setLayoutAnimationEnabledExperimental (true);
   }
 }
+
+
 const fonts = {
   'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
   'Clarendon-Italic': require ('../assets/fonts/clarendon-italic.otf'),
@@ -39,45 +41,47 @@ const fonts = {
 
 const CONTENT = [
   {
-    title:'Terms and Conditions',
-    content:'The following terms and conditions blah blah blah this is a filler'
+    title: 'Suicide Prevention',
+    content: 'Trans Lifeline',
+    desc: "A hotline staffed by transgender people for transgender people.",
+    number: "1-877-565-8860"
   },
   {
-    title:'Privacy Policy',
-    content: 'A privacy policy is this and its dumb and this is filler'
-  }
-]
+    title:"Domestic Violence",
+    content:"A help hotline",
+    desc:"Domestic violence is very bad this number will help you",
+    number:"1-900-348-3934"
+  },
+];
 
 const SELECTORS = [
-  {title: 'T&C', value:0},
-  {title: 'Privacy Policy', value:1}
-]
+  {title: 'T&C', value: 0},
+  {title: 'Privacy Policy', value: 1},
+];
 const Support = () => {
   const [fontsLoaded, setFontsLoaded] = useState (false);
-  const [activeSections, setActiveSections] = useState([]);
-  const [collapsed, setCollapsed]= useState(true);
-  const [multipleSelect, setMultipleSelect] = useState(false);
+  const [activeSections, setActiveSections] = useState ([]);
+  const [collapsed, setCollapsed] = useState (true);
+  const [multipleSelect, setMultipleSelect] = useState(true);
 
-  const toggleExpanded = () =>{
-    setCollapsed(!collapsed)
-  }
+  const toggleExpanded = () => {
+    setCollapsed (!collapsed);
+  };
 
-  const setSections = (sections) =>{
-    setActiveSections(
-      sections.includes(undefined) ? [] :sections
-    )
-  }
+  const setSections = sections => {
+    setActiveSections (sections.includes (undefined) ? [] : sections);
+  };
 
-  const renderHeader = (section, _, isActive) =>{
-    return(
+  const renderHeader = (section, _, isActive) => {
+    return (
       <Animatable.View
-      duration={400}
-      style={[styles.header, isActive ? styles.active : styles.inactive]}
-      transition="backgroundColor">
-        <Text tyle={styles.headerText}>{section.title}</Text>
+        duration={400}
+        style={[styles.header, isActive ? styles.active : styles.inactive]}
+        transition="backgroundColor"
+      >
+        <Text style={styles.headerText}>{section.title}</Text>
       </Animatable.View>
-      
-    )
+    );
   };
 
   const renderContent = (section, _, isActive) => {
@@ -85,15 +89,16 @@ const Support = () => {
     return (
       <Animatable.View
         duration={400}
-        style={[
-          styles.content,
-          isActive ? styles.active : styles.inactive
-        ]}
-        transition="backgroundColor">
+        style={[styles.content && styles.desc, isActive ? styles.active : styles.inactive]}
+        transition="backgroundColor"
+      >
         <Animatable.Text
           animation={isActive ? 'bounceIn' : undefined}
-          style={{textAlign: 'center'}}>
-          {section.content}
+          style={{textAlign: 'left', fontFamily:"Garamond-Bold", fontSize:18}}
+        >
+          <Text style={styles.content}>{section.content}{'\n'}</Text>
+          <Text style={styles.desc}>{section.desc}{'\n'}</Text>
+          <Text style={styles.number}>{section.number}</Text>
         </Animatable.Text>
       </Animatable.View>
     );
@@ -112,69 +117,29 @@ const Support = () => {
   }
 
   return (
-    
+    <SafeAreaView style={{flex: 1}}>
       
-      <SafeAreaView style={{flex: 1}}>
-        <Image
+      <View style={styles.container}>
+      <Image
         style={styles.backgroundImage}
         source={require ('../assets/SupportImage.jpg')}
       />
-      <View style={styles.container}>
-      
+      <Text style={styles.headerTitleText}>Additional Resources</Text>
+      <Text style={styles.subHeaderText}>A currated list of local and national resources</Text>
+      <Text style={styles.disclaimerText}>DISCLAIMER: Significant efforts were made to ensure that this resource list is reputable
+      & safe, however; Encircle cannot guarentee these resources. Encircle does not endorse the listed facilities, service providers, or support groups.</Text>
+        
         <ScrollView>
-          <Text style={styles.title}>
-            Example of Collapsible/Accordion/Expandable
-            Listview in React
-            Native
-          </Text>
+          
 
-          {/*Code for Single Collapsible Start*/}
-          <TouchableOpacity onPress={toggleExpanded}>
-            <View style={styles.header}>
-              <Text style={styles.headerText}>
-                Single Collapsible
-              </Text>
-              {/*Heading of Single Collapsible*/}
-            </View>
-          </TouchableOpacity>
-          {/*Content of Single Collapsible*/}
-          <Collapsible
-            collapsed={collapsed}
-            align="center"
-          >
-            <View style={styles.content}>
-              <Text style={{textAlign: 'center'}}>
-                This is a dummy text of Single Collapsible View
-              </Text>
-            </View>
-          </Collapsible>
-          {/*Code for Single Collapsible Ends*/}
+         
 
           <View
-            style={{
-              backgroundColor: '#000',
-              height: 1,
-              marginTop: 10
-            }} />
-          <View style={styles.multipleToggle}>
-            <Text
-              style={styles.multipleToggle__title}
-            >
-              Multiple Expand Allowed?
-            </Text>
-            <Switch
-              value={multipleSelect}
-              onValueChange={(multipleSelect) =>
-                setMultipleSelect(multipleSelect)
-              }
-            />
-          </View>
-          <Text style={styles.selectTitle}>
-            Please select below option to expand
-          </Text>
+             />
+          
 
           {/*Code for Selector starts here*/}
-          <View style={styles.selectors}>
+          {/* <View style={styles.selectors}>
             {SELECTORS.map((selector) => (
               <TouchableOpacity
                 key={selector.title}
@@ -193,7 +158,7 @@ const Support = () => {
                 </View>
               </TouchableOpacity>
             ))}
-          </View>
+          </View> */}
           {/*Code for Selector ends here*/}
 
           {/*Code for Accordion/Expandable List starts here*/}
@@ -223,89 +188,112 @@ const Support = () => {
       </View>
     </SafeAreaView>
   );
-  }
-
- 
-
-
- 
+};
 
 const styles = StyleSheet.create ({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
+ 
+  backgroundImage: {
+    height: 167,
+    width: '100%',
   },
-  backgroundImage:{
-    height:167,
-    width:'100%'
-  },
-  content: {
-    paddingLeft: 29,
-    paddingRight: 40,
-  },
-  headerText: {
+  headerTitleText: {
     paddingTop: 30,
+    paddingLeft: 30,
+    paddingRight: 40,
     fontFamily: 'Clarendon',
     fontSize: 24,
     lineHeight: 28.8,
   },
   subHeaderText: {
     paddingTop: 5,
+    paddingLeft: 30,
     fontFamily: 'Garamond',
     fontSize: 18,
     lineHeight: 21.6,
   },
   disclaimerText: {
     paddingTop: 18,
+    paddingLeft: 30,
+    paddingRight: 30,
     fontFamily: 'Garamond-Italic',
     lineHeight: 18,
   },
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
-    paddingTop: 30,
+    
+    fontFamily:"Garamond"
   },
   title: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 18,
-    fontWeight: '300',
     marginBottom: 20,
+    color:'red',
+    fontFamily:"Garamond"
   },
   header: {
-    backgroundColor: '#F5FCFF',
+   
     padding: 10,
   },
   headerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
+    textAlign: 'left',
+    lineHeight:26,
+    fontSize: 18,
+    fontFamily:"Garamond-Bold"
+   
   },
   content: {
-    padding: 20,
-    backgroundColor: '#fff',
+    paddingBottom:10,
+    lineHeight:26,
+    paddingTop:40,
+    fontFamily:"Garamond-Bold",
+    fontSize:18,
+    letterSpacing:.6
+  },
+  desc:{
+    paddingTop:40,
+    fontFamily:"Garamond",
+    fontSize:18,
+    letterSpacing:.5
+  },
+  number:{
+    paddingTop:5,
+    fontFamily:"Garamond",
+    color:'grey',
+    fontSize:18,
+    paddingBottom:30,
+    letterSpacing:1
   },
   active: {
-    backgroundColor: 'rgba(255,255,255,1)',
+  fontFamily:'Garamond-Bold',
+   paddingLeft:30,
+   paddingRight:40,
+   paddingTop:10,
   },
   inactive: {
-    backgroundColor: 'rgba(245,252,255,1)',
+    fontFamily:"Garamond",
+    paddingLeft:30,
+    paddingRight:40,
+    paddingTop:10
   },
   selectors: {
     marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'center',
+    backgroundColor:'red'
   },
   selector: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
+    backgroundColor: 'purple',
+    padding: 20,
+    
   },
   activeSelector: {
-    fontWeight: 'bold',
+    
+    color:'yellow'
   },
   selectTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    padding: 10,
+    fontSize: 15,
+    padding: 50,
+    color:'green',
     textAlign: 'center',
   },
   multipleToggle: {
@@ -317,8 +305,8 @@ const styles = StyleSheet.create ({
   multipleToggle__title: {
     fontSize: 16,
     marginRight: 8,
+    color:'pink'
   },
-
 });
 
 export default Support;
