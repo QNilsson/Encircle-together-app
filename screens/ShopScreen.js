@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   Platform,
   Button,
+  Pressable,
   ImageBackground,
 } from "react-native";
 import {
@@ -17,6 +18,7 @@ import {
   CollapseHeader,
   CollapseBody,
 } from "accordion-collapse-react-native";
+import { Divider } from "react-native-elements";
 
 import Product from "../models/product";
 // imports static product data array (loaded with product objects)
@@ -107,7 +109,7 @@ const ShopScreen = () => {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.headerContainer}>
         <ImageBackground
           source={require("../assets/storeHeader.png")}
@@ -118,46 +120,73 @@ const ShopScreen = () => {
       <View style={styles.filter}>
         <Collapse onToggle={changeOpen}>
           <CollapseHeader>
-            <View>
-              <Text>
-                {isOpen ? (
-                  <AntDesign name="down" size={24} color="black" />
-                ) : (
-                  <AntDesign name="up" size={24} color="black" />
-                )}
+            <View style={styles.filter}>
+              <Text style={styles.filterHeader}>
                 {productType == null ? "All Products" : productType}
+                {isOpen ? (
+                  <AntDesign
+                    style={styles.icon}
+                    name="down"
+                    size={22}
+                    color="black"
+                  />
+                ) : (
+                  <AntDesign
+                    style={styles.icon}
+                    name="up"
+                    size={22}
+                    color="black"
+                  />
+                )}
               </Text>
             </View>
           </CollapseHeader>
           <CollapseBody>
-            <Button
+            <Divider style={styles.divider} />
+            <Pressable
+              style={styles.filterButton}
               onPress={() => setFilter("Clothing")}
-              title="Clothing"
               accessibilityLabel="Click this to filter clothing"
-            />
-            <Button
+            >
+              <Text style={styles.filterText}>Clothing</Text>
+            </Pressable>
+            <Divider style={styles.divider} />
+            <Pressable
+              style={styles.filterButton}
               onPress={() => setFilter("Accessories")}
-              title="Accessories"
               accessibilityLabel="Click this to filter clothing"
-            />
-            <Button
+            >
+              <Text style={styles.filterText}>Accessories</Text>
+            </Pressable>
+            <Divider style={styles.divider} />
+            <Pressable
+              style={styles.filterButton}
               onPress={() => setFilter("Resources")}
-              title="Resources"
               accessibilityLabel="Click this to filter clothing"
-            />
-            <Button
+            >
+              <Text style={styles.filterText}>Resources</Text>
+            </Pressable>
+            <Divider style={styles.divider} />
+            <Pressable
+              style={styles.filterButton}
               onPress={() => setFilter("Sale")}
-              title="Sale"
               accessibilityLabel="Click this to filter clothing"
-            />
-            <Button
+            >
+              <Text style={styles.filterText}>Sale</Text>
+            </Pressable>
+            <Divider style={styles.divider} />
+            <Pressable
+              style={styles.filterButton}
               onPress={() => setFilter("Last Chance")}
-              title="Last chances"
               accessibilityLabel="Click this to filter clothing"
-            />
+            >
+              <Text style={styles.filterText}>Last Chance</Text>
+            </Pressable>
           </CollapseBody>
         </Collapse>
+        <Divider style={styles.divider} />
       </View>
+      <Text style={styles.itemsHeader}>{productType === null ? "All Products" : productType}</Text>
       <FlatList
         numColumns={2}
         style={styles.items}
@@ -165,7 +194,7 @@ const ShopScreen = () => {
         keyExtractor={(product) => product.title}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            {<Image source={{ uri: item.image }} />}
+            {<Image style={styles.itemImage} source={{url: item.url}} />}
             <TouchableOpacity>
               <Text>{item.title}</Text>
               <Text>{item.price}</Text>
@@ -190,7 +219,38 @@ const styles = StyleSheet.create({
     width: "100%",
     top: 0,
   },
-  filter: {},
+  filterHeader: {
+    padding: 15,
+    alignContent: "center",
+    paddingTop: 20,
+    fontSize: 22,
+  },
+  filterButton: {
+    backgroundColor: "white",
+    padding: 15,
+  },
+  filterText: {
+    fontSize: 22,
+  },
+  filter: {
+    width: "100%",
+  },
+  itemsHeader: {
+    fontSize: 24,
+    margin: 25,
+  },
   items: {},
   item: {},
+  itemImage: {
+    resizeMode: "contain",
+  },
+  icon: {
+    marginLeft: 5,
+  },
+  divider: {
+    backgroundColor: "#F2F2F2",
+    height: 2,
+    marginRight: 15,
+    marginLeft: 15,
+  },
 });
