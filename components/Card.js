@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Platform} from 'react-native';
 import {block} from 'react-native-reanimated';
 
@@ -9,29 +9,31 @@ const Card = props => {
   const dd = String (today.getDate ()).padStart (2, '0');
   today = dd;
 
-   const timeConversion = (x) => {
+   const timeConversion = (start_) => {
     let output = []
-    x = x.split(':')
-    if (Number(x[0]) == 24) {
-      x[0] = '12'
-      output.push((x[0]+':'+x[1]))
+    start_ = start_.split(':');
+    if (Number(start_[0]) == 24) {
+      start_[0] = '12'
+      output.push((start_[0]+':'+start_[1]))
       output.push('AM')
-    } else if (Number(x[0]) == 12) {
-      output.push((x[0]+':'+x[1]))
+    } else if (Number(start_[0]) == 12) {
+      output.push((start_[0]+':'+start_[1]))
       output.push('            PM')
-    } else if (Number(x[0]) > 12) {
-      x[0] = Number(x[0]) - 12
-      x[0] = x[0].toString()
-      output.push((x[0]+':'+x[1]))
+    } else if (Number(start_[0]) > 12) {
+      start_[0] = Number(start_[0]) - 12
+      start_[0] = start_[0].toString()
+      output.push((start_[0]+':'+start_[1]))
       output.push('            PM')
     } else {
-      output.push((x[0]+':'+x[1]))
+      output.push((start_[0]+':'+start_[1]))
       output.push('AM')
     }
     return output
   }
 
-  
+  useEffect(() => {
+    console.log(props.start)
+  })
 
 
 

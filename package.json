@@ -9,34 +9,28 @@
     "dev": "expo start"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.1.0",
     "@expo/vector-icons": "^10.0.0",
     "@react-native-async-storage/async-storage": "^1.13.3",
     "@react-native-community/masked-view": "0.1.10",
-<<<<<<< HEAD
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.2.9",
     "@types/react": "~16.9.35",
     "async-storage": "^0.1.0",
     "axios": "^0.19.2",
     "expo": "^39.0.3",
+    "expo-app-loading": "^1.0.1",
     "expo-cli": "^3.28.2",
-=======
-    "@react-navigation/native": "^5.8.10",
-    "@react-navigation/stack": "^5.12.8",
-    "@types/react": "^16.9.56",
-    "axios": "^0.21.1",
-    "expo": "^39.0.5",
-    "expo-cli": "^3.28.6",
->>>>>>> master
     "expo-constants": "~9.2.0",
     "expo-file-system": "~9.2.0",
-    "expo-font": "^8.3.0",
+    "expo-font": "~8.3.0",
     "expo-updates": "^0.3.5",
     "gradle": "^1.2.3",
     "path-to-regexp": "^6.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.0.tar.gz",
+    "react-native-async-storage": "^0.0.1",
     "react-native-calendars": "^1.789.0",
     "react-native-cli": "^2.0.1",
     "react-native-dark-mode": "^0.2.2",
@@ -57,6 +51,11 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
