@@ -25,7 +25,6 @@ if (Platform.OS === 'android') {
   }
 }
 
-
 const fonts = {
   'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
   'Clarendon-Italic': require ('../assets/fonts/clarendon-italic.otf'),
@@ -41,16 +40,17 @@ const fonts = {
 
 const CONTENT = [
   {
-    title: 'Suicide Prevention',
+    title: '+ Suicide Prevention',
     content: 'Trans Lifeline',
-    desc: "A hotline staffed by transgender people for transgender people.",
-    number: "1-877-565-8860"
+    desc: 'A hotline staffed by transgender people for transgender people.',
+    number: '1-877-565-8860'
+
   },
   {
-    title:"Domestic Violence",
-    content:"A help hotline",
-    desc:"Domestic violence is very bad this number will help you",
-    number:"1-900-348-3934"
+    title: '+ Domestic Violence',
+    content: 'A help hotline',
+    desc: 'Domestic violence is very bad this number will help you',
+    number: '1-900-348-3934',
   },
 ];
 
@@ -62,7 +62,7 @@ const Support = () => {
   const [fontsLoaded, setFontsLoaded] = useState (false);
   const [activeSections, setActiveSections] = useState ([]);
   const [collapsed, setCollapsed] = useState (true);
-  const [multipleSelect, setMultipleSelect] = useState(true);
+  const [multipleSelect, setMultipleSelect] = useState (true);
 
   const toggleExpanded = () => {
     setCollapsed (!collapsed);
@@ -89,12 +89,15 @@ const Support = () => {
     return (
       <Animatable.View
         duration={400}
-        style={[styles.content && styles.desc, isActive ? styles.active : styles.inactive]}
+        style={[
+          styles.content && styles.desc,
+          isActive ? styles.active : styles.inactive,
+        ]}
         transition="backgroundColor"
       >
         <Animatable.Text
-          animation={isActive ? 'bounceIn' : undefined}
-          style={{textAlign: 'left', fontFamily:"Garamond-Bold", fontSize:18}}
+          // animation={isActive ? 'bounceIn' : undefined}
+          style={{textAlign: 'left', fontFamily: 'Garamond-Bold', fontSize: 18}}
         >
           <Text style={styles.content}>{section.content}{'\n'}</Text>
           <Text style={styles.desc}>{section.desc}{'\n'}</Text>
@@ -118,25 +121,24 @@ const Support = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      
+
       <View style={styles.container}>
-      <Image
-        style={styles.backgroundImage}
-        source={require ('../assets/SupportImage.jpg')}
-      />
-      <Text style={styles.headerTitleText}>Additional Resources</Text>
-      <Text style={styles.subHeaderText}>A currated list of local and national resources</Text>
-      <Text style={styles.disclaimerText}>DISCLAIMER: Significant efforts were made to ensure that this resource list is reputable
-      & safe, however; Encircle cannot guarentee these resources. Encircle does not endorse the listed facilities, service providers, or support groups.</Text>
-        
+        <Image
+          style={styles.backgroundImage}
+          source={require ('../assets/SupportImage.jpg')}
+        />
+        <Text style={styles.headerTitleText}>Additional Resources</Text>
+        <Text style={styles.subHeaderText}>
+          A currated list of local and national resources
+        </Text>
+        <Text style={styles.disclaimerText}>
+          DISCLAIMER: Significant efforts were made to ensure that this resource list is reputable
+          & safe, however; Encircle cannot guarentee these resources. Encircle does not endorse the listed facilities, service providers, or support groups.
+        </Text>
+
         <ScrollView>
-          
 
-         
-
-          <View
-             />
-          
+          <View />
 
           {/*Code for Selector starts here*/}
           {/* <View style={styles.selectors}>
@@ -191,7 +193,6 @@ const Support = () => {
 };
 
 const styles = StyleSheet.create ({
- 
   backgroundImage: {
     height: 167,
     width: '100%',
@@ -220,80 +221,76 @@ const styles = StyleSheet.create ({
   },
   container: {
     flex: 1,
-    
-    fontFamily:"Garamond"
+
+    fontFamily: 'Garamond',
   },
   title: {
     textAlign: 'left',
     fontSize: 18,
     marginBottom: 20,
-    color:'red',
-    fontFamily:"Garamond"
+    color: 'red',
+    fontFamily: 'Garamond',
   },
   header: {
-   
     padding: 10,
   },
   headerText: {
     textAlign: 'left',
-    lineHeight:26,
+    lineHeight: 26,
     fontSize: 18,
-    fontFamily:"Garamond-Bold"
-   
+    fontFamily: 'Garamond-Bold',
   },
   content: {
-    paddingBottom:10,
-    lineHeight:26,
-    paddingTop:40,
-    fontFamily:"Garamond-Bold",
-    fontSize:18,
-    letterSpacing:.6
+    paddingBottom: 10,
+    lineHeight: 26,
+    paddingTop: 40,
+    fontFamily: 'Garamond-Bold',
+    fontSize: 18,
+    letterSpacing: 0.6,
   },
-  desc:{
-    paddingTop:40,
-    fontFamily:"Garamond",
-    fontSize:18,
-    letterSpacing:.5
+  desc: {
+    paddingTop: 40,
+    fontFamily: 'Garamond',
+    fontSize: 18,
+    letterSpacing: 0.5,
   },
-  number:{
-    paddingTop:5,
-    fontFamily:"Garamond",
-    color:'grey',
-    fontSize:18,
-    paddingBottom:30,
-    letterSpacing:1
+  number: {
+    paddingTop: 5,
+    fontFamily: 'Garamond',
+    color: 'grey',
+    fontSize: 18,
+    paddingBottom: 30,
+    letterSpacing: 1,
   },
   active: {
-  fontFamily:'Garamond-Bold',
-   paddingLeft:30,
-   paddingRight:40,
-   paddingTop:10,
+    fontFamily: 'Garamond-Bold',
+    paddingLeft: 30,
+    paddingRight: 40,
+    paddingTop: 10,
   },
   inactive: {
-    fontFamily:"Garamond",
-    paddingLeft:30,
-    paddingRight:40,
-    paddingTop:10
+    fontFamily: 'Garamond',
+    paddingLeft: 30,
+    paddingRight: 40,
+    paddingTop: 10,
   },
   selectors: {
     marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor:'red'
+    backgroundColor: 'red',
   },
   selector: {
     backgroundColor: 'purple',
     padding: 20,
-    
   },
   activeSelector: {
-    
-    color:'yellow'
+    color: 'yellow',
   },
   selectTitle: {
     fontSize: 15,
     padding: 50,
-    color:'green',
+    color: 'green',
     textAlign: 'center',
   },
   multipleToggle: {
@@ -305,7 +302,7 @@ const styles = StyleSheet.create ({
   multipleToggle__title: {
     fontSize: 16,
     marginRight: 8,
-    color:'pink'
+    color: 'pink',
   },
 });
 
