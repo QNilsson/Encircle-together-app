@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#2B2B2B',
     fontSize: 16,
-    fontFamily: 'Clarendon',
+    fontFamily: 'Clarendon-Regular',
     marginLeft: '5%',
   },
   arrowIcon: {
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'left',
     color: '#2B2B2B',
-    fontFamily: 'Garamond',
+    fontFamily: 'Garamond-Regular',
     marginTop: 15
   },
   iconContainer: {
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'left',
     color: '#2B2B2B',
-    fontFamily: 'Din',
+    fontFamily: 'Din-Regular',
     marginLeft: '5%'
   },
   time: {
     fontSize: 15,
     textAlign: 'left',
     color: '#2B2B2B',
-    fontFamily: 'Garamond',
+    fontFamily: 'Garamond-Regular',
     marginLeft: '5%'
   },
   description: {

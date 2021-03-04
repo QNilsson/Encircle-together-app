@@ -117,7 +117,7 @@ const AppNavigator = createBottomTabNavigator(
         borderColor: "#BABDC1",
         paddingTop: 5,
         paddingBottom: 30,
-        height: 100,
+        height: 90,
         position: "relative",
       },
     },
