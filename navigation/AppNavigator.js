@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Linking } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -12,10 +12,12 @@ import ResourcesScreen from "../screens/ResourcesScreen";
 import ResourceScreen from "../screens/ResourceScreen";
 import DonateScreen from "../screens/DonateScreen";
 import LocationScreen from "../screens/LocationScreen";
-import ShopScreen from "../screens/ShopScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
-// import { DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from "react-native-dark-mode";
+
+const shopRedirect = () => {
+  Linking.openURL("https://encirclestore.org/");
+}
 
 // more screen stack
 const MoreNavigator = createStackNavigator(
@@ -23,7 +25,7 @@ const MoreNavigator = createStackNavigator(
     More: MoreScreen,
     Location: LocationScreen,
     Donate: DonateScreen,
-    Shop: ShopScreen,
+    Shop: shopRedirect,
   },
   {
     header: null,
@@ -54,16 +56,6 @@ const CalendarNavigator = createStackNavigator(
     headerMode: "none",
   }
 );
-
-// dark mode
-// const DynamicStyles = new DynamicStyleSheet( {
-//   container: {
-//     backgroundColor: new DynamicValue('white', 'black')
-//   },
-//   text: {
-//     color: new DynamicValue('black', 'white')
-//   }
-// })
 
 // app bottom tab stack
 const AppNavigator = createBottomTabNavigator(
