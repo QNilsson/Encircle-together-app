@@ -9,7 +9,7 @@ const Card = props => {
   const dd = String (today.getDate ()).padStart (2, '0');
   today = dd;
 
-   const timeConversion = (start_) => {
+  const timeConversion = (start_) => {
     let output = []
     start_ = start_.split(':');
     if (Number(start_[0]) == 24) {
@@ -48,7 +48,7 @@ const Card = props => {
     <View style={styles.card}>
       <View style={styles.timeBox}>
         <View>
-          <Text style={styles.timeBoxText} numberOfLines={2}>{timeConversion(props.start)}</Text>
+          <Text style={styles.timeBoxText} numberOfLines={2}>{timeConversion(props.time)}</Text>
         
         </View>
       </View>

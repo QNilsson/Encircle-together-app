@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
   ImageBackground,
   StyleSheet,
-  SafeAreaView,
+  ScrollView,
   Image,
   Pressable,
+  Platform,
+  Linking,
 } from "react-native";
 
 const VolunteerScreen = () => {
-
-  const VolunteerWebpage = () => {
-
-  }
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <View>
         <ImageBackground
           style={styles.backgroundImage}
@@ -39,8 +36,13 @@ const VolunteerScreen = () => {
         cookies and other treats, playing games, helping with homework, and
         providing information.
       </Text>
-      <Pressable style={styles.button}><Text style={styles.buttonText}>Get Involved</Text></Pressable>
-    </SafeAreaView>
+      <Pressable
+        style={styles.button}
+        onPress={() => Linking.openURL("https://encircletogether.org/involved")}
+      >
+        <Text style={styles.buttonText}>Get Involved</Text>
+      </Pressable>
+    </ScrollView>
   );
 };
 
@@ -57,18 +59,21 @@ const styles = StyleSheet.create({
     fontSize: 24,
     padding: 30,
     paddingBottom: 0,
+    paddingTop: 20,
   },
   bodyText: {
     fontSize: 18,
-    paddingBottom: 20,
+    paddingBottom: Platform.OS === "ios" ? 10 : 20,
     paddingLeft: 30,
     paddingRight: 30,
-    paddingTop: 20,
+    paddingTop: Platform.OS === "ios" ? 10 : 20,
   },
   bodyImage: {
     resizeMode: "contain",
     height: 250,
-    width: "100%",
+    width: "85%",
+    marginLeft: 30,
+    marginRight: 30,
   },
   button: {
     backgroundColor: "#000000",
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 15,
     marginBottom: 15,
-  }
+  },
 });
 
 export default VolunteerScreen;
