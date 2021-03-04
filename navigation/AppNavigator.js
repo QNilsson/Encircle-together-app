@@ -11,7 +11,6 @@ import ResourcesScreen from "../screens/ResourcesScreen";
 import ResourceScreen from "../screens/ResourceScreen";
 import DonateScreen from "../screens/DonateScreen";
 import LocationScreen from "../screens/LocationScreen";
-import ShopScreen from "../screens/ShopScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
 import VolunteerScreen from "../screens/Volunteer"
@@ -23,9 +22,8 @@ const MoreNavigator = createStackNavigator(
   {
     More: MoreScreen,
     Location: LocationScreen,
-    Donate: DonateScreen,
-    Shop: ShopScreen,
     Volunteer: VolunteerScreen,
+    Donate: DonateScreen,
   },
   {
     header: null,

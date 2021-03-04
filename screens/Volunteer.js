@@ -49,6 +49,8 @@ const VolunteerScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 1500,
+    paddingBottom: 15,
   },
   backgroundImage: {
     resizeMode: "contain",
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     padding: 30,
     paddingBottom: 0,
     paddingTop: 20,
+    fontFamily: "Clarendon-Regular",
   },
   bodyText: {
     fontSize: 18,
@@ -83,11 +86,14 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
     shadowColor: "black",
+    elevation: 3,
     shadowOffset: {
-      width: 20,
-      height: 0,
+      width: 3,
+      height: 3,
     },
     shadowOpacity: 0.1,
+    shadowRadius: 6,
+    fontFamily: "Garamond-Regular",
   },
   buttonText: {
     color: "#FFFFFF",
@@ -95,6 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 15,
     marginBottom: 15,
+    fontFamily: "Din-Regular",
   },
 });
 
