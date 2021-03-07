@@ -20,7 +20,7 @@ const VolunteerScreen = () => {
       <View>
         <ImageBackground
           style={styles.backgroundImage}
-          source={require("../assets/volunteer.jpg")}
+          source={require("../assets/volunteer.png")}
         />
       </View>
       <Text style={styles.familyText}>

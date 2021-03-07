@@ -48,7 +48,7 @@ const Card = props => {
     <View style={styles.card}>
       <View style={styles.timeBox}>
         <View>
-          <Text style={styles.timeBoxText} numberOfLines={2}>{timeConversion(props.start)}</Text>
+          <Text style={styles.timeBoxText} numberOfLines={2}>{timeConversion(props.time)}</Text>
         
         </View>
       </View>
