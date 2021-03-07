@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: "center",
     color: "#2B2B2B",
-    fontFamily: "ModernoFB",
+    fontFamily: "Garamond-Regular",
     marginTop: "20%"
   },
   paragraph: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     margin: 8,
     marginBottom: 20,
     alignItems: "center",
-    fontFamily: "Futura-Book"
+    fontFamily: "Clarendon-Regular"
   },
   calendarButton: {
     display: "flex",
@@ -202,13 +202,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#2B2B2B",
     textAlign: "center",
-    fontFamily: "Futura-Book"
+    fontFamily: "Clarendon-Regular"
   },
   priceText: {
     color: "#686868",
     fontStyle: "italic",
     textAlign: "center",
     padding: 10,
-    fontFamily: "ModernoFB"
+    fontFamily: "Garamond-Regular"
   }
 });

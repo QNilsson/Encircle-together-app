@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dimensions, StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView, ScrollView } from "react-native";
+import { Dimensions, StyleSheet, Text, View, FlatList, TouchableOpacity, Image, ImageBackground, SafeAreaView, ScrollView } from "react-native";
 
 // imports publication model used to load publicationData array
 import Publication from '../models/publication';
@@ -77,8 +77,11 @@ export default class ResourcesScreen extends Component {
               data={this.state.publications}
               keyExtractor={publication => publication.docId}
               ListHeaderComponent={
-                <View style={styles.resourceHeader}>
-                  <Text style={styles.resources}>Encircle Resources</Text>
+                <View>
+                  <ImageBackground
+                    style={styles.backgroundImage}
+                    source={require("../assets/resource.jpg")}
+                  />
                 </View>
               }
               renderItem={({ item }) => (
@@ -134,9 +137,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: 'Clarendon-Regular',
   },
-  resourceHeader: {
-    backgroundColor: '#767B82',
-    width: '100%'
+  backgroundImage: {
+    resizeMode: "contain",
+    width: "100%",
+    height: 167,
   },
   paragraph: {
     fontSize: 20,

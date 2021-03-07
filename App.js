@@ -37,6 +37,7 @@ export default function App() {
     "Garamond-Bold": require("./assets/fonts/garamond-bold.otf"),
     "Garamond-Italic": require("./assets/fonts/garamond-italic.otf"),
     "Garamond-Bold-Italic": require("./assets/fonts/garamond-bold-italic.otf"),
+    "Icomoon": require("./assets/fonts/icomoon.ttf"),
   });
 
   if (!fontsLoaded) {

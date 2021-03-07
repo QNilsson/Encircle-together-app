@@ -31,7 +31,7 @@ const EventScreen = (props) => {
     html = ''
   }
   html = urlify(html);
-  html = '<div style="color:#2B2B2B; font-family: Futura-Book; margin-bottom: 120px;">'+html+'</div>'
+  html = '<div style="color:#2B2B2B; font-family: Clarendon-Regular; margin-bottom: 120px;">'+html+'</div>'
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
