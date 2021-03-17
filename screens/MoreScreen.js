@@ -50,11 +50,11 @@ class MoreScreen extends Component {
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Shop");
+              this.props.navigation.navigate("Therapists");
             }}
           >
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Shop</Text>
+              <Text style={styles.title}>Therapists</Text>
               <Ionicons
                 name="ios-arrow-forward"
                 size={20}

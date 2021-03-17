@@ -13,9 +13,8 @@ import DonateScreen from "../screens/DonateScreen";
 import LocationScreen from "../screens/LocationScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
-import VolunteerScreen from "../screens/Volunteer"
-import { Onboard } from "../context/OnbaordContext";
-import OnBoarding from "../screens/OnBoarding";
+import VolunteerScreen from "../screens/Volunteer";
+import BiosScreen from "../screens/Bios";
 
 // more screen stack
 const MoreNavigator = createStackNavigator(
@@ -23,6 +22,7 @@ const MoreNavigator = createStackNavigator(
     More: MoreScreen,
     Location: LocationScreen,
     Volunteer: VolunteerScreen,
+    Therapists: BiosScreen,
     Donate: DonateScreen,
   },
   {
