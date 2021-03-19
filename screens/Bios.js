@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   View,
@@ -7,10 +7,11 @@ import {
   ImageBackground,
   StyleSheet,
   Linking,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 
-import THERAPISTS from "../constants/Therapists"
-import Bio from "./Bio"
+import THERAPISTS from "../constants/Therapists";
 
 const BiosScreen = () => {
   const [docs, setDocs] = useState();
@@ -20,7 +21,7 @@ const BiosScreen = () => {
       await setDocs([...THERAPISTS]);
     };
     loadTherapists();
-  }, [])
+  }, []);
 
   return (
     <ScrollView>
@@ -46,16 +47,69 @@ const BiosScreen = () => {
           </Pressable>
         </ImageBackground>
       </View>
-      <View style={{flex: 1}}>
-            {
-              docs.map((doc, key) => {
-                return <Bio therapist={doc} key={key} />
-              })
-            }
+      <Text style={docStyles.docHeader}>Our Therapists</Text>
+      <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
+        <TouchableOpacity style={docStyles.docContainer}>
+          <Image style={docStyles.docImage} source={require("../assets/Jared.png")} />
+          <Text style={docStyles.docName}>
+            Jared Klundt <Text style={docStyles.docTitle}>PhD</Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={docStyles.docContainer}>
+          <Image style={docStyles.docImage} source={require("../assets/Lacey.png")} />
+          <Text style={docStyles.docName}>
+            Lacey Bagley <Text style={docStyles.docTitle}>MS, AMFT</Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={docStyles.docContainer}>
+          <Image style={docStyles.docImage} source={require("../assets/Sandra.png")} />
+          <Text style={docStyles.docName}>
+            Sandra Priedeman <Text style={docStyles.docTitle}>MSW, LCSW</Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={docStyles.docContainer}>
+          <Image style={docStyles.docImage} source={require("../assets/Andres.png")} />
+          <Text style={docStyles.docName}>
+            Andrés Brown <Text style={docStyles.docTitle}>MS, AMFT</Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={docStyles.docContainer}>
+          <Image style={docStyles.docImage} source={require("../assets/Meghan.png")} />
+          <Text style={docStyles.docName}>
+            Meghan Maddock <Text style={docStyles.docTitle}>MS</Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={docStyles.docContainer}>
+          <Image style={docStyles.docImage} source={require("../assets/Lori.png")} />
+          <Text style={docStyles.docName}>
+            Lori Smith <Text style={docStyles.docTitle}>MSW, LCSW</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
+
+const docStyles = StyleSheet.create({
+  docImage: {
+    resizeMode: "contain",
+    width: 147,
+    height: 196,
+  },
+  docName: {
+    fontSize: 16,
+    fontFamily: "Garamond-Regular",
+  },
+  docTitle: {
+    fontSize: 12,
+  },
+  docContainer: {
+    paddingRight: 34,
+  },
+  docHeader: {
+    fontSize: 24,
+  }
+})
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -98,7 +152,7 @@ const styles = StyleSheet.create({
     fontFamily: "Din-Regular",
     fontSize: 20,
     textAlign: "center",
-  }
+  },
 });
 
 export default BiosScreen;
