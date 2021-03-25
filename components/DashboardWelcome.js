@@ -20,26 +20,6 @@ export const getLocationImage = (location) => {
 };
 
 class DashboardWelcome extends Component {
-<<<<<<< HEAD
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-  }
-
-  render() {
-    if (this.state.loading) {
-      return <ActivityIndicator />;
-    }
-    return (
-      <View style={styles.titleContainer}>
-        <ImageBackground
-          source={require("../assets/backgroundImage.png")}
-          style={styles.backgroundImage}
-        ></ImageBackground>
-      </View>
-    );
-  }
-=======
 	constructor(props) {
 		super(props);
 		this.state = {loading: true};
@@ -47,11 +27,6 @@ class DashboardWelcome extends Component {
 
 	async componentWillMount() {
 		await Font.loadAsync({
-			ModernoFB: require('../assets/fonts/ModernoFB-Semibold.otf'),
-			'Futura-Light': require('../assets/fonts/Futura-Light.ttf'),
-			'Futura-Book': require('../assets/fonts/Futura-Book.ttf'),
-			'Futura-Medium': require('../assets/fonts/Futura-Medium.ttf'),
-			'Futura-Bold': require('../assets/fonts/Futura-Bold.ttf'),
 			Clarendon: require('../assets/fonts/clarendon.otf'),
 			'Garamond-Bold': require('../assets/fonts/garamond-bold.otf'),
 			'Din-Bold': require('../assets/fonts/din-bold.otf'),
@@ -75,7 +50,6 @@ class DashboardWelcome extends Component {
 			</View>
 		);
 	}
->>>>>>> d716c0fa666e243140b5fc49643e317b3275f82f
 }
 
 const styles = StyleSheet.create({

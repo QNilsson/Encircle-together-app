@@ -23,7 +23,6 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 // imports app navigation (https://reactnavigation.org/)
 import AppNavigator from "./navigation/AppNavigator";
-import OnboardProvider from "./context/OnbaordContext";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
