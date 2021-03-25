@@ -9,17 +9,6 @@ class DashboardWelcome extends Component {
     this.state = { loading: true };
   }
 
-  async componentWillMount() {
-    await Font.loadAsync({
-      ModernoFB: require("../assets/fonts/ModernoFB-Semibold.otf"),
-      "Futura-Light": require("../assets/fonts/Futura-Light.ttf"),
-      "Futura-Book": require("../assets/fonts/Futura-Book.ttf"),
-      "Futura-Medium": require("../assets/fonts/Futura-Medium.ttf"),
-      "Futura-Bold": require("../assets/fonts/Futura-Bold.ttf"),
-    });
-    this.setState({ loading: false });
-  }
-
   render() {
     if (this.state.loading) {
       return <ActivityIndicator />;

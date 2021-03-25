@@ -1,0 +1,6 @@
+module Pods_ectest {
+  umbrella header "Pods-ectest-umbrella.h"
+
+  export *
+  module * { export * }
+}

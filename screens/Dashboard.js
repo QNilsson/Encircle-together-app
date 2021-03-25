@@ -23,8 +23,6 @@ import * as eventActions from "../store/actions/Event";
 import * as resourceActions from "../store/actions/Resource";
 
 import Calendar from "../screens/Calendar";
-import { Onboard } from "../context/OnbaordContext";
-import OnBoarding from "./OnBoarding";
 
 const Dashboard = (props) => {
   // pulls set location from store (provo default)
@@ -34,8 +32,6 @@ const Dashboard = (props) => {
   // pulls resources from store
   let resources = useSelector((state) => state.resources.resources);
 
-  const onboardContext = useContext(Onboard);
-
   const dispatch = useDispatch();
 
   // updates component when a new location is selected - loads resources from issuu api
@@ -43,10 +39,6 @@ const Dashboard = (props) => {
     dispatch(eventActions.fetchTodaysEvents(location));
     dispatch(resourceActions.fetchResources());
   }, [dispatch]);
-
-  if (onboardContext.firstOpen) {
-    return <OnBoarding />;
-  }
 
   return (
     <ScrollView style={{ flex: 1 }}>
