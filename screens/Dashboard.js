@@ -23,8 +23,28 @@ import * as eventActions from "../store/actions/Event";
 import * as resourceActions from "../store/actions/Resource";
 
 import Calendar from "../screens/Calendar";
+import {useFonts} from "expo-font"
 
-const Dashboard = (props) => {
+
+
+
+
+const Dashboard = props => {
+
+  const [fonts] = useFonts({
+    'Clarendon-Regular': require ('../assets/fonts/clarendon.otf'),
+    'Clarendon-Italic': require ('../assets/fonts/clarendon-italic.otf'),
+    'Clarendon-Bold': require ('../assets/fonts/clarendon-bold.otf'),
+    'Clarendon-Bold-Italic': require ('../assets/fonts/clarendon-bold-italic.otf'),
+    'Din-Regular': require ('../assets/fonts/din.otf'),
+    'Din-Bold': require ('../assets/fonts/din-bold.otf'),
+    'Garamond-Regular': require ('../assets/fonts/garamond.otf'),
+    'Garamond-Bold': require ('../assets/fonts/garamond-bold.otf'),
+    'Garamond-Italic': require ('../assets/fonts/garamond-italic.otf'),
+    'Garamond-Bold-Italic': require ('../assets/fonts/garamond-bold-italic.otf'),
+  });
+
+  
   // pulls set location from store (provo default)
   let location = useSelector((state) => state.events.location);
   // pulls events from store (based on selected location)
@@ -32,13 +52,65 @@ const Dashboard = (props) => {
   // pulls resources from store
   let resources = useSelector((state) => state.resources.resources);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch ();
+ 
+  //prepare to get month names
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  // sets date to today
+  let today = new Date ();
+  let dd = String (today.getDate ()).padStart (2, '0');
+  let mm = String (today.getMonth () + 1).padStart (2, '0');
+  let monthName = monthNames[today.getMonth ()].toUpperCase ();
+  let yyyy = today.getFullYear ();
+  today = yyyy + '-' + mm + '-' + dd;
+  let todayName = monthName + ' ' + dd + ',' + ' ' + yyyy;
+
+  //trying to get correct time
+
+  const timeConversion = x => {
+    let output = [];
+    x = x.split (':');
+    if (Number (x[0]) == 24) {
+      x[0] = '12';
+      output.push (x[0] + ':' + x[1]);
+      output.push ('AM');
+    } else if (Number (x[0]) == 12) {
+      output.push (x[0] + ':' + x[1]);
+      output.push ('PM');
+    } else if (Number (x[0]) > 12) {
+      x[0] = Number (x[0]) - 12;
+      x[0] = x[0].toString ();
+      output.push (x[0] + ':' + x[1]);
+      output.push ('PM');
+    } else {
+      output.push (x[0] + ':' + x[1]);
+      output.push ('AM');
+    }
+    return output;
+  };
 
   // updates component when a new location is selected - loads resources from issuu api
-  useEffect(() => {
-    dispatch(eventActions.fetchTodaysEvents(location));
-    dispatch(resourceActions.fetchResources());
-  }, [dispatch]);
+  useEffect (
+    () => {
+      dispatch (eventActions.fetchTodaysEvents (location));
+      dispatch (resourceActions.fetchResources ());
+    },
+    [dispatch]
+  );
 
   return (
     <ScrollView style={{ flex: 1 }}>
@@ -49,7 +121,7 @@ const Dashboard = (props) => {
         <View style={styles.container}>
           <View style={styles.eventContainter}>
             <Text style={styles.location}>
-              LATER TODAY IN{" "}
+              LATER TODAY IN {""}
               <Text style={styles.locationText}>{location.toUpperCase()}</Text>
             </Text>
 
@@ -118,7 +190,7 @@ const Dashboard = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create ({
   mainContainer: {
     backgroundColor: "#F2F2F2",
     flex: 1,
@@ -128,6 +200,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  // dateContain: {
+  //   flex: 1,
+  //   alignItems: 'flex-start',
+  // },
   eventContainter: {
     flex: 1,
     alignItems: "center",

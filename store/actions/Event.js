@@ -108,6 +108,57 @@ export const fetchSlcEvents = (location) => {
   };
 };
 
+export const fetchStGEvents = (location) => {
+  return async dispatch => {
+    // slc encircle google calendar id
+    const CALENDAR_ID = 'encircletogether.org_3231333930393634323835@resource.calendar.google.com';
+    // google api key
+    const API_KEY = 'AIzaSyDg7_XJNVaiMIOkgSqZfZ6ivpBhnyv6UIQ';
+
+    // sets date to today
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    // sets timeMin url parameter to first day of current month
+    const yearMonth = `${yyyy}-${mm}`;
+    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?maxResults=100&orderBy=startTime&singleEvents=true&timeMin=${yearMonth}-01T00:00:00.000Z&key=${API_KEY}`;
+
+    const response = await fetch(url);
+    const resData = await response.json();
+    // stores unpackaged response data
+    const items = resData.items;
+    // stores event objects
+    const eventData = [];
+
+    // loads array with event objects
+    for(const key in items) {
+      eventData.push(
+        new Event(
+          items[key].id,
+          items[key].creator.email,
+          items[key].description,
+          items[key].end.dateTime,
+          items[key].start.dateTime,
+          items[key].summary,
+          items[key].location
+        )
+      );
+    }
+
+    // use this to see loaded event objects
+    for(const event in eventData) {
+      // console.log(eventData[event]);
+    }
+
+    // async dispatch - sends location and event object array to event reducer
+    dispatch({ type: FETCH_SLC_EVENTS, data: { location: location, events: eventData } });
+  };
+};
+
 // events for dashboard screen
 export const fetchTodaysEvents = (location) => {
   return async dispatch => {
@@ -145,6 +196,7 @@ export const fetchTodaysEvents = (location) => {
 
     // loads array with event objects
     for(const key in items) {
+      
       eventData.push(
         new Event(
           items[key].id,
@@ -156,6 +208,7 @@ export const fetchTodaysEvents = (location) => {
           items[key].location
         )
       );
+        
     }
 
     // use this to see loaded event objects

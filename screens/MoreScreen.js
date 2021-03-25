@@ -33,6 +33,23 @@ class MoreScreen extends Component {
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
+              this.props.navigation.navigate("Volunteer");
+            }}
+          >
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Volunteer</Text>
+              <Ionicons
+                name="ios-arrow-forward"
+                size={20}
+                color="#686868"
+                style={styles.arrowIcon}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.TouchableOpacity}
+            onPress={() => {
               this.props.navigation.navigate("Shop");
             }}
           >
