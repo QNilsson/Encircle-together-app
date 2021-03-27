@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView, ScrollView } from "react-native";
+import { Dimensions, StyleSheet, Text, View, FlatList, TouchableOpacity, Image, ImageBackground, SafeAreaView, ScrollView } from "react-native";
 
 // imports publication model used to load publicationData array
 import Publication from '../models/publication';
@@ -77,8 +77,11 @@ export default class ResourcesScreen extends Component {
               data={this.state.publications}
               keyExtractor={publication => publication.docId}
               ListHeaderComponent={
-                <View style={styles.resourceHeader}>
-                  <Text style={styles.resources}>Encircle Resources</Text>
+                <View>
+                  <ImageBackground
+                    style={styles.backgroundImage}
+                    source={require("../assets/resource.jpg")}
+                  />
                 </View>
               }
               renderItem={({ item }) => (
@@ -118,6 +121,8 @@ export default class ResourcesScreen extends Component {
   }
 }
 
+let screenWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -130,13 +135,12 @@ const styles = StyleSheet.create({
     marginTop: '25%',
     textAlign: "center",
     color: "#fff",
-    fontFamily: 'Clarendon',
+    fontFamily: 'Clarendon-Regular',
   },
-  resourceHeader: {
-    backgroundColor: '#767B82',
-    width: '110%',
-    marginLeft: '-5%',
-    top: -20,
+  backgroundImage: {
+    resizeMode: "contain",
+    width: "100%",
+    height: 167,
   },
   paragraph: {
     fontSize: 20,
@@ -145,14 +149,14 @@ const styles = StyleSheet.create({
     margin: 8,
     marginBottom: 10,
     alignItems: "center",
-    fontFamily: 'Futura-Book'
+    fontFamily: 'Garamond-Regular'
   },
   item: {
     flex: 1,
     textAlign: "center",
     alignContent: "center",
-    marginBottom: 30,
-    marginTop: 30
+    marginBottom: 10,
+    marginTop: 10
 
   },
   titleText: {
@@ -161,9 +165,9 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#2B2B2B",
     textAlign: "center",
-    fontFamily: 'Futura-Book',
+    fontFamily: 'Garamond-Regular',
     marginBottom: 0,
     margin: 0,
-    paddingTop: 20
+    paddingTop: 5
   }
 });

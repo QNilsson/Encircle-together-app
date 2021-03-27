@@ -27,7 +27,12 @@ class DashboardWelcome extends Component {
 
 	async componentWillMount() {
 		await Font.loadAsync({
-			Clarendon: require('../assets/fonts/clarendon.otf'),
+			ModernoFB: require('../assets/fonts/ModernoFB-Semibold.otf'),
+			'Futura-Light': require('../assets/fonts/Futura-Light.ttf'),
+			'Futura-Book': require('../assets/fonts/Futura-Book.ttf'),
+			'Futura-Medium': require('../assets/fonts/Futura-Medium.ttf'),
+			'Futura-Bold': require('../assets/fonts/Futura-Bold.ttf'),
+			'Clarendon': require('../assets/fonts/clarendon.otf'),
 			'Garamond-Bold': require('../assets/fonts/garamond-bold.otf'),
 			'Din-Bold': require('../assets/fonts/din-bold.otf'),
 		});
