@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: "center",
     color: "#2B2B2B",
-    fontFamily: "ModernoFB",
+    fontFamily: "Garamond-Regular",
     marginTop: "20%"
   },
   TouchableOpacity: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: "#2B2B2B",
-    fontFamily: "Futura-Book",
+    fontFamily: "Clarendon-Regular",
     marginLeft: "10%",
     marginBottom: 10
   },

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     width: '98%',
     color: "#2B2B2B",
     textAlign: "center",
-    fontFamily: 'Futura-Medium',
+    fontFamily: 'Clarendon-Regular',
     paddingTop: 15
   }
 });

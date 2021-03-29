@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Platform } from "react-native";
+import { Text, Platform } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -69,17 +69,20 @@ const AppNavigator = createBottomTabNavigator(
         let IconComponent = Ionicons;
         let iconName;
 
+        let iconStyle = {fontFamily: 'Icomoon', fontSize: 28}
+        let iconColor = {color: 'tomato'}
+
         // sets tab icon based on values in AppNavigator
         if (routeName === "Dashboard") {
-          iconName = focused ? "home" : "home";
+          return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
         } else if (routeName === "Calendar") {
-          iconName = focused ? "calendar" : "calendar";
+          return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
         } else if (routeName === "Resources") {
-          iconName = focused ? "book" : "book";
+          return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
         } else if (routeName === "EncircleLive") {
-          iconName = focused ? "analytics" : "analytics";
+          return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
         } else if (routeName === "More") {
-          iconName = focused ? "more" : "more";
+          return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
         } else if (routeName === "Donate") {
           iconName = focused ? "gift" : "gift";
         } else if (routeName === "Shop") {
@@ -111,7 +114,7 @@ const AppNavigator = createBottomTabNavigator(
         borderColor: "#BABDC1",
         paddingTop: 5,
         paddingBottom: 30,
-        height: 100,
+        height: 90,
         position: "relative",
       },
     },

@@ -27,7 +27,7 @@ class DashboardWelcome extends Component {
 
 	async componentWillMount() {
 		await Font.loadAsync({
-			Clarendon: require('../assets/fonts/clarendon.otf'),
+			'Clarendon': require('../assets/fonts/clarendon.otf'),
 			'Garamond-Bold': require('../assets/fonts/garamond-bold.otf'),
 			'Din-Bold': require('../assets/fonts/din-bold.otf'),
 		});

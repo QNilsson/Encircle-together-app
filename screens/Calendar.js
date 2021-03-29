@@ -218,9 +218,9 @@ const CalendarScreen = (props) => {
             dotColor: '#000',
             selectedDotColor: '#000',
             textDayFontFamily: 'Garamond-Bold',
-            textMonthFontFamily: 'Clarendon',
+            textMonthFontFamily: 'Garamond-Regular',
             textMonthTransform: 'Uppercase',
-            textDayHeaderFontFamily: 'Garamond',
+            textDayHeaderFontFamily: 'Garamond-Regular',
             textDayHeaderColor: '#2B2B2B',
             textDayFontSize: 16,
             textMonthFontSize: 24,
@@ -266,7 +266,7 @@ const CalendarScreen = (props) => {
                   <View style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
                     <View style={styles.eventTimeLoc}>
                       <Text style={{textAlign: 'center', justifyContent: 'center', fontFamily: 'Garamond-Bold', fontSize: 16, letterSpacing: 1.6}}>{item.start}</Text>
-                      <Text style={{textAlign: 'center', justifyContent: 'center', color: '#767B82', fontFamily: 'Garamond'}}>{item.startstamp}</Text>
+                      <Text style={{textAlign: 'center', justifyContent: 'center', color: '#767B82', fontFamily: 'Garamond-Regular'}}>{item.startstamp}</Text>
                     </View>
                     <View style={{flexDirection:'row', flexWrap: 'wrap',flexShrink: 1}}>
                       <Text style={[styles.eventSummaryText,]}>{ item.summ }</Text>
@@ -300,12 +300,12 @@ const styles = StyleSheet.create({
   eventsOnText: {
     color: '#767B82', 
     fontSize: 16,
-    fontFamily: 'Garamond',
+    fontFamily: 'Garamond-Regular',
   },
   selectedDayText: {
     color: '#2B2B2B',
     fontSize: 22,
-    fontFamily: 'Clarendon',
+    fontFamily: 'Clarendon-Regular',
   },
   item: {
     flex: 1,
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
   },
   eventSummaryText: {
     flexShrink: 1,
-    fontFamily: 'Clarendon',
+    fontFamily: 'Clarendon-Regular',
     color: '#2B2B2B',
     paddingVertical: 10,
     paddingHorizontal: 10,
