@@ -18,12 +18,12 @@ const Card = props => {
       output.push('AM')
     } else if (Number(start_[0]) == 12) {
       output.push((start_[0]+':'+start_[1]))
-      output.push('            PM')
+      output.push('PM')
     } else if (Number(start_[0]) > 12) {
       start_[0] = Number(start_[0]) - 12
       start_[0] = start_[0].toString()
       output.push((start_[0]+':'+start_[1]))
-      output.push('            PM')
+      output.push('PM')
     } else {
       output.push((start_[0]+':'+start_[1]))
       output.push('AM')
@@ -82,8 +82,8 @@ const styles = StyleSheet.create ({
   },
 
   timeBox: {
-    maxWidth: 70,
-    width: 70,
+    maxWidth: 80,
+    width: 80,
     padding: 8,
     alignItems:'center',
     alignContent:'center',

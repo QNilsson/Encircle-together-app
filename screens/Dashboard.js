@@ -132,14 +132,14 @@ const Dashboard = props => {
                   props.navigation.navigate("Event", {
                     id: event.id,
                     summ: event.summary,
-                    start: event.start__dateTime
+                    start: timeConversion(event.start__dateTime
                       .split("T")[1]
                       .split("-")[0]
-                      .slice(0, 5),
-                    end: event.end__dateTime
+                      .slice(0, 5)),
+                    end: timeConversion(event.end__dateTime
                       .split("T")[1]
                       .split("-")[0]
-                      .slice(0, 5),
+                      .slice(0, 5)),
                     loc: event.location,
                     desc: event.description,
                   })
@@ -148,7 +148,7 @@ const Dashboard = props => {
                 <Card
                   style={styles.event}
                   key={event.id}
-                  time={event.start__dateTime}
+                  time={event.start__dateTime .split('T')[1].split('-')[0].slice(0,5)}
                   summary={event.summary}
                 ></Card>
               </TouchableOpacity>
