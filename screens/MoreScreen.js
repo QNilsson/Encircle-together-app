@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Text, StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { Button, Text, StyleSheet, View, TouchableOpacity, SafeAreaView, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 class MoreScreen extends Component {
@@ -50,7 +50,7 @@ class MoreScreen extends Component {
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Shop");
+              Linking.openURL("https://encirclestore.org/");
             }}
           >
             <View style={styles.titleContainer}>
