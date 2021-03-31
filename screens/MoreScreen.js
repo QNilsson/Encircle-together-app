@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Text, StyleSheet, View, TouchableOpacity, SafeAreaView, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 
 class MoreScreen extends Component {
   constructor(props) {
@@ -55,8 +56,8 @@ class MoreScreen extends Component {
           >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Shop</Text>
-              <Ionicons
-                name="ios-arrow-forward"
+              <EvilIcons
+                name="external-link"
                 size={20}
                 color="#686868"
                 style={styles.arrowIcon}
@@ -72,8 +73,8 @@ class MoreScreen extends Component {
           >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Donate</Text>
-              <Ionicons
-                name="ios-arrow-forward"
+              <EvilIcons
+                name="external-link"
                 size={20}
                 color="#686868"
                 style={styles.arrowIcon}
