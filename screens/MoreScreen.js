@@ -67,7 +67,7 @@ class MoreScreen extends Component {
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Donate");
+              Linking.openURL("https://encircletogether.org/give");
             }}
           >
             <View style={styles.titleContainer}>
