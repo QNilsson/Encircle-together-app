@@ -11,7 +11,7 @@ class MoreScreen extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.shop}>More</Text>
+       
 
         <View style={styles.container}>
           <TouchableOpacity
@@ -22,12 +22,7 @@ class MoreScreen extends Component {
           >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Volunteer at Encircle</Text>
-              <Ionicons
-                name="external-link"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
+             
             </View>
           </TouchableOpacity>
 
@@ -39,12 +34,7 @@ class MoreScreen extends Component {
           >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Hotlines & Support</Text>
-              <Ionicons
-                name="ios-arrow-forward"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
+              
             </View>
           </TouchableOpacity>
 
@@ -56,12 +46,7 @@ class MoreScreen extends Component {
             >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Encircle Store</Text>
-              <EvilIcons
-                name="external-link"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
+              
             </View>
             </TouchableOpacity>
           
@@ -79,19 +64,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     margin: 20,
     marginTop: "10%",
-    marginBottom: 50
+    marginBottom: 0
   },
   textContainer: {
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center"
-  },
-  shop: {
-    fontSize: 40,
-    textAlign: "center",
-    color: "#2B2B2B",
-    fontFamily: "Garamond-Regular",
-    marginTop: "20%"
   },
   TouchableOpacity: {
     width: "100%",
@@ -104,44 +82,38 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-end",
     margin: 0,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50
+    
   },
   container: {
     alignItems: "center",
-    height: "100%",
+    height: "40%",
     backgroundColor: "white",
-    borderTopStartRadius: 30,
-    borderTopEndRadius: 30,
-    paddingTop: 30,
+    paddingTop: 7,
     bottom: 0,
-    marginTop: "40%"
+    marginTop: "125%"
   },
   title: {
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: "bold",
     color: "#2B2B2B",
-    fontFamily: "Clarendon-Regular",
+    fontFamily: "Garamond-Regular",
     marginLeft: "10%",
-    marginBottom: 10
+    marginBottom: 10,
+    marginTop:-10
   },
   titleContainer: {
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "#F2F2F2",
     borderStyle: "solid",
-    borderBottomColor: "#eee",
+    borderBottomColor: "#F2F2F2",
     borderBottomWidth: 5,
     width: "100%",
     marginVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#2B2B2B",
+    borderBottomColor: "#F2F2F2",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  arrowIcon: {
-    marginLeft: "auto",
-    marginRight: "10%"
-  }
 });
 
 export default MoreScreen;
