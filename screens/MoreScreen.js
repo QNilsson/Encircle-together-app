@@ -17,11 +17,28 @@ class MoreScreen extends Component {
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Location");
+              Linking.openURL("https://encircletogether.org/involved/");
             }}
           >
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Location</Text>
+              <Text style={styles.title}>Volunteer at Encircle</Text>
+              <Ionicons
+                name="external-link"
+                size={20}
+                color="#686868"
+                style={styles.arrowIcon}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.TouchableOpacity}
+            onPress={() => {
+              this.props.navigation.navigate("SupportScreen");
+            }}
+          >
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Hotlines & Support</Text>
               <Ionicons
                 name="ios-arrow-forward"
                 size={20}
@@ -34,28 +51,11 @@ class MoreScreen extends Component {
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Volunteer");
+              Linking.openURL("https://encirclestore.org//");
             }}
-          >
+            >
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Volunteer</Text>
-              <Ionicons
-                name="ios-arrow-forward"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={() => {
-              Linking.openURL("https://encirclestore.org/");
-            }}
-          >
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>Shop</Text>
+              <Text style={styles.title}>Encircle Store</Text>
               <EvilIcons
                 name="external-link"
                 size={20}
@@ -63,24 +63,12 @@ class MoreScreen extends Component {
                 style={styles.arrowIcon}
               />
             </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={() => {
-              Linking.openURL("https://encircletogether.org/give");
-            }}
-          >
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>Donate</Text>
-              <EvilIcons
-                name="external-link"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          
+            
+            
+            
+          
         </View>
       </View>
     );
