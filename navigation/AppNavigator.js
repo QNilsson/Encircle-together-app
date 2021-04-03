@@ -22,7 +22,7 @@ const MoreNavigator = createStackNavigator(
     More: MoreScreen,
     // Location: LocationScreen,
     // Volunteer: VolunteerScreen,
-    Donate: DonateScreen,
+  
   },
   {
     header: null,
@@ -169,7 +169,8 @@ const optionsStyles = {
     fontSize:22,
     paddingBottom:20,
     paddingTop:10,
-    alignItems:'center'
+    alignItems:'center',
+    paddingLeft:5
   },
 };
 
