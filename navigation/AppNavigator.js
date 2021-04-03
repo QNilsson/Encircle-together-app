@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, Platform,StyleSheet } from "react-native";
+import { Text, Platform, Linking } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -99,9 +99,11 @@ const AppNavigator = createBottomTabNavigator(
               <Text style={[iconStyle, focused ? iconColor : null]}></Text>
               </MenuTrigger>
               <MenuOptions customStyles={optionsStyles}>
-                <MenuOption  onSelect={() => alert(`save`)} text='Volunteer at Encircle'/>
-                <MenuOption onSelect={() =>alert(`Delete`)}text='Encircle Store'/>
-                <MenuOption  onSelect={() =>alert (`not called`)}text='Hotlines & Support'/>
+                <MenuOption  onSelect={() => Linking.openURL("https://encircletogether.org/involved/")} text='Volunteer at Encircle'/>
+                <MenuOption  onSelect={() =>this.props.navigation.navigate("SupportScreen")}text='Hotlines & Support'/>
+                <MenuOption  onSelect={() => Linking.openURL("https://www.encircletherapy.org/")} text='Schedule a Therapy Session'/>
+                <MenuOption onSelect={()=>  Linking.openURL("https://encirclestore.org/")}text='Encircle Store'/>
+        
               </MenuOptions>
             </Menu>
           )
@@ -143,16 +145,18 @@ const optionsStyles = {
   optionsContainer: {
     height:253,
     width:'100%',
-    marginTop:-55
+    marginTop:-97
+    
   },
   
   optionWrapper: {
     backgroundColor: '#ffffff',
     margin: 5,
-    paddingTop:30,
+    // paddingTop:30,
     borderBottomColor:'#F2F2F2',
     borderBottomWidth:1,
-    marginBotom:10
+    width:'100%'
+    
   },
   optionTouchable: {
     
@@ -164,6 +168,7 @@ const optionsStyles = {
     fontFamily:"Garamond-Regular",
     fontSize:22,
     paddingBottom:20,
+    paddingTop:10,
     alignItems:'center'
   },
 };
