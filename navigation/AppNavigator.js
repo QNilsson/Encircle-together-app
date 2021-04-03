@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, Platform } from "react-native";
+import { Text, Platform,StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -85,7 +85,7 @@ const AppNavigator = createBottomTabNavigator(
 
 
         // } else if (routeName === "More") {
-        //   return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
+        //   return 
         // } else if (routeName === "Donate") {
         //   iconName = focused ? "gift" : "gift";
         // } else if (routeName === "Shop") {
@@ -95,11 +95,13 @@ const AppNavigator = createBottomTabNavigator(
         }else if (routeName === "More"){
           return(
             <Menu>
-              <MenuTrigger text="Select Action"/>
-              <MenuOptions>
-                <MenuOption onSelect={() => alert(`save`)} text='save'/>
-                <MenuOption onSelect={() =>alert(`Delete`)}text='delete'/>
-                <MenuOption onSelect={() =>alert (`not called`)}text='disabled'/>
+              <MenuTrigger>
+              <Text style={[iconStyle, focused ? iconColor : null]}></Text>
+              </MenuTrigger>
+              <MenuOptions customStyles={optionsStyles}>
+                <MenuOption  onSelect={() => alert(`save`)} text='Volunteer at Encircle'/>
+                <MenuOption onSelect={() =>alert(`Delete`)}text='Encircle Store'/>
+                <MenuOption  onSelect={() =>alert (`not called`)}text='Hotlines & Support'/>
               </MenuOptions>
             </Menu>
           )
@@ -116,18 +118,18 @@ const AppNavigator = createBottomTabNavigator(
         );
       },
     }),
-    // bottom tab bar styling
+    //bottom tab bar styling
     tabBarOptions: {
       activeTintColor: "tomato",
       inactiveTintColor: "gray",
       showLabel: false,
       style: {
-        borderTopStartRadius: 30,
-        borderTopEndRadius: 30,
+        // borderTopStartRadius: 30,
+        // borderTopEndRadius: 30,
         borderTopWidth: 1,
         borderRightWidth: 1,
         borderLeftWidth: 1,
-        borderColor: "#BABDC1",
+        // borderColor: "#BABDC1",
         paddingTop: 5,
         paddingBottom: 30,
         height: 90,
@@ -137,4 +139,37 @@ const AppNavigator = createBottomTabNavigator(
   }
 );
 
+const optionsStyles = {
+  optionsContainer: {
+    height:253,
+    width:'100%',
+    marginTop:-55
+  },
+  
+  optionWrapper: {
+    backgroundColor: '#ffffff',
+    margin: 5,
+    paddingTop:30,
+    borderBottomColor:'#F2F2F2',
+    borderBottomWidth:1,
+    marginBotom:10
+  },
+  optionTouchable: {
+    
+    activeOpacity: 50,
+   
+  },
+  optionText: {
+    color: '#3E4144',
+    fontFamily:"Garamond-Regular",
+    fontSize:22,
+    paddingBottom:20,
+    alignItems:'center'
+  },
+};
+
+
+
+
 export default createAppContainer(AppNavigator);
+
