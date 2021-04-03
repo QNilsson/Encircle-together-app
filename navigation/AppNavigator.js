@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Ionicons } from "@expo/vector-icons";
+import {Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu'
 
 import Dashboard from "../screens/Dashboard";
 import MoreScreen from "../screens/MoreScreen";
@@ -19,8 +20,8 @@ import VolunteerScreen from "../screens/Volunteer"
 const MoreNavigator = createStackNavigator(
   {
     More: MoreScreen,
-    Location: LocationScreen,
-    Volunteer: VolunteerScreen,
+    // Location: LocationScreen,
+    // Volunteer: VolunteerScreen,
     Donate: DonateScreen,
   },
   {
@@ -81,12 +82,27 @@ const AppNavigator = createBottomTabNavigator(
           return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
         } else if (routeName === "EncircleLive") {
           return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
-        } else if (routeName === "More") {
-          return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
-        } else if (routeName === "Donate") {
-          iconName = focused ? "gift" : "gift";
-        } else if (routeName === "Shop") {
-          iconName = focused ? "cart" : "cart";
+
+
+        // } else if (routeName === "More") {
+        //   return <Text style={[iconStyle, focused ? iconColor : null]}></Text>
+        // } else if (routeName === "Donate") {
+        //   iconName = focused ? "gift" : "gift";
+        // } else if (routeName === "Shop") {
+        //   iconName = focused ? "cart" : "cart";
+        // }
+
+        }else if (routeName === "More"){
+          return(
+            <Menu>
+              <MenuTrigger text="Select Action"/>
+              <MenuOptions>
+                <MenuOption onSelect={() => alert(`save`)} text='save'/>
+                <MenuOption onSelect={() =>alert(`Delete`)}text='delete'/>
+                <MenuOption onSelect={() =>alert (`not called`)}text='disabled'/>
+              </MenuOptions>
+            </Menu>
+          )
         }
 
         return (
