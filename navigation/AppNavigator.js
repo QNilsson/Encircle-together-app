@@ -106,8 +106,6 @@ const AppNavigator = createBottomTabNavigator(
       inactiveTintColor: "gray",
       showLabel: false,
       style: {
-        borderTopStartRadius: 30,
-        borderTopEndRadius: 30,
         borderTopWidth: 1,
         borderRightWidth: 1,
         borderLeftWidth: 1,
