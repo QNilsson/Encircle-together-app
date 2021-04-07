@@ -95,7 +95,7 @@ const AppNavigator = createBottomTabNavigator(
         }else if (routeName === "More"){
           return(
             <Menu>
-              <MenuTrigger>
+              <MenuTrigger hitSlop={{top: 65, bottom: 70, left: 45, right: 100}}>
               <Text style={[iconStyle, focused ? iconColor : null]}></Text>
               </MenuTrigger>
               <MenuOptions customStyles={optionsStyles}>
