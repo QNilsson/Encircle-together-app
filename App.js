@@ -1,5 +1,5 @@
 import React from "react";
-
+import { MenuProvider } from 'react-native-popup-menu'
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
@@ -45,11 +45,13 @@ export default function App() {
 
   return (
     <Provider store={store}>
+    <MenuProvider>
         <GeneralStatusBarColor
           backgroundColor="black"
           barStyle="light-content"
         />
         <AppNavigator />
+        </MenuProvider>
     </Provider>
   );
 }

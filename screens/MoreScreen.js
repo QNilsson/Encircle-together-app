@@ -11,76 +11,49 @@ class MoreScreen extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.shop}>More</Text>
+       
 
         <View style={styles.container}>
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Location");
+              Linking.openURL("https://encircletogether.org/involved/");
             }}
           >
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Location</Text>
-              <Ionicons
-                name="ios-arrow-forward"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
+              <Text style={styles.title}>Volunteer at Encircle</Text>
+             
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              this.props.navigation.navigate("Volunteer");
+              this.props.navigation.navigate("SupportScreen");
             }}
           >
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Volunteer</Text>
-              <Ionicons
-                name="ios-arrow-forward"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
+              <Text style={styles.title}>Hotlines & Support</Text>
+              
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.TouchableOpacity}
             onPress={() => {
-              Linking.openURL("https://encirclestore.org/");
+              Linking.openURL("https://encirclestore.org//");
             }}
-          >
+            >
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Shop</Text>
-              <EvilIcons
-                name="external-link"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
+              <Text style={styles.title}>Encircle Store</Text>
+              
             </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={() => {
-              Linking.openURL("https://encircletogether.org/give");
-            }}
-          >
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>Donate</Text>
-              <EvilIcons
-                name="external-link"
-                size={20}
-                color="#686868"
-                style={styles.arrowIcon}
-              />
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          
+            
+            
+            
+          
         </View>
       </View>
     );
@@ -91,19 +64,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     margin: 20,
     marginTop: "10%",
-    marginBottom: 50
+    marginBottom: 0
   },
   textContainer: {
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center"
-  },
-  shop: {
-    fontSize: 40,
-    textAlign: "center",
-    color: "#2B2B2B",
-    fontFamily: "Garamond-Regular",
-    marginTop: "20%"
   },
   TouchableOpacity: {
     width: "100%",
@@ -116,44 +82,38 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-end",
     margin: 0,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50
+    
   },
   container: {
     alignItems: "center",
-    height: "100%",
+    height: "40%",
     backgroundColor: "white",
-    borderTopStartRadius: 30,
-    borderTopEndRadius: 30,
-    paddingTop: 30,
+    paddingTop: 7,
     bottom: 0,
-    marginTop: "40%"
+    marginTop: "125%"
   },
   title: {
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: "bold",
     color: "#2B2B2B",
-    fontFamily: "Clarendon-Regular",
+    fontFamily: "Garamond-Regular",
     marginLeft: "10%",
-    marginBottom: 10
+    marginBottom: 10,
+    marginTop:-10
   },
   titleContainer: {
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "#F2F2F2",
     borderStyle: "solid",
-    borderBottomColor: "#eee",
+    borderBottomColor: "#F2F2F2",
     borderBottomWidth: 5,
     width: "100%",
     marginVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#2B2B2B",
+    borderBottomColor: "#F2F2F2",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  arrowIcon: {
-    marginLeft: "auto",
-    marginRight: "10%"
-  }
 });
 
 export default MoreScreen;
