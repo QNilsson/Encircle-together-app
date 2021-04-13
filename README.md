@@ -2,7 +2,7 @@
 
 ## Installation
 
-Run ```yarn install``` to install all the packages necessary to get the app to function.
+Run ```expo install``` to install all the packages necessary to get the app to function.
 
 Then run ```expo start``` to get the dev environment started.
 
