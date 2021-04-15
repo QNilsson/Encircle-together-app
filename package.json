@@ -17,7 +17,7 @@
     "@react-navigation/stack": "^5.2.9",
     "@types/react": "~16.9.35",
     "async-storage": "^0.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "^39.0.5",
     "expo-app-loading": "^1.0.1",
     "expo-cli": "^3.28.2",
