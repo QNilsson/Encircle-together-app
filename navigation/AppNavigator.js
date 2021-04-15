@@ -96,11 +96,11 @@ const AppNavigator = createBottomTabNavigator(
           return(
             <Menu>
               <MenuTrigger hitSlop={{top: 65, bottom: 70, left: 45, right: 100}}>
-              <Text style={[iconStyle, focused ? iconColor : null]}></Text>
+              <Text style={optionsStyles.fontControl, [iconStyle, focused ? iconColor : null]}></Text>
               </MenuTrigger>
               <MenuOptions customStyles={optionsStyles}>
                 <MenuOption  onSelect={() => Linking.openURL("https://encircletogether.org/involved/")} text='Volunteer at Encircle'/>
-                <MenuOption  onSelect={() =>this.props.navigation.navigate("SupportScreen")}text='Hotlines & Support'/>
+                {/*<MenuOption  onSelect={() => this.props.navigation.navigate("SupportScreen")}text='Hotlines & Support'/>*/}
                 <MenuOption  onSelect={() => Linking.openURL("https://www.encircletherapy.org/")} text='Schedule a Therapy Session'/>
                 <MenuOption onSelect={()=>  Linking.openURL("https://encirclestore.org/")}text='Encircle Store'/>
         
@@ -147,6 +147,10 @@ const optionsStyles = {
     width:'100%',
     marginTop:-97
     
+  },
+
+  fontControl: {
+    fontSize: 30,
   },
   
   optionWrapper: {
