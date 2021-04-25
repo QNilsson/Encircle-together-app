@@ -6,9 +6,13 @@ Run ```expo install``` to install all the packages necessary to get the app to f
 
 Then run ```expo start``` to get the dev environment started.
 
+You will need to stop the environment to install packages. Use ```expo install <package_name>``` to install the package. It will link it where needed and ensure it plays properly with the metro bundler.
+
+If you want to remove a package, you can just use, ```npm/yarn uninstall <package_name>```. It won't matter to expo at all not to mention it doesn't have an uninstall command.
+
 ### iOS
 
-Download the Expo Go app from the App store and take a picture of the QR Code that pops up. It will take you to the Expo Go app and build an app preview for you.
+Download the Expo Go app from the App store and use your camera app to scan the QR code that pops up. It will take you to the Expo Go app and build an app preview for you.
 
 ### Android
 
@@ -35,3 +39,5 @@ https://help.gamesalad.com/gamesalad-cookbook/publishing/4-android-publishing/4-
 Expo keystore info:
 
 https://docs.expo.io/distribution/building-standalone-apps/#if-you-choose-to-build-for-android
+
+When you run the build command once the build is queued, you will be given a link to where you can download the application in the console once the build is done. This can take up to 10 mins.

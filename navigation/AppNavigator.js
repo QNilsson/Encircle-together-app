@@ -10,19 +10,13 @@ import Dashboard from "../screens/Dashboard";
 import MoreScreen from "../screens/MoreScreen";
 import ResourcesScreen from "../screens/ResourcesScreen";
 import ResourceScreen from "../screens/ResourceScreen";
-import DonateScreen from "../screens/DonateScreen";
-import LocationScreen from "../screens/LocationScreen";
 import Calendar from "../screens/Calendar";
 import EventScreen from "../screens/EventScreen";
-import VolunteerScreen from "../screens/Volunteer"
 
 // more screen stack
 const MoreNavigator = createStackNavigator(
   {
     More: MoreScreen,
-    // Location: LocationScreen,
-    // Volunteer: VolunteerScreen,
-  
   },
   {
     header: null,
@@ -95,15 +89,14 @@ const AppNavigator = createBottomTabNavigator(
         }else if (routeName === "More"){
           return(
             <Menu>
-              <MenuTrigger hitSlop={{top: 65, bottom: 70, left: 45, right: 100}}>
+              <MenuTrigger customStyles={optionsStyles.fontControl}>
               <Text style={optionsStyles.fontControl, [iconStyle, focused ? iconColor : null]}></Text>
               </MenuTrigger>
               <MenuOptions customStyles={optionsStyles}>
                 <MenuOption  onSelect={() => Linking.openURL("https://encircletogether.org/involved/")} text='Volunteer at Encircle'/>
-                {/*<MenuOption  onSelect={() => this.props.navigation.navigate("SupportScreen")}text='Hotlines & Support'/>*/}
+                <MenuOption  onSelect={() => this.props.navigation.navigate("SupportScreen")} text='Hotlines & Support'/>
                 <MenuOption  onSelect={() => Linking.openURL("https://www.encircletherapy.org/")} text='Schedule a Therapy Session'/>
-                <MenuOption onSelect={()=>  Linking.openURL("https://encirclestore.org/")}text='Encircle Store'/>
-        
+                <MenuOption onSelect={() => Linking.openURL("https://encirclestore.org/")} text='Encircle Store'/>
               </MenuOptions>
             </Menu>
           )
@@ -150,7 +143,7 @@ const optionsStyles = {
   },
 
   fontControl: {
-    fontSize: 30,
+    padding: 90,
   },
   
   optionWrapper: {
