@@ -89,8 +89,8 @@ const AppNavigator = createBottomTabNavigator(
         }else if (routeName === "More"){
           return(
             <Menu>
-              <MenuTrigger customStyles={optionsStyles.fontControl}>
-              <Text style={optionsStyles.fontControl, [iconStyle, focused ? iconColor : null]}></Text>
+              <MenuTrigger hitSlop={{top: 65, bottom: 70, left:45, right:100}}>
+              <Text style={[iconStyle, focused ? iconColor : null]}></Text>
               </MenuTrigger>
               <MenuOptions customStyles={optionsStyles}>
                 <MenuOption  onSelect={() => Linking.openURL("https://encircletogether.org/involved/")} text='Volunteer at Encircle'/>
